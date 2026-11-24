@@ -11,6 +11,7 @@ from __future__ import annotations
 import importlib
 import json
 import random
+import threading
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -19,6 +20,7 @@ from phase2.authoring.core import materialize
 
 ROOT = Path(__file__).resolve().parent.parent
 _RealRandom = random.Random
+_GEN_LOCK = threading.Lock()  # seeded() patches a global; serialize all generation
 
 
 @contextmanager
@@ -39,6 +41,11 @@ def seeded(seed):
 
 
 def generate(seed, domains=None):
+    with _GEN_LOCK:
+        return _generate(seed, domains)
+
+
+def _generate(seed, domains=None):
     """Return ({task_id: frozen_task}, {task_id: error}) for one seed."""
     tasks, errors = {}, {}
     for domain in domains or DOMAINS:

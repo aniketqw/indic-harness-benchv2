@@ -32,6 +32,7 @@ MAX_OUT = 512 * 1024
 _lock = threading.Lock()
 _ready = False
 _frozen = None
+_seeded = {}
 
 
 def get_task(task_id: str, seed=None) -> dict:
@@ -41,10 +42,14 @@ def get_task(task_id: str, seed=None) -> dict:
             _frozen = catalog()
         return _frozen[task_id]
     from rlharness.p2gen import generate
-    tasks, errors = generate(seed)
-    if task_id not in tasks:
-        raise ValueError(f"{task_id} invalid for seed {seed}: {errors}")
-    return tasks[task_id]
+    with _lock:
+        if (task_id, seed) not in _seeded:
+            tasks, errors = generate(seed, [d for d in __import__('phase2.authoring.build', fromlist=['DOMAINS']).DOMAINS])
+            for tid, item in tasks.items():
+                _seeded[(tid, seed)] = item
+            if task_id not in tasks:
+                raise ValueError(f"{task_id} invalid for seed {seed}: {errors}")
+        return _seeded[(task_id, seed)]
 
 
 def ensure_proxy2() -> None:
@@ -66,7 +71,7 @@ def ensure_proxy2() -> None:
         _ready = True
 
 
-def config(model: str) -> dict:
+def config(model: str, temperature: float = 0.0) -> dict:
     return {
         "models": {"mode": "replace", "providers": {"ollama": {
             "baseUrl": f"http://{PROXY2}:11434/v1", "apiKey": "ollama", "api": "openai-completions",
@@ -74,7 +79,7 @@ def config(model: str) -> dict:
                 "contextWindow": 131072, "maxTokens": 32768,
                 "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0}}]}}},
         "agents": {"defaults": {"workspace": "/workspace", "model": {"primary": "ollama/" + model, "fallbacks": []},
-                                "models": {"ollama/" + model: {"params": {"temperature": 0}}},
+                                "models": {"ollama/" + model: {"params": {"temperature": temperature}}},
                                 "thinkingDefault": "high", "timeoutSeconds": TIMEOUT, "skipBootstrap": True,
                                 "compaction": {"memoryFlush": {"enabled": False}}, "sandbox": {"mode": "off"}}},
         "tools": {"allow": ["read", "write", "edit", "exec", "process"], "elevated": {"enabled": False},
@@ -101,10 +106,23 @@ def grade_workspace(task: dict, files: dict, ws: Path) -> dict:
     except (UnicodeError, csv.Error):
         return {**res, "reason": "invalid_csv_or_encoding"}
     g = grade_rows(contract, header, rows)
-    return {**res, **g, "score": g["score"] if intact else 0.0, "full_completion": intact and g["full_completion"]}
+    wrong, wrong_total = [], 0
+    if not g.get("full_completion") and "row_checks" in g:
+        kc, cols = task["key_columns"], task["output"]
+        exp = {":".join(str(v).strip() for v in r[:kc]): r for r in task["answer"]}
+        act = {":".join(v.strip() for v in r[:kc]): r for r in rows}
+        for key, cc in g["row_checks"].items():
+            for col, ok in cc.items():
+                if not ok:
+                    wrong_total += 1
+                    if len(wrong) < 10:
+                        i = cols.index(col)
+                        wrong.append({"key": key, "column": col, "expected": str(exp[key][i])[:40] if key in exp else None,
+                                      "actual": act[key][i][:40] if key in act and i < len(act[key]) else None})
+    return {**res, **g, "wrong": wrong, "wrong_total": wrong_total, "score": g["score"] if intact else 0.0, "full_completion": intact and g["full_completion"]}
 
 
-def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, lessons=None) -> dict:
+def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, lessons=None, temperature: float = 0.0) -> dict:
     ensure_proxy2()
     model = MODELS[model_key]
     task = get_task(task_id, seed)
@@ -126,7 +144,7 @@ def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, les
              "--label", "rlharness=1", IMAGE, "sleep", str(TIMEOUT + 300)])
         _sh(["docker", "start", name])
         _sh(["docker", "exec", "-i", name, "tar", "-xf", "-", "-C", "/workspace", "--no-same-owner"], _tar_dir(ws))
-        cfg = Path(tempfile.mkdtemp()); (cfg / "openclaw.json").write_text(json.dumps(config(model)))
+        cfg = Path(tempfile.mkdtemp()); (cfg / "openclaw.json").write_text(json.dumps(config(model, temperature)))
         home = "/home/bench/.openclaw"
         _sh(["docker", "exec", "-i", name, "sh", "-c", f"mkdir -p {home} && tar -xf - -C {home} --no-same-owner"],
             _tar_dir(cfg)); shutil.rmtree(cfg, ignore_errors=True)
@@ -157,6 +175,6 @@ def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, les
     shutil.rmtree(ws, ignore_errors=True)
     return {"model": model_key, "task": task_id, "seed": seed, "plang": plang, "flang": flang,
             "score": g["score"] / 100.0, "full": g["full_completion"], "reason": g.get("reason"),
-            "input_intact": g["input_intact"], "extra_keys": len(g.get("extra_keys", [])),
+            "input_intact": g["input_intact"], "wrong": g.get("wrong", []), "wrong_total": g.get("wrong_total", 0), "extra_keys": len(g.get("extra_keys", [])),
             "integrity_violation": not g["input_intact"], "elapsed": round(time.time() - t0, 1),
             "error": err, "result_head": res, "stdout_tail": tail}

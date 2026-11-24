@@ -75,9 +75,9 @@ def run_tool(w: Path, name: str, args: dict) -> str:
         return f"ERROR: {e}"
 
 
-def chat(model: str, messages: list, temperature: float, seed: int | None, tools=True, retries=4) -> dict:
+def chat(model: str, messages: list, temperature: float, seed: int | None, tools=True, retries=4, num_predict=4096) -> dict:
     body = {"model": model, "messages": messages, "stream": False,
-            "options": {"temperature": temperature, "num_predict": 4096}}
+            "options": {"temperature": temperature, "num_predict": num_predict}}
     if seed is not None:
         body["options"]["seed"] = seed
     if tools:
