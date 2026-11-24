@@ -44,6 +44,12 @@ PLACEBO_POOL = [
 ]
 
 lock = threading.Lock()
+ART_DIR = None
+REFLOG = None
+
+
+def safe(key):
+    return re.sub(r'[^A-Za-z0-9_.-]+', '__', key)
 
 
 class Log:
@@ -77,7 +83,13 @@ def run_item(log, key, task, plang, flang, lessons, seed=None, temp=0.0):
     r = attempt(MODEL, task, plang, flang, seed=seed, lessons=lessons, temperature=temp)
     if r["error"] and ("harness_error" in r["error"] or "rc=" in r["error"]):
         r = attempt(MODEL, task, plang, flang, seed=seed, lessons=lessons, temperature=temp); r["retried"] = True
-    r["key"] = key; r["stdout_tail"] = ""; r["result_head"] = r["result_head"][:300]
+    r["key"] = key; r["arm"] = key.split("|")[0]; r["lessons_n"] = len(lessons or []); r["temperature"] = temp; r["seed_used"] = seed
+    r["ts"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+    if ART_DIR is not None:  # full evidence on disk: output file and agent transcript
+        (ART_DIR / (safe(key) + ".result.csv")).write_text(r.pop("result_full", ""), encoding="utf-8")
+        (ART_DIR / (safe(key) + ".openclaw.json")).write_text(r.pop("stdout_full", ""), encoding="utf-8")
+        r["artifact"] = safe(key)
+    r.pop("stdout_tail", None); r["result_head"] = r["result_head"][:300]
     log.add(r)
     print(f"  {key}: score={r['score']:.3f} full={r['full']} {r['elapsed']}s {r['reason'] or ''} {(r['error'] or '')[:50]}", flush=True)
 
@@ -98,11 +110,16 @@ def transfer_items():
 # ---------------------------------------------------------------- reflection
 def llm_json(prompt_text):
     r = chat(MODELS[MODEL], [{"role": "user", "content": prompt_text}], 0.2, None, tools=False, num_predict=12000)
-    m = re.search(r"\{.*\}", r["message"].get("content", ""), re.S)
+    raw = r["message"].get("content", "")
+    m = re.search(r"\{.*\}", raw, re.S)
     try:
-        return json.loads(m.group(0)) if m else {}
+        parsed = json.loads(m.group(0)) if m else {}
     except Exception:
-        return {}
+        parsed = {}
+    if REFLOG is not None:  # keep every reflector prompt and raw response
+        with lock, REFLOG.open("a") as f:
+            f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "prompt": prompt_text, "raw": raw, "parsed": parsed}, ensure_ascii=False) + "\n")
+    return parsed
 
 
 def fmt_wrong(a):
@@ -228,9 +245,56 @@ def analyze(log, outdir, tips, placebo):
             "3_worse_at_most_half_of_better": f["worse"] * 2 <= f["better"],
             "4_noise_change_smaller_than_A_vs_C_change": noise_flip < (f["better"] + f["worse"])}
     res["rule"] = rule; res["tips_helped_by_prespecified_rule"] = all(rule.values())
+    # ---- evidence for "why" ----
+    def category(r):
+        if r["full"]: return "fully_correct"
+        if r["reason"] == "output_missing_or_oversized": return "no_file"
+        if r["reason"]: return "invalid_output:" + r["reason"]
+        if not r.get("input_intact", True): return "inputs_changed"
+        return "wrong_values"
+    res["failure_taxonomy"] = {arm: {} for arm in "ABC"}
+    for p in pairs:
+        for arm in "ABC":
+            c = category(p[3][arm]); res["failure_taxonomy"][arm][c] = res["failure_taxonomy"][arm].get(c, 0) + 1
+    res["mean_wrong_fields"] = {arm: round(st.mean(p[3][arm].get("wrong_total", 0) for p in pairs), 2) for arm in "ABC"}
+    res["agent_effort"] = {arm: {"mean_elapsed_s": round(st.mean(p[3][arm]["elapsed"] for p in pairs), 1),
+                                 "mean_tool_calls": round(st.mean((p[3][arm].get("stats") or {}).get("tool_calls", 0) for p in pairs), 1),
+                                 "mean_tool_failures": round(st.mean((p[3][arm].get("stats") or {}).get("tool_failures", 0) for p in pairs), 2)} for arm in "ABC"}
+    def wrongset(r): return {(w["key"], w["column"]) for w in r.get("wrong", [])}
+    fixed, broken, col_fixed, col_broken = 0, 0, {}, {}
+    for t, pl, fl, d in pairs:
+        wa, wc = wrongset(d["A"]), wrongset(d["C"])
+        for key, col in wa - wc:
+            fixed += 1; col_fixed[f"{t}:{col}"] = col_fixed.get(f"{t}:{col}", 0) + 1
+        for key, col in wc - wa:
+            broken += 1; col_broken[f"{t}:{col}"] = col_broken.get(f"{t}:{col}", 0) + 1
+    res["field_delta_C_vs_A"] = {"fields_fixed": fixed, "fields_broken": broken,
+                                 "columns_most_fixed": dict(sorted(col_fixed.items(), key=lambda x: -x[1])[:10]),
+                                 "columns_most_broken": dict(sorted(col_broken.items(), key=lambda x: -x[1])[:10])}
+    res["flipped_items"] = [{"task": t, "plang": pl, "flang": fl, "A_score": round(d["A"]["score"], 3), "B_score": round(d["B"]["score"], 3),
+                             "C_score": round(d["C"]["score"], 3), "A_full": d["A"]["full"], "C_full": d["C"]["full"]}
+                            for t, pl, fl, d in pairs if d["A"]["full"] != d["C"]["full"]]
     res["note"] = "Matched on the same frozen items. If fewer than 48 items are matched, infrastructure failures were excluded."
     (outdir / "summary.json").write_text(json.dumps(res, indent=1, ensure_ascii=False))
     return res
+
+
+def ablate(log, outdir, tips, workers, max_items=6):
+    """Leave-one-tip-out on items that the full tip list fixed (A not fully correct, C fully correct)."""
+    rows = {r["key"]: r for r in log.rows}
+    flips = [(t, pl, fl) for t, pl, fl in primary_items()
+             if f"A|{t}|{pl}|{fl}|r0" in rows and f"C|{t}|{pl}|{fl}|r0" in rows
+             and not rows[f"A|{t}|{pl}|{fl}|r0"]["full"] and rows[f"C|{t}|{pl}|{fl}|r0"]["full"]][:max_items]
+    fns = [lambda t=t, pl=pl, fl=fl, i=i: run_item(log, f"D{i}|{t}|{pl}|{fl}|r0", t, pl, fl, tips[:i] + tips[i + 1:])
+           for (t, pl, fl) in flips for i in range(len(tips))]
+    pool(workers, fns)
+    rows = {r["key"]: r for r in log.rows}
+    out = {"items": [list(f) for f in flips], "per_tip": []}
+    for i, tip in enumerate(tips):
+        done = [rows[f"D{i}|{t}|{pl}|{fl}|r0"] for t, pl, fl in flips if f"D{i}|{t}|{pl}|{fl}|r0" in rows]
+        out["per_tip"].append({"tip": tip, "n": len(done), "lost_full_when_removed": sum(1 for r in done if not r["full"])})
+    (outdir / "ablation.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
+    return out
 
 
 def main():
@@ -239,6 +303,8 @@ def main():
     ap.add_argument("--stage", default="all")
     a = ap.parse_args()
     outdir = Path(__file__).parent / "runs" / a.run; outdir.mkdir(parents=True, exist_ok=True)
+    global ART_DIR, REFLOG
+    ART_DIR = outdir / "artifacts"; ART_DIR.mkdir(exist_ok=True); REFLOG = outdir / "reflection_log.jsonl"
     log = Log(outdir / "attempts.jsonl")
     # reuse earlier identical plain runs as transfer arm A items
     old = Path(__file__).parent / "runs" / "p2_base1" / "attempts.jsonl"
@@ -250,6 +316,15 @@ def main():
     seeds = {t: pick_seed(t) for t in PRIMARY}
     (outdir / "seeds.json").write_text(json.dumps(seeds))
     print("seeds:", seeds, flush=True)
+    import subprocess, sys
+    commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=Path(__file__).parent).stdout.strip()
+    manifest = {"run": a.run, "started": time.strftime("%Y-%m-%dT%H:%M:%S"), "git_commit": commit, "python": sys.version,
+                "model": MODELS[MODEL], "openclaw_image": "ihb-agent:2026.9.7", "workers": a.workers, "thinking": "high",
+                "eval_temperature": 0.0, "practice_temperature": PRACTICE_TEMP, "group_size": G, "max_tips": MAX_TIPS,
+                "primary_tasks": PRIMARY, "transfer_tasks": TRANSFER, "seeds": seeds, "noise_items": NOISE_N,
+                "prompt_languages": list(PROMPT_LANGS), "file_languages": list(FILE_LANGS), "reused": REUSE,
+                "plan": "rlharness/EXPERIMENT_PLAN.md", "proxy_allow_list": "rlharness/proxy.py"}
+    (outdir / "run_manifest.json").write_text(json.dumps(manifest, indent=1))
     t0 = time.time()
 
     if a.stage in ("all", "practice"):
@@ -275,6 +350,9 @@ def main():
         random.Random(11).shuffle(fns)  # mix arms so any drift in the service hits all arms equally
         pool(a.workers, fns)
         print(f"all arms done in {(time.time()-t0)/60:.1f} min", flush=True)
+    if a.stage == "ablate":
+        tips = json.loads((outdir / "tips.json").read_text())
+        print(json.dumps(ablate(log, outdir, tips, a.workers), indent=1, ensure_ascii=False), flush=True)
     if a.stage in ("all", "arms", "analyze"):
         tips = json.loads((outdir / "tips.json").read_text()); placebo = json.loads((outdir / "placebo.json").read_text())
         print(json.dumps(analyze(log, outdir, tips, placebo), indent=1, ensure_ascii=False), flush=True)

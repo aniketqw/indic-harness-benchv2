@@ -35,6 +35,31 @@ def agg(sel):
             "no_file": sum(1 for r in sel if r.get("reason") == "output_missing_or_oversized")}
 
 
+def export_experiment(run="p2_exp1", label="phase2-experiment-1"):
+    """Compact committed copy of the experiment: attempts (no transcripts), summary, tips, manifest, ablation."""
+    src = RUNS / run
+    rows = load(src / "attempts.jsonl")
+    if not rows:
+        print(f"{run}: no attempts yet, skipped"); return
+    d = OUT / label; d.mkdir(parents=True, exist_ok=True)
+    fields = ["key", "arm", "task", "plang", "flang", "score", "full", "reason", "wrong_total", "extra_keys", "elapsed",
+              "input_intact", "lessons_n", "temperature", "error", "reused_from", "retried", "ts"]
+    compact = []
+    for r in rows:
+        c = {k: r.get(k) for k in fields}
+        c["tool_calls"] = (r.get("stats") or {}).get("tool_calls"); c["tool_failures"] = (r.get("stats") or {}).get("tool_failures")
+        c["stop_reason"] = (r.get("stats") or {}).get("stop_reason")
+        compact.append(c)
+    cols = list(compact[0].keys())
+    with (d / "attempts.csv").open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(compact)
+    (d / "attempts.jsonl").write_text("\n".join(json.dumps(c, ensure_ascii=False) for c in compact) + "\n")
+    for name in ("summary.json", "tips.json", "placebo.json", "practice_report.json", "ablation.json", "run_manifest.json", "seeds.json"):
+        if (src / name).exists():
+            (d / name).write_text((src / name).read_text())
+    print(f"{run}: exported {len(rows)} attempts -> results/{label}/")
+
+
 def main():
     for run, (label, kind) in RUNS_TO_EXPORT.items():
         rows = load(RUNS / run / "attempts.jsonl")
@@ -55,6 +80,7 @@ def main():
                                      for m in sorted({r["model"] for r in rows}) for fl in ("en", "hi")}
         (d / "summary.json").write_text(json.dumps(summ, indent=1, ensure_ascii=False))
         print(f"{run}: exported {len(rows)} attempts -> results/{label}/")
+    export_experiment()
 
 
 if __name__ == "__main__":

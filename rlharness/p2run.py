@@ -52,6 +52,39 @@ def get_task(task_id: str, seed=None) -> dict:
         return _seeded[(task_id, seed)]
 
 
+def parse_stats(stdout: str) -> dict:
+    """Pull tool-call statistics and the final reply out of OpenClaw's --json output (best effort)."""
+    import re
+    stats = {}
+    try:
+        data = json.loads(stdout)
+        stats["json_ok"] = True
+        blob = json.dumps(data)
+    except Exception:
+        stats["json_ok"] = False
+        blob = stdout
+    for key, pat in (("tool_calls", r'"calls":\s*(\d+)'), ("tool_failures", r'"failures":\s*(\d+)')):
+        m = re.search(pat, blob)
+        if m:
+            stats[key] = int(m.group(1))
+    for key, pat in (("stop_reason", r'"stopReason":\s*"([^"]+)"'), ("finish_reason", r'"finishReason":\s*"([^"]+)"'),
+                     ("disposition", r'"disposition":\s*"([^"]+)"')):
+        m = re.search(pat, blob)
+        if m:
+            stats[key] = m.group(1)
+    tools = re.search(r'"tools":\s*\[([^\]]*)\]', blob)
+    if tools:
+        stats["tools_used"] = sorted(set(re.findall(r'"([^"]+)"', tools.group(1))))
+    texts = re.findall(r'"text":\s*"((?:[^"\\]|\\.){0,600})', blob)
+    if texts:
+        stats["final_reply"] = texts[-1][:600]
+    for key in ("input", "output", "total", "inputTokens", "outputTokens", "totalTokens", "promptTokens", "completionTokens"):
+        m = re.search(r'"%s":\s*(\d+)' % key, blob)
+        if m:
+            stats.setdefault("usage", {})[key] = int(m.group(1))
+    return stats
+
+
 def ensure_proxy2() -> None:
     global _ready
     with _lock:
@@ -107,19 +140,21 @@ def grade_workspace(task: dict, files: dict, ws: Path) -> dict:
         return {**res, "reason": "invalid_csv_or_encoding"}
     g = grade_rows(contract, header, rows)
     wrong, wrong_total = [], 0
+    missing_rows = []
     if not g.get("full_completion") and "row_checks" in g:
         kc, cols = task["key_columns"], task["output"]
         exp = {":".join(str(v).strip() for v in r[:kc]): r for r in task["answer"]}
         act = {":".join(v.strip() for v in r[:kc]): r for r in rows}
+        missing_rows = [k for k in exp if k not in act][:100]
         for key, cc in g["row_checks"].items():
             for col, ok in cc.items():
                 if not ok:
                     wrong_total += 1
-                    if len(wrong) < 10:
+                    if len(wrong) < 300:
                         i = cols.index(col)
                         wrong.append({"key": key, "column": col, "expected": str(exp[key][i])[:40] if key in exp else None,
                                       "actual": act[key][i][:40] if key in act and i < len(act[key]) else None})
-    return {**res, **g, "wrong": wrong, "wrong_total": wrong_total, "score": g["score"] if intact else 0.0, "full_completion": intact and g["full_completion"]}
+    return {**res, **g, "wrong": wrong, "wrong_total": wrong_total, "missing_rows": missing_rows, "score": g["score"] if intact else 0.0, "full_completion": intact and g["full_completion"]}
 
 
 def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, lessons=None, temperature: float = 0.0) -> dict:
@@ -136,7 +171,7 @@ def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, les
         (ws / name).parent.mkdir(parents=True, exist_ok=True); (ws / name).write_bytes(data)
     (ws / "out").mkdir(exist_ok=True)
     name = "rlh2-" + uuid.uuid4().hex[:10]
-    t0 = time.time(); err = None; tail = ""
+    t0 = time.time(); err = None; tail = ""; full_out = ""
     try:
         _sh(["docker", "create", "--name", name, "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
              "--memory", "3g", "--cpus", "2", "--pids-limit", "256",
@@ -155,7 +190,8 @@ def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, les
                                   "--session-id", "s-" + uuid.uuid4().hex[:8], "--timeout", str(TIMEOUT),
                                   "--thinking", "high", "--json", "--message", text],
                                  capture_output=True, timeout=TIMEOUT + 30)
-            tail = out.stdout.decode("utf-8", "replace")[-3000:]
+            full_out = out.stdout.decode("utf-8", "replace")[-300000:]
+            tail = full_out[-3000:]
             if out.returncode != 0:
                 err = f"openclaw rc={out.returncode}: " + out.stderr.decode("utf-8", "replace")[-300:]
         except subprocess.TimeoutExpired:
@@ -171,10 +207,13 @@ def attempt(model_key: str, task_id: str, plang: str, flang: str, seed=None, les
         else:
             subprocess.run(["docker", "rm", "-f", name], capture_output=True)
     g = grade_workspace(task, files, ws)
-    res = (ws / "out/result.csv").read_text(encoding="utf-8", errors="replace")[:1500] if (ws / "out/result.csv").is_file() else ""
+    res_full = (ws / "out/result.csv").read_text(encoding="utf-8", errors="replace")[:MAX_OUT] if (ws / "out/result.csv").is_file() else ""
+    res = res_full[:1500]
     shutil.rmtree(ws, ignore_errors=True)
     return {"model": model_key, "task": task_id, "seed": seed, "plang": plang, "flang": flang,
             "score": g["score"] / 100.0, "full": g["full_completion"], "reason": g.get("reason"),
-            "input_intact": g["input_intact"], "wrong": g.get("wrong", []), "wrong_total": g.get("wrong_total", 0), "extra_keys": len(g.get("extra_keys", [])),
+            "input_intact": g["input_intact"], "wrong": g.get("wrong", []), "wrong_total": g.get("wrong_total", 0), "missing_rows": g.get("missing_rows", []),
+            "extra_keys_list": g.get("extra_keys", [])[:100], "prompt_sha256": hashlib.sha256(text.encode()).hexdigest(),
+            "stats": parse_stats(full_out), "stdout_full": full_out, "result_full": res_full, "extra_keys": len(g.get("extra_keys", [])),
             "integrity_violation": not g["input_intact"], "elapsed": round(time.time() - t0, 1),
             "error": err, "result_head": res, "stdout_tail": tail}
