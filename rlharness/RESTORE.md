@@ -25,3 +25,21 @@ Restore: `tar -xzf p0/rl-archive/<file>.tar.gz -C rlharness/runs/` and verify wi
 ## Older artifacts kept on purpose
 - `rlharness/archive_thin/`: the first, thinly-logged launch (2 reused rows only; superseded).
 - `rlharness/results/phase1-openclaw-gptoss-baseline/`, `phase2-openclaw-baseline/`: partial self-run plain baselines, stopped on purpose.
+
+## If something goes down mid-run (resume recipe)
+Every finished attempt is appended to `rlharness/runs/p2_exp1/attempts.jsonl` immediately (with its output file and transcript in
+`artifacts/`). A restart **skips finished attempts**; only attempts that were in flight are lost.
+1. Make sure Docker Desktop is running (`docker info`) and Ollama is running (`curl localhost:11434/api/version`).
+   The allow-list proxy container is recreated automatically.
+2. Re-run the stage that was running (from the repo root):
+   - practice stage: `PYTHONPATH=. python3.13 -B -X utf8 -u -m rlharness.p2exp --run p2_exp1 --workers 7 --stage practice`
+   - arms stage:     `PYTHONPATH=. python3.13 -B -X utf8 -u -m rlharness.p2exp --run p2_exp1 --workers 7 --stage arms`
+3. If the run folder itself was damaged, restore the newest checkpoint (see below), verify it, and run step 2:
+   `ls -t p0/rl-archive/checkpoints/` then `tar -xzf p0/rl-archive/checkpoints/<file>.tar.gz -C rlharness/runs/` and
+   `shasum -a 256 -c p0/rl-archive/checkpoints/<file>.sha256`.
+4. Optional afterwards: `python3.13 -m rlharness.p2exp --run p2_exp1 --stage ablate` (leave-one-tip-out), then
+   `python3.13 -m rlharness.p2report` and `python3.13 -m rlharness.p2deep` (run with `PYTHONPATH=.`).
+
+Automatic checkpoints: `rlharness/p2checkpoint.py` snapshots `runs/p2_exp1/` every 20 minutes when the log has grown, into
+`p0/rl-archive/checkpoints/` (newest 8 kept; it only deletes its own old checkpoints). Status: `runs/p2_exp1/checkpoint_status.json`.
+It never pushes to Git; I commit compact results to the branch at milestones.
