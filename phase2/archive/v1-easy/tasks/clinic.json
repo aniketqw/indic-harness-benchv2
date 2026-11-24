@@ -1,0 +1,277 @@
+[
+  {
+    "id": "19-appointment-moves",
+    "title": "Synthetic appointment rescheduling",
+    "goals": {
+      "en": "Assign replacement slots for the affected appointment IDs.",
+      "hi": "जिन अपॉइंटमेंट पर असर पड़ा है, उनकी आईडी के लिए नया समय तय करें।",
+      "hinglish": "Affected appointment IDs ko replacement slots assign karo."
+    },
+    "headers": {
+      "en": [
+        "type",
+        "id",
+        "time",
+        "kind"
+      ],
+      "hi": [
+        "प्रकार",
+        "आईडी",
+        "समय",
+        "श्रेणी"
+      ]
+    },
+    "records": [
+      [
+        "BOOK",
+        "A1",
+        "09:00",
+        "ACCESS"
+      ],
+      [
+        "BOOK",
+        "A2",
+        "09:15",
+        "ANY"
+      ],
+      [
+        "BOOK",
+        "A3",
+        "09:30",
+        "ACCESS"
+      ],
+      [
+        "SLOT",
+        "S1",
+        "11:00",
+        "STANDARD"
+      ],
+      [
+        "SLOT",
+        "S2",
+        "11:15",
+        "ACCESS"
+      ],
+      [
+        "SLOT",
+        "S3",
+        "11:30",
+        "STANDARD"
+      ],
+      [
+        "SLOT",
+        "S4",
+        "11:45",
+        "ACCESS"
+      ]
+    ],
+    "notice": {
+      "en": "All BOOK rows were cancelled and need replacement. Process appointments in original chronological order. ACCESS bookings require ACCESS slots. ANY bookings use the earliest free slot of either kind. A replacement slot can only be used once.",
+      "hi": "सभी BOOK प्रविष्टियाँ रद्द हुई हैं और नया समय चाहिए। अपॉइंटमेंट को पुराने समय के क्रम में लें। ACCESS बुकिंग को ACCESS स्लॉट चाहिए। ANY बुकिंग के लिए किसी भी प्रकार का सबसे पहला खाली स्लॉट दें। नया स्लॉट केवल एक बार इस्तेमाल करें।"
+    },
+    "output": [
+      "appointment",
+      "slot"
+    ],
+    "answer": [
+      [
+        "A1",
+        "S2"
+      ],
+      [
+        "A2",
+        "S1"
+      ],
+      [
+        "A3",
+        "S4"
+      ]
+    ]
+  },
+  {
+    "id": "20-supply-lots",
+    "title": "Supply expiry audit",
+    "goals": {
+      "en": "Report usable units and disposition for each supply lot.",
+      "hi": "हर बैच की इस्तेमाल योग्य इकाइयाँ और उसकी स्थिति लिखें।",
+      "hinglish": "Har supply lot ki usable units aur status report karo."
+    },
+    "headers": {
+      "en": [
+        "lot",
+        "count",
+        "expiry",
+        "adjustment"
+      ],
+      "hi": [
+        "बैच",
+        "गिनती",
+        "समाप्ति_तारीख",
+        "समायोजन"
+      ]
+    },
+    "records": [
+      [
+        "L1",
+        "42",
+        "2026-11-16",
+        "0"
+      ],
+      [
+        "L2",
+        "17",
+        "2026-11-17",
+        "2"
+      ],
+      [
+        "L3",
+        "26",
+        "2026-12-03",
+        "-4"
+      ],
+      [
+        "L4",
+        "15",
+        "2026-12-03",
+        "0"
+      ],
+      [
+        "L5",
+        "4",
+        "",
+        "0"
+      ]
+    ],
+    "notice": {
+      "en": "Audit date is 17 November 2026. A lot remains usable on the printed expiry date. Put past dates in EXPIRED. Missing expiry or the quarantined lot L4 goes to HOLD. For USABLE lots report count plus adjustment; other lots have zero usable units.",
+      "hi": "जाँच की तारीख 17 नवंबर 2026 है। छपी समाप्ति तारीख वाले दिन भी बैच इस्तेमाल हो सकता है। उससे पहले समाप्त हो चुके बैच को EXPIRED लिखें। समाप्ति तारीख गायब हो या बैच L4 की तरह अलग रखा गया हो तो HOLD लिखें। USABLE बैच में गिनती और समायोजन का योग दें। बाकी में इस्तेमाल योग्य मात्रा शून्य है।"
+    },
+    "output": [
+      "lot",
+      "status",
+      "usable_units"
+    ],
+    "answer": [
+      [
+        "L1",
+        "EXPIRED",
+        "0"
+      ],
+      [
+        "L2",
+        "USABLE",
+        "19"
+      ],
+      [
+        "L3",
+        "USABLE",
+        "22"
+      ],
+      [
+        "L4",
+        "HOLD",
+        "0"
+      ],
+      [
+        "L5",
+        "HOLD",
+        "0"
+      ]
+    ]
+  },
+  {
+    "id": "21-equipment-service",
+    "title": "Equipment service calendar",
+    "goals": {
+      "en": "Mark every booking keep or move against the revised service windows.",
+      "hi": "संशोधित सर्विस समय के आधार पर हर बुकिंग को बनाए रखने या हटाकर नया समय देने का निर्णय लिखें।",
+      "hinglish": "Revised service windows ke hisaab se har booking ko keep ya move mark karo."
+    },
+    "headers": {
+      "en": [
+        "booking",
+        "device",
+        "start",
+        "end"
+      ],
+      "hi": [
+        "बुकिंग",
+        "उपकरण",
+        "शुरुआत",
+        "समाप्ति"
+      ]
+    },
+    "records": [
+      [
+        "B1",
+        "Q1",
+        "09:30",
+        "10:00"
+      ],
+      [
+        "B2",
+        "Q1",
+        "10:00",
+        "10:20"
+      ],
+      [
+        "B3",
+        "Q1",
+        "10:15",
+        "11:00"
+      ],
+      [
+        "B4",
+        "Q1",
+        "11:00",
+        "11:30"
+      ],
+      [
+        "B5",
+        "Q2",
+        "10:10",
+        "10:40"
+      ],
+      [
+        "B6",
+        "Q2",
+        "11:30",
+        "12:00"
+      ]
+    ],
+    "notice": {
+      "en": "Final service windows: Q1 10:15–11:00, Q2 10:30–11:30. Any positive overlap requires MOVE. Touching at exactly one endpoint is allowed, so use KEEP when there is no overlap.",
+      "hi": "सर्विस का अंतिम समय: Q1 के लिए 10:15 से 11:00 और Q2 के लिए 10:30 से 11:30। बुकिंग का कुछ समय सर्विस के दौरान पड़ता है तो MOVE लिखें। एक का अंत ठीक दूसरे की शुरुआत हो तो उसे टकराव न मानें। टकराव न हो तो KEEP लिखें।"
+    },
+    "output": [
+      "booking",
+      "decision"
+    ],
+    "answer": [
+      [
+        "B1",
+        "KEEP"
+      ],
+      [
+        "B2",
+        "MOVE"
+      ],
+      [
+        "B3",
+        "MOVE"
+      ],
+      [
+        "B4",
+        "KEEP"
+      ],
+      [
+        "B5",
+        "MOVE"
+      ],
+      [
+        "B6",
+        "KEEP"
+      ]
+    ]
+  }
+]

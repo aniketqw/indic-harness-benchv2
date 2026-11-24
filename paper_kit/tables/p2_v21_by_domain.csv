@@ -1,0 +1,9 @@
+domain,n,correct,correct_pct,mean_field_score
+agriculture,24,18,75.0,89.4
+archives,24,20,83.3,95.1
+clinic,24,13,54.2,69.9
+finance,24,20,83.3,90.7
+localization,24,18,75.0,95.1
+logistics,24,20,83.3,93.7
+municipal,24,20,83.3,98.1
+schools,24,17,70.8,90.9

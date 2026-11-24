@@ -1,0 +1,278 @@
+[
+  {
+    "id": "13-water-register",
+    "title": "Water-outage register correction",
+    "goals": {
+      "en": "Update the water-outage register for every street.",
+      "hi": "हर सड़क के लिए जलापूर्ति बाधित रहने का रजिस्टर अपडेट करें।",
+      "hinglish": "Har street ke liye water-outage register update karo."
+    },
+    "headers": {
+      "en": [
+        "street",
+        "ward",
+        "start",
+        "end"
+      ],
+      "hi": [
+        "सड़क",
+        "वार्ड",
+        "शुरुआत",
+        "समाप्ति"
+      ]
+    },
+    "records": [
+      [
+        "S1",
+        "W5",
+        "09:00",
+        "12:00"
+      ],
+      [
+        "S2",
+        "W5",
+        "09:00",
+        "12:00"
+      ],
+      [
+        "S3",
+        "W5",
+        "10:00",
+        "13:00"
+      ],
+      [
+        "S4",
+        "W6",
+        "09:00",
+        "12:00"
+      ],
+      [
+        "S5",
+        "W5",
+        "",
+        ""
+      ]
+    ],
+    "notice": {
+      "en": "Final signed ward correction: S2 no longer has an outage; leave its times blank. S5 is added from 11:00 to 13:00. The end of the S1 outage moves to 12:30. All other plans remain as listed.",
+      "hi": "वार्ड का अंतिम हस्ताक्षरित संशोधन: S2 में अब जलापूर्ति बंद नहीं होगी, उसके समय खाली छोड़ें। S5 में 11:00 से 13:00 तक आपूर्ति बंद रहेगी। S1 में आपूर्ति 12:30 बजे बहाल होगी। बाकी योजना सूची के अनुसार रहेगी।"
+    },
+    "output": [
+      "street",
+      "start",
+      "end"
+    ],
+    "answer": [
+      [
+        "S1",
+        "09:00",
+        "12:30"
+      ],
+      [
+        "S2",
+        "",
+        ""
+      ],
+      [
+        "S3",
+        "10:00",
+        "13:00"
+      ],
+      [
+        "S4",
+        "09:00",
+        "12:00"
+      ],
+      [
+        "S5",
+        "11:00",
+        "13:00"
+      ]
+    ]
+  },
+  {
+    "id": "14-sanitation-queue",
+    "title": "Sanitation complaint deduplication",
+    "goals": {
+      "en": "Map every complaint to a canonical ticket and a dispatch team.",
+      "hi": "हर शिकायत को उसकी मुख्य टिकट आईडी और भेजी जाने वाली टीम से जोड़ें।",
+      "hinglish": "Har complaint ko canonical ticket aur dispatch team se map karo."
+    },
+    "headers": {
+      "en": [
+        "ticket",
+        "zone",
+        "landmark",
+        "side",
+        "kind"
+      ],
+      "hi": [
+        "टिकट",
+        "क्षेत्र",
+        "पहचान_स्थल",
+        "तरफ़",
+        "प्रकार"
+      ]
+    },
+    "records": [
+      [
+        "T01",
+        "W1",
+        "M7",
+        "N",
+        "BIN"
+      ],
+      [
+        "T02",
+        "W1",
+        "M7",
+        "N",
+        "BIN"
+      ],
+      [
+        "T03",
+        "W1",
+        "M7",
+        "S",
+        "BIN"
+      ],
+      [
+        "T04",
+        "W1",
+        "M7",
+        "N",
+        "SWEEP"
+      ],
+      [
+        "T05",
+        "W2",
+        "M7",
+        "N",
+        "BIN"
+      ],
+      [
+        "T06",
+        "W1",
+        "M7",
+        "S",
+        "BIN"
+      ]
+    ],
+    "notice": {
+      "en": "Two tickets duplicate one another only if zone, landmark, side and kind all match. Use the lowest ticket ID as canonical. Dispatch SWEEP to STREET. BIN goes to NORTH in W1 and EAST in W2.",
+      "hi": "दो टिकट तभी एक ही शिकायत हैं जब क्षेत्र, पहचान स्थल, तरफ़ और प्रकार चारों समान हों। सबसे छोटी टिकट आईडी को मुख्य मानें। SWEEP को STREET टीम को भेजें। BIN को W1 में NORTH और W2 में EAST टीम को भेजें।"
+    },
+    "output": [
+      "ticket",
+      "canonical",
+      "team"
+    ],
+    "answer": [
+      [
+        "T01",
+        "T01",
+        "NORTH"
+      ],
+      [
+        "T02",
+        "T01",
+        "NORTH"
+      ],
+      [
+        "T03",
+        "T03",
+        "NORTH"
+      ],
+      [
+        "T04",
+        "T04",
+        "STREET"
+      ],
+      [
+        "T05",
+        "T05",
+        "EAST"
+      ],
+      [
+        "T06",
+        "T03",
+        "NORTH"
+      ]
+    ]
+  },
+  {
+    "id": "15-streetlight-handover",
+    "hi_records": [
+      ["P1","मंदिर","पूर्व"],
+      ["P2","मंदिर","पश्चिम"],
+      ["P3","बाज़ार","उत्तर"],
+      ["P4","बाज़ार","दक्षिण"]
+    ],
+    "title": "Streetlight repair handover",
+    "goals": {
+      "en": "Submit a handover list for all streetlights in the register.",
+      "hi": "रजिस्टर की सभी स्ट्रीटलाइट के लिए कार्य हस्तांतरण सूची बनाएँ।",
+      "hinglish": "Register ki saari streetlights ke liye handover list banao."
+    },
+    "headers": {
+      "en": [
+        "asset",
+        "landmark",
+        "side"
+      ],
+      "hi": [
+        "संपत्ति",
+        "पहचान_स्थल",
+        "तरफ़"
+      ]
+    },
+    "records": [
+      [
+        "P1",
+        "TEMPLE",
+        "E"
+      ],
+      [
+        "P2",
+        "TEMPLE",
+        "W"
+      ],
+      [
+        "P3",
+        "MARKET",
+        "N"
+      ],
+      [
+        "P4",
+        "MARKET",
+        "S"
+      ]
+    ],
+    "notice": {
+      "en": "Field notes: fixed the west pole by the temple. The east temple pole needs a follow-up. A market pole was fixed but its side is unknown. Record FIXED only for a uniquely identified repair. Use OPEN for every other pole.",
+      "hi": "मैदानी नोट: मंदिर के पास पश्चिम वाला खंभा ठीक किया गया। मंदिर के पूर्व वाले खंभे पर फिर काम करना है। बाज़ार का एक खंभा ठीक हुआ, पर किस तरफ़ का था यह पता नहीं। केवल उस मरम्मत पर FIXED लिखें जिसकी पहचान पक्की है। बाकी हर खंभे के लिए OPEN लिखें।"
+    },
+    "output": [
+      "asset",
+      "status"
+    ],
+    "answer": [
+      [
+        "P1",
+        "OPEN"
+      ],
+      [
+        "P2",
+        "FIXED"
+      ],
+      [
+        "P3",
+        "OPEN"
+      ],
+      [
+        "P4",
+        "OPEN"
+      ]
+    ]
+  }
+]

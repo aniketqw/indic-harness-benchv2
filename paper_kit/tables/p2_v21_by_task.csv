@@ -1,0 +1,17 @@
+task,domain,glm_of6,nemotron_of6,en_workspace_of6,hi_workspace_of6,v21_total_of12,v2_total_of12,v21_mean_field_score
+01-upi-settlement,finance,5,4,4,5,9,8,89.8
+02-gst-payables,finance,6,5,6,5,11,8,91.7
+03-bus-roster,schools,6,4,6,4,10,8,83.3
+04-exam-seating,schools,2,5,4,3,7,9,98.5
+05-grower-payout,agriculture,6,2,4,4,8,10,80.1
+06-seed-allocation,agriculture,4,6,6,4,10,2,98.6
+07-ui-strings,localization,2,6,5,3,8,11,98.5
+08-search-normalization,localization,6,4,5,5,10,8,91.6
+09-water-schedule,municipal,4,6,6,4,10,9,99.6
+10-grievance-dedup,municipal,4,6,4,6,10,7,96.7
+11-parcel-dispatch,logistics,6,5,6,5,11,10,91.7
+12-delivery-audit,logistics,5,4,6,3,9,7,95.7
+13-appointment-rebooking,clinic,4,1,3,2,5,5,56.9
+14-lab-flags,clinic,6,2,4,4,8,0,82.8
+15-catalogue-merge,archives,4,6,6,4,10,12,90.3
+16-digitization-audit,archives,4,6,6,4,10,6,99.9

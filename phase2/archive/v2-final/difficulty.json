@@ -1,0 +1,822 @@
+{
+ "01-upi-settlement": {
+  "domain": "finance",
+  "title": "UPI settlement close",
+  "input_rows": {
+   "in/invoices.csv": 36,
+   "in/payments.csv": 57,
+   "in/amendments.csv": 14
+  },
+  "output_rows": 36,
+  "scored_fields": 108,
+  "input_bytes": {
+   "en": 5286,
+   "hi": 9243
+  },
+  "ablations": [
+   {
+    "rule_ignored": "dedup",
+    "score": 89.8148
+   },
+   {
+    "rule_ignored": "note",
+    "score": 88.8889
+   },
+   {
+    "rule_ignored": "note_first",
+    "score": 66.6667
+   },
+   {
+    "rule_ignored": "amend",
+    "score": 69.4444
+   },
+   {
+    "rule_ignored": "seq",
+    "score": 99.0741
+   },
+   {
+    "rule_ignored": "cutoff",
+    "score": 89.8148
+   },
+   {
+    "rule_ignored": "cutoff_exclusive",
+    "score": 87.963
+   },
+   {
+    "rule_ignored": "reversals",
+    "score": 91.6667
+   },
+   {
+    "rule_ignored": "rev_orig",
+    "score": 98.1481
+   }
+  ],
+  "mean_ablation_score": 86.8,
+  "max_ablation_score": 99.0741
+ },
+ "02-gst-payables": {
+  "domain": "finance",
+  "title": "GST payables register",
+  "input_rows": {
+   "in/suppliers.csv": 8,
+   "in/invoices.csv": 64,
+   "in/amendments.csv": 8
+  },
+  "output_rows": 64,
+  "scored_fields": 256,
+  "input_bytes": {
+   "en": 4567,
+   "hi": 7572
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 91.4062
+   },
+   {
+    "rule_ignored": "cancel_first",
+    "score": 98.8281
+   },
+   {
+    "rule_ignored": "dup",
+    "score": 91.7969
+   },
+   {
+    "rule_ignored": "normalize",
+    "score": 97.2656
+   },
+   {
+    "rule_ignored": "dup_latest",
+    "score": 83.2031
+   },
+   {
+    "rule_ignored": "gstin",
+    "score": 90.625
+   },
+   {
+    "rule_ignored": "bankers",
+    "score": 89.8438
+   },
+   {
+    "rule_ignored": "tds_never",
+    "score": 92.9688
+   },
+   {
+    "rule_ignored": "tds_order_entry",
+    "score": 93.75
+   },
+   {
+    "rule_ignored": "tds_all",
+    "score": 88.2812
+   },
+   {
+    "rule_ignored": "tds_after",
+    "score": 98.4375
+   }
+  ],
+  "mean_ablation_score": 92.4,
+  "max_ablation_score": 98.8281
+ },
+ "03-bus-roster": {
+  "domain": "schools",
+  "title": "School bus roster",
+  "input_rows": {
+   "in/stops.csv": 20,
+   "in/students.csv": 118,
+   "in/circulars.csv": 13
+  },
+  "output_rows": 118,
+  "scored_fields": 354,
+  "input_bytes": {
+   "en": 3172,
+   "hi": 5139
+  },
+  "ablations": [
+   {
+    "rule_ignored": "unsigned",
+    "score": 90.3955
+   },
+   {
+    "rule_ignored": "cancel",
+    "score": 90.678
+   },
+   {
+    "rule_ignored": "close_up",
+    "score": 98.8701
+   },
+   {
+    "rule_ignored": "close_static",
+    "score": 96.0452
+   },
+   {
+    "rule_ignored": "capacity",
+    "score": 95.1977
+   },
+   {
+    "rule_ignored": "siblings",
+    "score": 96.6102
+   },
+   {
+    "rule_ignored": "priority",
+    "score": 92.0904
+   },
+   {
+    "rule_ignored": "stop_at_misfit",
+    "score": 99.435
+   },
+   {
+    "rule_ignored": "ov_order",
+    "score": 97.7401
+   }
+  ],
+  "mean_ablation_score": 95.2,
+  "max_ablation_score": 99.435
+ },
+ "04-exam-seating": {
+  "domain": "schools",
+  "title": "Exam room allocation",
+  "input_rows": {
+   "in/rooms.csv": 9,
+   "in/closures.csv": 6,
+   "in/groups.csv": 34,
+   "in/changes.csv": 10
+  },
+  "output_rows": 34,
+  "scored_fields": 136,
+  "input_bytes": {
+   "en": 1791,
+   "hi": 4231
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 83.8235
+   },
+   {
+    "rule_ignored": "order_id",
+    "score": 76.4706
+   },
+   {
+    "rule_ignored": "order_asc",
+    "score": 72.0588
+   },
+   {
+    "rule_ignored": "largest_fit",
+    "score": 97.0588
+   },
+   {
+    "rule_ignored": "step_free",
+    "score": 91.9118
+   },
+   {
+    "rule_ignored": "closures",
+    "score": 86.0294
+   },
+   {
+    "rule_ignored": "split_smallest",
+    "score": 83.0882
+   },
+   {
+    "rule_ignored": "partial_unseated",
+    "score": 91.9118
+   }
+  ],
+  "mean_ablation_score": 85.3,
+  "max_ablation_score": 97.0588
+ },
+ "05-grower-payout": {
+  "domain": "agriculture",
+  "title": "Paddy procurement payout",
+  "input_rows": {
+   "in/farmers.csv": 30,
+   "in/registry_merges.csv": 5,
+   "in/deliveries.csv": 120,
+   "in/advances.csv": 27,
+   "in/amendments.csv": 9
+  },
+  "output_rows": 24,
+  "scored_fields": 120,
+  "input_bytes": {
+   "en": 6562,
+   "hi": 11372
+  },
+  "ablations": [
+   {
+    "rule_ignored": "merge",
+    "score": 71.0345
+   },
+   {
+    "rule_ignored": "merge_once",
+    "score": 92.0
+   },
+   {
+    "rule_ignored": "amend",
+    "score": 87.5
+   },
+   {
+    "rule_ignored": "moisture_round",
+    "score": 64.1667
+   },
+   {
+    "rule_ignored": "reject_inclusive",
+    "score": 92.5
+   },
+   {
+    "rule_ignored": "units",
+    "score": 58.3333
+   },
+   {
+    "rule_ignored": "rate_date",
+    "score": 79.1667
+   },
+   {
+    "rule_ignored": "round_total",
+    "score": 93.3333
+   },
+   {
+    "rule_ignored": "advance_cap",
+    "score": 95.0
+   }
+  ],
+  "mean_ablation_score": 81.4,
+  "max_ablation_score": 95.0
+ },
+ "06-seed-allocation": {
+  "domain": "agriculture",
+  "title": "Seed lot allocation",
+  "input_rows": {
+   "in/lots.csv": 24,
+   "in/requests.csv": 72,
+   "in/amendments.csv": 8
+  },
+  "output_rows": 72,
+  "scored_fields": 216,
+  "input_bytes": {
+   "en": 3837,
+   "hi": 8047
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 86.1111
+   },
+   {
+    "rule_ignored": "quarantine",
+    "score": 87.037
+   },
+   {
+    "rule_ignored": "expiry",
+    "score": 69.4444
+   },
+   {
+    "rule_ignored": "expiry_exclusive",
+    "score": 55.5556
+   },
+   {
+    "rule_ignored": "priority",
+    "score": 57.8704
+   },
+   {
+    "rule_ignored": "fefo",
+    "score": 79.6296
+   },
+   {
+    "rule_ignored": "floor_packs",
+    "score": 66.2037
+   }
+  ],
+  "mean_ablation_score": 71.7,
+  "max_ablation_score": 87.037
+ },
+ "07-ui-strings": {
+  "domain": "localization",
+  "title": "Hindi UI string QA",
+  "input_rows": {
+   "in/strings.csv": 60,
+   "in/revisions.csv": 15,
+   "in/glossary.csv": 5
+  },
+  "output_rows": 60,
+  "scored_fields": 120,
+  "input_bytes": {
+   "en": 6535,
+   "hi": 7125
+  },
+  "ablations": [
+   {
+    "rule_ignored": "revisions",
+    "score": 82.5
+   },
+   {
+    "rule_ignored": "revision_any",
+    "score": 95.8333
+   },
+   {
+    "rule_ignored": "order",
+    "score": 99.1667
+   },
+   {
+    "rule_ignored": "case",
+    "score": 95.8333
+   },
+   {
+    "rule_ignored": "forbidden",
+    "score": 99.1667
+   },
+   {
+    "rule_ignored": "nfc",
+    "score": 99.1667
+   },
+   {
+    "rule_ignored": "zwj",
+    "score": 99.1667
+   },
+   {
+    "rule_ignored": "priority",
+    "score": 99.1667
+   }
+  ],
+  "mean_ablation_score": 96.3,
+  "max_ablation_score": 99.1667
+ },
+ "08-search-normalization": {
+  "domain": "localization",
+  "title": "Grocery search normalization",
+  "input_rows": {
+   "in/catalog.csv": 41,
+   "in/amendments.csv": 8,
+   "in/queries.csv": 138
+  },
+  "output_rows": 138,
+  "scored_fields": 138,
+  "input_bytes": {
+   "en": 4740,
+   "hi": 5512
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 92.7536
+   },
+   {
+    "rule_ignored": "status",
+    "score": 96.3768
+   },
+   {
+    "rule_ignored": "zwj",
+    "score": 97.8261
+   },
+   {
+    "rule_ignored": "nukta",
+    "score": 96.3768
+   },
+   {
+    "rule_ignored": "chandrabindu",
+    "score": 98.5507
+   },
+   {
+    "rule_ignored": "digits",
+    "score": 99.2754
+   },
+   {
+    "rule_ignored": "case",
+    "score": 85.5072
+   },
+   {
+    "rule_ignored": "diacritics",
+    "score": 97.1014
+   },
+   {
+    "rule_ignored": "hyphen",
+    "score": 94.2029
+   },
+   {
+    "rule_ignored": "space",
+    "score": 95.6522
+   },
+   {
+    "rule_ignored": "multi",
+    "score": 98.5507
+   }
+  ],
+  "mean_ablation_score": 95.7,
+  "max_ablation_score": 99.2754
+ },
+ "09-water-schedule": {
+  "domain": "municipal",
+  "title": "Ward water-supply plan",
+  "input_rows": {
+   "in/schedule.csv": 60,
+   "in/notices.csv": 36
+  },
+  "output_rows": 60,
+  "scored_fields": 240,
+  "input_bytes": {
+   "en": 3335,
+   "hi": 7441
+  },
+  "ablations": [
+   {
+    "rule_ignored": "unsigned",
+    "score": 71.25
+   },
+   {
+    "rule_ignored": "order",
+    "score": 98.75
+   },
+   {
+    "rule_ignored": "all",
+    "score": 90.8333
+   },
+   {
+    "rule_ignored": "cancel_permanent",
+    "score": 98.75
+   },
+   {
+    "rule_ignored": "extend_cancelled",
+    "score": 98.3333
+   },
+   {
+    "rule_ignored": "tanker_inclusive",
+    "score": 96.6667
+   }
+  ],
+  "mean_ablation_score": 92.4,
+  "max_ablation_score": 98.75
+ },
+ "10-grievance-dedup": {
+  "domain": "municipal",
+  "title": "Grievance consolidation",
+  "input_rows": {
+   "in/landmarks.csv": 39,
+   "in/tickets.csv": 103,
+   "in/amendments.csv": 10
+  },
+  "output_rows": 72,
+  "scored_fields": 288,
+  "input_bytes": {
+   "en": 8236,
+   "hi": 13231
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 89.3333
+   },
+   {
+    "rule_ignored": "withdrawn",
+    "score": 94.3333
+   },
+   {
+    "rule_ignored": "alias",
+    "score": 76.7045
+   },
+   {
+    "rule_ignored": "window_exclusive",
+    "score": 95.0
+   },
+   {
+    "rule_ignored": "window_chain",
+    "score": 96.5278
+   },
+   {
+    "rule_ignored": "sla_member",
+    "score": 92.7083
+   },
+   {
+    "rule_ignored": "resolved_latest",
+    "score": 98.6111
+   },
+   {
+    "rule_ignored": "pending_breach",
+    "score": 94.4444
+   },
+   {
+    "rule_ignored": "dept_exception",
+    "score": 97.5694
+   }
+  ],
+  "mean_ablation_score": 92.8,
+  "max_ablation_score": 98.6111
+ },
+ "11-parcel-dispatch": {
+  "domain": "logistics",
+  "title": "Parcel dispatch and charges",
+  "input_rows": {
+   "in/holidays.csv": 3,
+   "in/parcels.csv": 96,
+   "in/amendments.csv": 10
+  },
+  "output_rows": 93,
+  "scored_fields": 279,
+  "input_bytes": {
+   "en": 6533,
+   "hi": 14985
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 94.4444
+   },
+   {
+    "rule_ignored": "cutoff_exclusive",
+    "score": 92.8315
+   },
+   {
+    "rule_ignored": "holidays",
+    "score": 94.9821
+   },
+   {
+    "rule_ignored": "sunday",
+    "score": 93.5484
+   },
+   {
+    "rule_ignored": "depot_cutoff",
+    "score": 95.3405
+   },
+   {
+    "rule_ignored": "volumetric",
+    "score": 64.8746
+   },
+   {
+    "rule_ignored": "round_nearest",
+    "score": 75.6272
+   },
+   {
+    "rule_ignored": "cod_off",
+    "score": 92.4731
+   },
+   {
+    "rule_ignored": "cod_flat",
+    "score": 94.9821
+   }
+  ],
+  "mean_ablation_score": 88.8,
+  "max_ablation_score": 95.3405
+ },
+ "12-delivery-audit": {
+  "domain": "logistics",
+  "title": "Proof-of-delivery audit",
+  "input_rows": {
+   "in/skus.csv": 12,
+   "in/manifest.csv": 57,
+   "in/receipts.csv": 79,
+   "in/amendments.csv": 7
+  },
+  "output_rows": 57,
+  "scored_fields": 171,
+  "input_bytes": {
+   "en": 5119,
+   "hi": 9157
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 88.8889
+   },
+   {
+    "rule_ignored": "unsigned",
+    "score": 94.7368
+   },
+   {
+    "rule_ignored": "cutoff",
+    "score": 92.9825
+   },
+   {
+    "rule_ignored": "boxes",
+    "score": 65.4971
+   },
+   {
+    "rule_ignored": "returns",
+    "score": 89.4737
+   },
+   {
+    "rule_ignored": "zero_proof",
+    "score": 94.7368
+   },
+   {
+    "rule_ignored": "return_proof",
+    "score": 96.4912
+   }
+  ],
+  "mean_ablation_score": 89.0,
+  "max_ablation_score": 96.4912
+ },
+ "13-appointment-rebooking": {
+  "domain": "clinic",
+  "title": "Appointment rebooking",
+  "input_rows": {
+   "in/doctors.csv": 6,
+   "in/leave.csv": 4,
+   "in/patients.csv": 56,
+   "in/appointments.csv": 96,
+   "in/free_slots.csv": 58
+  },
+  "output_rows": 41,
+  "scored_fields": 123,
+  "input_bytes": {
+   "en": 7453,
+   "hi": 15097
+  },
+  "ablations": [
+   {
+    "rule_ignored": "priority",
+    "score": 52.8455
+   },
+   {
+    "rule_ignored": "age_year",
+    "score": 82.9268
+   },
+   {
+    "rule_ignored": "specialty",
+    "score": 41.4634
+   },
+   {
+    "rule_ignored": "leave_slots",
+    "score": 65.0407
+   },
+   {
+    "rule_ignored": "before_original",
+    "score": 80.4878
+   },
+   {
+    "rule_ignored": "access_any",
+    "score": 62.6016
+   },
+   {
+    "rule_ignored": "same_day",
+    "score": 75.6098
+   }
+  ],
+  "mean_ablation_score": 65.9,
+  "max_ablation_score": 82.9268
+ },
+ "14-lab-flags": {
+  "domain": "clinic",
+  "title": "Lab result flags",
+  "input_rows": {
+   "in/patients.csv": 26,
+   "in/results.csv": 143,
+   "in/corrections.csv": 9
+  },
+  "output_rows": 66,
+  "scored_fields": 132,
+  "input_bytes": {
+   "en": 8113,
+   "hi": 18224
+  },
+  "ablations": [
+   {
+    "rule_ignored": "corrections",
+    "score": 95.4545
+   },
+   {
+    "rule_ignored": "earliest",
+    "score": 49.2424
+   },
+   {
+    "rule_ignored": "convert",
+    "score": 70.4545
+   },
+   {
+    "rule_ignored": "unrounded",
+    "score": 93.1818
+   },
+   {
+    "rule_ignored": "child",
+    "score": 93.9394
+   },
+   {
+    "rule_ignored": "sex",
+    "score": 97.7273
+   },
+   {
+    "rule_ignored": "critical",
+    "score": 96.2121
+   }
+  ],
+  "mean_ablation_score": 85.2,
+  "max_ablation_score": 97.7273
+ },
+ "15-catalogue-merge": {
+  "domain": "archives",
+  "title": "Catalogue de-duplication",
+  "input_rows": {
+   "in/records.csv": 77,
+   "in/amendments.csv": 6
+  },
+  "output_rows": 39,
+  "scored_fields": 117,
+  "input_bytes": {
+   "en": 5324,
+   "hi": 8292
+  },
+  "ablations": [
+   {
+    "rule_ignored": "amend",
+    "score": 77.2727
+   },
+   {
+    "rule_ignored": "withdrawn",
+    "score": 85.2713
+   },
+   {
+    "rule_ignored": "isbn10",
+    "score": 68.1159
+   },
+   {
+    "rule_ignored": "checksum",
+    "score": 94.0171
+   },
+   {
+    "rule_ignored": "edition",
+    "score": 86.3248
+   },
+   {
+    "rule_ignored": "deva",
+    "score": 77.2727
+   },
+   {
+    "rule_ignored": "lexical",
+    "score": 79.845
+   }
+  ],
+  "mean_ablation_score": 81.2,
+  "max_ablation_score": 94.0171
+ },
+ "16-digitization-audit": {
+  "domain": "archives",
+  "title": "Digitization page audit",
+  "input_rows": {
+   "in/volumes.csv": 3,
+   "in/scans.csv": 134,
+   "in/rescans.csv": 4
+  },
+  "output_rows": 125,
+  "scored_fields": 375,
+  "input_bytes": {
+   "en": 3470,
+   "hi": 5172
+  },
+  "ablations": [
+   {
+    "rule_ignored": "rescans",
+    "score": 97.8667
+   },
+   {
+    "rule_ignored": "foldout",
+    "score": 56.2667
+   },
+   {
+    "rule_ignored": "digits",
+    "score": 79.2
+   },
+   {
+    "rule_ignored": "case",
+    "score": 97.8667
+   }
+  ],
+  "mean_ablation_score": 82.8,
+  "max_ablation_score": 97.8667
+ }
+}

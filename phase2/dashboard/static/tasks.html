@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indic Harness Bench · Tasks</title>
+<link rel="stylesheet" href="/style.css">
+<script defer src="/tasks.js"></script>
+</head>
+<body>
+<main class="shell">
+  <header class="page-head"><div><p class="product">Indic Harness Bench</p><h1>Browse tasks</h1></div></header>
+  <nav class="view-nav" aria-label="Dashboard"><a href="/">Runner</a><a href="/tasks" aria-current="page">Tasks</a></nav>
+  <section class="panel task-controls" aria-label="Select a task">
+    <label>Workflow<select id="task"></select></label>
+    <label>Instruction language<select id="instruction"><option value="en">English</option><option value="hi">Hindi</option><option value="hinglish">Hinglish</option></select></label>
+    <label>Working files<select id="workspace"><option value="en">English</option><option value="hi">Hindi</option></select></label>
+  </section>
+  <p id="task-error" class="notice" role="status" hidden></p>
+  <section class="panel preview" aria-labelledby="prompt-title">
+    <h2 id="prompt-title">Prompt shown to the agent</h2>
+    <pre id="prompt"></pre>
+  </section>
+  <section class="panel preview" aria-labelledby="files-title">
+    <h2 id="files-title">Files in the agent’s workspace</h2>
+    <div id="files"></div>
+  </section>
+</main>
+</body>
+</html>

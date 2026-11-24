@@ -1,0 +1,251 @@
+[
+  {
+    "id": "07-grower-payout",
+    "title": "Grower payout calculation",
+    "goals": {
+      "en": "Compute the payout for every delivery.",
+      "hi": "हर डिलीवरी का भुगतान निकालें।",
+      "hinglish": "Har delivery ka payout calculate karo."
+    },
+    "headers": {
+      "en": [
+        "delivery",
+        "date",
+        "kg",
+        "grade"
+      ],
+      "hi": [
+        "डिलीवरी",
+        "तारीख",
+        "किलो",
+        "श्रेणी"
+      ]
+    },
+    "records": [
+      [
+        "D1",
+        "2026-11-10",
+        "40",
+        "A"
+      ],
+      [
+        "D2",
+        "2026-11-12",
+        "30",
+        "B"
+      ],
+      [
+        "D3",
+        "2026-11-13",
+        "25",
+        "A"
+      ],
+      [
+        "D4",
+        "2026-11-11",
+        "20",
+        "B"
+      ]
+    ],
+    "notice": {
+      "en": "The base rate is Rs 24 per kg up to and including 11 November, then Rs 28. Grade B pays Rs 3 less per kg on either side of the change. Grade A has no deduction. Record the actual rate and final payout in rupees.",
+      "hi": "11 नवंबर तक, उस दिन समेत, मूल दर 24 रुपये प्रति किलो है। उसके बाद दर 28 रुपये है। श्रेणी B में दोनों अवधियों में प्रति किलो 3 रुपये कम मिलेंगे। श्रेणी A में कटौती नहीं है। लागू दर और कुल भुगतान रुपये में लिखें।"
+    },
+    "output": [
+      "delivery",
+      "rate",
+      "payout"
+    ],
+    "answer": [
+      [
+        "D1",
+        "24",
+        "960"
+      ],
+      [
+        "D2",
+        "25",
+        "750"
+      ],
+      [
+        "D3",
+        "28",
+        "700"
+      ],
+      [
+        "D4",
+        "21",
+        "420"
+      ]
+    ]
+  },
+  {
+    "id": "08-seed-stock",
+    "title": "Seed stock reconciliation",
+    "goals": {
+      "en": "Calculate usable warehouse stock and unfilled allocations by seed lot.",
+      "hi": "हर बीज बैच का इस्तेमाल योग्य स्टॉक और अधूरा आवंटन निकालें।",
+      "hinglish": "Har seed lot ka usable stock aur pending allocation nikalo."
+    },
+    "headers": {
+      "en": [
+        "type",
+        "lot",
+        "amount",
+        "unit"
+      ],
+      "hi": [
+        "प्रकार",
+        "बैच",
+        "मात्रा",
+        "इकाई"
+      ]
+    },
+    "records": [
+      [
+        "STOCK",
+        "L1",
+        "12",
+        "PACK"
+      ],
+      [
+        "STOCK",
+        "L2",
+        "40",
+        "KG"
+      ],
+      [
+        "ISSUE",
+        "L1",
+        "5",
+        "PACK"
+      ],
+      [
+        "ISSUE",
+        "L2",
+        "12",
+        "KG"
+      ],
+      [
+        "REQUEST",
+        "L1",
+        "28",
+        "KG"
+      ],
+      [
+        "REQUEST",
+        "L2",
+        "22",
+        "KG"
+      ],
+      [
+        "QUARANTINE",
+        "L1",
+        "1",
+        "PACK"
+      ],
+      [
+        "QUARANTINE",
+        "L2",
+        "2",
+        "KG"
+      ]
+    ],
+    "notice": {
+      "en": "Each PACK weighs 4 kg for L1 and 5 kg for L2. Requests in the file are additional to issues already recorded. Usable stock excludes issues and quarantine. Report usable kg before fulfilling requests and pending kg after allocating from usable stock, floored at zero.",
+      "hi": "L1 में एक PACK 4 किलो का है और L2 में 5 किलो का। फ़ाइल की माँगें पहले जारी की गई मात्रा के अलावा हैं। जारी और अलग रखे गए बीज को इस्तेमाल योग्य स्टॉक से घटाएँ। माँग पूरी करने से पहले का इस्तेमाल योग्य स्टॉक और उसमें से आवंटन करने के बाद बची अधूरी माँग किलो में लिखें। अधूरी माँग कम से कम शून्य होगी।"
+    },
+    "output": [
+      "lot",
+      "usable_kg",
+      "pending_kg"
+    ],
+    "answer": [
+      [
+        "L1",
+        "24",
+        "4"
+      ],
+      [
+        "L2",
+        "26",
+        "0"
+      ]
+    ]
+  },
+  {
+    "id": "09-equipment-slots",
+    "title": "Shared equipment rescheduling",
+    "goals": {
+      "en": "Produce an updated booking list for the cooperative's equipment.",
+      "hi": "सहकारी समिति के उपकरण की बुकिंग की नई सूची बनाएँ।",
+      "hinglish": "Cooperative ke equipment ki updated booking list banao."
+    },
+    "headers": {
+      "en": [
+        "request",
+        "day",
+        "zone",
+        "priority"
+      ],
+      "hi": [
+        "अनुरोध",
+        "दिन",
+        "क्षेत्र",
+        "प्राथमिकता"
+      ]
+    },
+    "records": [
+      [
+        "Q1",
+        "MON",
+        "NORTH",
+        "2"
+      ],
+      [
+        "Q2",
+        "MON",
+        "SOUTH",
+        "1"
+      ],
+      [
+        "Q3",
+        "TUE",
+        "NORTH",
+        "1"
+      ],
+      [
+        "Q4",
+        "MON",
+        "NORTH",
+        "1"
+      ]
+    ],
+    "notice": {
+      "en": "Monday bookings are cancelled after a breakdown. Q3 keeps its existing Tuesday booking. Move the others to Wednesday, Thursday or Friday, one per day, by ascending priority number then request ID. South-zone requests cannot use Wednesday. Assign each request the earliest remaining eligible day.",
+      "hi": "खराबी के कारण सोमवार की बुकिंग रद्द है। Q3 की मंगलवार वाली बुकिंग बनी रहेगी। बाकी को बुधवार, गुरुवार या शुक्रवार को ले जाएँ। एक दिन में एक बुकिंग रखें। पहले छोटी प्राथमिकता संख्या और बराबरी पर छोटी अनुरोध आईडी लें। SOUTH क्षेत्र को बुधवार नहीं मिल सकता। हर अनुरोध को बचा हुआ सबसे पहला पात्र दिन दें।"
+    },
+    "output": [
+      "request",
+      "day"
+    ],
+    "answer": [
+      [
+        "Q1",
+        "FRI"
+      ],
+      [
+        "Q2",
+        "THU"
+      ],
+      [
+        "Q3",
+        "TUE"
+      ],
+      [
+        "Q4",
+        "WED"
+      ]
+    ]
+  }
+]

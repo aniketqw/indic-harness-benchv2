@@ -1,0 +1,22 @@
+
+:root{color-scheme:light;--paper:#f3f2ec;--ink:#202b2a;--muted:#586460;--line:#d6ddd5;--green:#164d3c;--mint:#dceadd;--white:#fffefa}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 "Inter","Segoe UI",sans-serif}
+.shell{max-width:1130px;margin:0 auto;padding:46px 28px 60px}.page-head,.section-head{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.page-head{margin-bottom:24px}.product{color:var(--green);font-weight:750;margin:0 0 4px}h1,h2,p{margin:0}h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.05em;line-height:1.05}h2{font-size:1.16rem;letter-spacing:-.02em}
+.state{display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--white);padding:6px 12px;border-radius:20px;font-weight:650;white-space:nowrap}
+.state span{background:#747d74;border-radius:50%;width:8px;height:8px}.state[data-kind="running"] span{background:#26804d}.state[data-kind="pausing"] span,.state[data-kind="recover"] span{background:#a4581c}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px}
+form{display:grid;grid-template-columns:1fr 1.25fr .68fr auto;gap:12px;align-items:end}
+label{display:grid;gap:6px;font-weight:620;color:var(--muted);font-size:.88rem}input,select,button{font:inherit;border-radius:7px;border:1px solid #bbc8be;background:#fffefa;color:var(--ink);padding:9px 10px;min-height:42px}input,select{width:100%;font-weight:500}
+.buttons{display:flex;gap:7px;flex-wrap:wrap}button{cursor:pointer;padding-inline:13px;font-weight:700}button.primary{background:var(--green);color:white;border-color:var(--green)}button:disabled{opacity:.48;cursor:default}
+:focus-visible{outline:3px solid #36877c;outline-offset:2px}.notice{margin-top:12px;color:var(--muted)}.notice[data-error]{color:#8b3d1f}.notice[data-safe]{color:var(--green);font-weight:700}
+.section-head p{color:var(--muted);margin-top:3px}.section-head strong{white-space:nowrap;font-size:1.4rem;font-variant-numeric:tabular-nums}
+progress{appearance:none;width:100%;height:10px;margin:17px 0 20px;border:0;border-radius:10px;background:#e7ece4;color:var(--green);overflow:hidden}progress::-webkit-progress-bar{background:#e7ece4}progress::-webkit-progress-value{background:var(--green)}progress::-moz-progress-bar{background:var(--green)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metrics div{background:#f0f5ed;border-radius:8px;padding:10px 13px}.metrics span{color:var(--muted);font-size:.82rem;display:block}.metrics strong{font-size:1.32rem;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:.78fr 1.22fr;gap:14px;align-items:start}table{width:100%;border-collapse:collapse;white-space:nowrap;table-layout:auto;margin-top:9px;font-size:.88rem}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid #e6eae2}th:first-child,td:first-child{padding-left:0}th{font-weight:650;color:var(--muted)}td:last-child,th:last-child{text-align:right}tbody tr:last-child td{border-bottom:0}.empty{text-align:left!important;color:var(--muted)}.table-wrap{overflow:auto}
+details{border-top:1px solid #e6eae2;margin-top:10px;padding-top:10px}summary{cursor:pointer;color:var(--green)}pre{overflow:auto;white-space:pre-wrap;font-size:.81rem}
+@media(max-width:920px){form{grid-template-columns:1fr 1.2fr .75fr}.buttons{grid-column:1/-1}}
+@media(max-width:620px){.shell{padding:28px 12px}.panel{padding:16px}.stats{display:block}.metrics{grid-template-columns:repeat(2,1fr)}form{grid-template-columns:1fr 1fr}form label:first-child{grid-column:1/-1}}
+.view-nav{display:flex;gap:8px;margin-bottom:16px}.view-nav a{color:var(--green);text-decoration:none;padding:7px 14px;border:1px solid var(--line);border-radius:8px;font-weight:700}.view-nav a[aria-current="page"]{background:var(--mint);border-color:var(--mint)}
+.task-controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.preview pre{padding:12px;background:#f3f5f0;border-radius:7px;margin:10px 0 0;line-height:1.6}.preview #files pre{max-height:340px;white-space:pre}
+@media(max-width:620px){.task-controls{grid-template-columns:1fr 1fr}.task-controls label:first-child{grid-column:1/-1}}

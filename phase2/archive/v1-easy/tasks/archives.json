@@ -1,0 +1,351 @@
+[
+  {
+    "id": "22-catalogue-merge",
+    "title": "Cross-script catalogue merge",
+    "goals": {
+      "en": "Map every accession to a canonical record and return the canonical display title.",
+      "hi": "हर परिग्रहण आईडी को मुख्य रिकॉर्ड से जोड़ें और उसका प्रदर्शित शीर्षक दें।",
+      "hinglish": "Har accession ko canonical record se map karo aur canonical display title do."
+    },
+    "headers": {
+      "en": [
+        "accession",
+        "work",
+        "edition",
+        "title",
+        "script"
+      ],
+      "hi": [
+        "परिग्रहण",
+        "कृति",
+        "संस्करण",
+        "शीर्षक",
+        "लिपि"
+      ]
+    },
+    "records": [
+      [
+        "A01",
+        "W1",
+        "1",
+        "Nadi Kinare",
+        "LATN"
+      ],
+      [
+        "A02",
+        "W1",
+        "1",
+        "नदी किनारे",
+        "DEVA"
+      ],
+      [
+        "A03",
+        "W1",
+        "2",
+        "नदी किनारे",
+        "DEVA"
+      ],
+      [
+        "A04",
+        "W2",
+        "1",
+        "Bazaar",
+        "LATN"
+      ],
+      [
+        "A05",
+        "W2",
+        "1",
+        "बाज़ार",
+        "DEVA"
+      ],
+      [
+        "A06",
+        "W3",
+        "1",
+        "Bazaar",
+        "LATN"
+      ]
+    ],
+    "notice": {
+      "en": "Group by work and edition together. Prefer the lowest accession with a DEVA title, or if none exists, the lowest accession in the group. Preserve the selected record's title as supplied.",
+      "hi": "कृति और संस्करण दोनों के आधार पर समूह बनाएँ। DEVA शीर्षक वाली सबसे छोटी परिग्रहण आईडी चुनें। कोई DEVA शीर्षक न हो तो समूह की सबसे छोटी परिग्रहण आईडी चुनें। चुने गए रिकॉर्ड का शीर्षक ज्यों का त्यों रखें।"
+    },
+    "output": [
+      "accession",
+      "canonical",
+      "display_title"
+    ],
+    "answer": [
+      [
+        "A01",
+        "A02",
+        "नदी किनारे"
+      ],
+      [
+        "A02",
+        "A02",
+        "नदी किनारे"
+      ],
+      [
+        "A03",
+        "A03",
+        "नदी किनारे"
+      ],
+      [
+        "A04",
+        "A05",
+        "बाज़ार"
+      ],
+      [
+        "A05",
+        "A05",
+        "बाज़ार"
+      ],
+      [
+        "A06",
+        "A06",
+        "Bazaar"
+      ]
+    ]
+  },
+  {
+    "id": "23-digitization-audit",
+    "title": "Digitization quality audit",
+    "goals": {
+      "en": "Produce an audit row for each expected page in the scanned volume.",
+      "hi": "स्कैन किए गए खंड के हर अपेक्षित पृष्ठ की जाँच की एक पंक्ति बनाएँ।",
+      "hinglish": "Scanned volume ke har expected page ki ek audit row banao."
+    },
+    "headers": {
+      "en": [
+        "scan",
+        "observed_label"
+      ],
+      "hi": [
+        "स्कैन",
+        "दिखा_पृष्ठ_लेबल"
+      ]
+    },
+    "records": [
+      [
+        "F01",
+        "१"
+      ],
+      [
+        "F02",
+        "३"
+      ],
+      [
+        "F03",
+        "२"
+      ],
+      [
+        "F04",
+        "३"
+      ],
+      [
+        "F06",
+        "६"
+      ]
+    ],
+    "notice": {
+      "en": "The volume has six Arabic-numbered output pages 1–6. The observed labels are Devanagari digits. Scan names encode their assigned positions. Mark a page MISSING if its label never occurs, DUPLICATE if it occurs more than once, MISPLACED if it occurs once in a wrong position, otherwise OK. Provide all matching scan IDs joined by + in ascending order; blank if missing.",
+      "hi": "खंड में छह पृष्ठ हैं। आउटपुट में उनकी संख्या 1 से 6 तक लिखें। स्कैन में दिखे अंक देवनागरी में हैं। स्कैन के नाम उसकी तय जगह बताते हैं। लेबल कहीं न हो तो MISSING, एक से ज़्यादा बार हो तो DUPLICATE, केवल एक बार गलत जगह हो तो MISPLACED, वरना OK लिखें। मिलती हुई स्कैन आईडी को बढ़ते क्रम में + से जोड़ें। कुछ न मिले तो खाली छोड़ें।"
+    },
+    "output": [
+      "page",
+      "status",
+      "scans"
+    ],
+    "answer": [
+      [
+        "1",
+        "OK",
+        "F01"
+      ],
+      [
+        "2",
+        "MISPLACED",
+        "F03"
+      ],
+      [
+        "3",
+        "DUPLICATE",
+        "F02+F04"
+      ],
+      [
+        "4",
+        "MISSING",
+        ""
+      ],
+      [
+        "5",
+        "MISSING",
+        ""
+      ],
+      [
+        "6",
+        "OK",
+        "F06"
+      ]
+    ]
+  },
+  {
+    "id": "24-archive-index",
+    "forbidden_ids": ["A3"],
+    "hi_records": [
+      ["परिग्रहण","A1","C1","B1","2","सार्वजनिक"],
+      ["परिग्रहण","A2","C2","B1","2","सार्वजनिक"],
+      ["परिग्रहण","A3","C1","B1","3","प्रतिबंधित"],
+      ["परिग्रहण","A4","C1","B2","2","सार्वजनिक"],
+      ["शीर्षक","T1","C1","B1","2","पुरानी गलियाँ"],
+      ["शीर्षक","T2","C2","B1","2","नया मेला"],
+      ["शीर्षक","T3","C1","B1","3","घर की बातें"],
+      ["शीर्षक","T4","C1","B2","2","गाँव की यादें"],
+      ["स्कैन","F1","C1","B1","2","purani-galiyan.txt"],
+      ["स्कैन","F2","C2","B1","2","naya-mela.txt"],
+      ["स्कैन","F3","C1","B1","3","ghar-ki-baaten.txt"]
+    ],
+    "title": "Searchable archive index",
+    "goals": {
+      "en": "Build the public archive index. Include one row per public accession.",
+      "hi": "सार्वजनिक अभिलेखों की अनुक्रमणिका बनाएँ। हर सार्वजनिक परिग्रहण के लिए एक पंक्ति रखें।",
+      "hinglish": "Public archive index banao. Har public accession ka ek row do."
+    },
+    "headers": {
+      "en": [
+        "type",
+        "id",
+        "collection",
+        "box",
+        "item",
+        "value"
+      ],
+      "hi": [
+        "प्रकार",
+        "आईडी",
+        "संग्रह",
+        "डिब्बा",
+        "वस्तु",
+        "मूल्य"
+      ]
+    },
+    "records": [
+      [
+        "ACCESSION",
+        "A1",
+        "C1",
+        "B1",
+        "2",
+        "PUBLIC"
+      ],
+      [
+        "ACCESSION",
+        "A2",
+        "C2",
+        "B1",
+        "2",
+        "PUBLIC"
+      ],
+      [
+        "ACCESSION",
+        "A3",
+        "C1",
+        "B1",
+        "3",
+        "RESTRICTED"
+      ],
+      [
+        "ACCESSION",
+        "A4",
+        "C1",
+        "B2",
+        "2",
+        "PUBLIC"
+      ],
+      [
+        "TITLE",
+        "T1",
+        "C1",
+        "B1",
+        "2",
+        "पुरानी गलियाँ"
+      ],
+      [
+        "TITLE",
+        "T2",
+        "C2",
+        "B1",
+        "2",
+        "नया मेला"
+      ],
+      [
+        "TITLE",
+        "T3",
+        "C1",
+        "B1",
+        "3",
+        "घर की बातें"
+      ],
+      [
+        "TITLE",
+        "T4",
+        "C1",
+        "B2",
+        "2",
+        "गाँव की यादें"
+      ],
+      [
+        "SCAN",
+        "F1",
+        "C1",
+        "B1",
+        "2",
+        "purani-galiyan.txt"
+      ],
+      [
+        "SCAN",
+        "F2",
+        "C2",
+        "B1",
+        "2",
+        "naya-mela.txt"
+      ],
+      [
+        "SCAN",
+        "F3",
+        "C1",
+        "B1",
+        "3",
+        "ghar-ki-baaten.txt"
+      ]
+    ],
+    "notice": {
+      "en": "Join on collection, box and item together. Preserve the original title and filename. If no scan exists keep the public title and leave filename blank. Never index a restricted accession.",
+      "hi": "संग्रह, डिब्बा और वस्तु तीनों के आधार पर मिलान करें। मूल शीर्षक और फ़ाइल नाम सुरक्षित रखें। स्कैन न हो तो सार्वजनिक शीर्षक रखें और फ़ाइल नाम खाली छोड़ें। प्रतिबंधित परिग्रहण को अनुक्रमणिका में शामिल न करें।"
+    },
+    "output": [
+      "accession",
+      "title",
+      "filename"
+    ],
+    "answer": [
+      [
+        "A1",
+        "पुरानी गलियाँ",
+        "purani-galiyan.txt"
+      ],
+      [
+        "A2",
+        "नया मेला",
+        "naya-mela.txt"
+      ],
+      [
+        "A4",
+        "गाँव की यादें",
+        ""
+      ]
+    ]
+  }
+]

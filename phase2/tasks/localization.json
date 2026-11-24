@@ -1,0 +1,3769 @@
+[
+ {
+  "id": "07-ui-strings",
+  "title": "Hindi UI string QA",
+  "goals": {
+   "en": "Check every Hindi UI string for release and report its status.",
+   "hi": "रिलीज़ के लिए हर हिंदी यूआई स्ट्रिंग की जाँच करें और उसका status बताएँ।",
+   "hinglish": "Release ke liye har Hindi UI string check karo aur uska status batao."
+  },
+  "output": [
+   "key",
+   "revision",
+   "status"
+  ],
+  "key_columns": 1,
+  "numeric": [
+   "revision"
+  ],
+  "answer": [
+   [
+    "web.save",
+    "2",
+    "OK"
+   ],
+   [
+    "web.cancel",
+    "2",
+    "OK"
+   ],
+   [
+    "web.pay_now",
+    "1",
+    "OK"
+   ],
+   [
+    "web.place_order",
+    "3",
+    "OK"
+   ],
+   [
+    "web.track",
+    "2",
+    "OK"
+   ],
+   [
+    "web.tab_account",
+    "1",
+    "OK"
+   ],
+   [
+    "web.tab_settings",
+    "2",
+    "OK"
+   ],
+   [
+    "web.tab_orders",
+    "3",
+    "OK"
+   ],
+   [
+    "web.address",
+    "3",
+    "OK"
+   ],
+   [
+    "web.method",
+    "4",
+    "GLOSSARY"
+   ],
+   [
+    "web.welcome",
+    "3",
+    "OK"
+   ],
+   [
+    "web.shipped",
+    "1",
+    "OK"
+   ],
+   [
+    "web.paid",
+    "2",
+    "OK"
+   ],
+   [
+    "web.cart_one",
+    "2",
+    "OK"
+   ],
+   [
+    "web.cart_other",
+    "1",
+    "OK"
+   ],
+   [
+    "web.eta",
+    "2",
+    "OK"
+   ],
+   [
+    "web.gift",
+    "2",
+    "OK"
+   ],
+   [
+    "web.balance",
+    "2",
+    "GLOSSARY"
+   ],
+   [
+    "web.history",
+    "3",
+    "UNTRANSLATED"
+   ],
+   [
+    "web.reset",
+    "3",
+    "OK"
+   ],
+   [
+    "web.coupon",
+    "2",
+    "OK"
+   ],
+   [
+    "web.unread",
+    "2",
+    "OK"
+   ],
+   [
+    "web.account_settings",
+    "2",
+    "OK"
+   ],
+   [
+    "web.transit",
+    "2",
+    "OK"
+   ],
+   [
+    "web.retry",
+    "2",
+    "OK"
+   ],
+   [
+    "web.otp",
+    "1",
+    "OK"
+   ],
+   [
+    "web.tab_help",
+    "4",
+    "TOO_LONG"
+   ],
+   [
+    "web.logout",
+    "2",
+    "TOO_LONG"
+   ],
+   [
+    "web.order_cancelled",
+    "1",
+    "OK"
+   ],
+   [
+    "web.add_cart",
+    "1",
+    "OK"
+   ],
+   [
+    "app.save",
+    "2",
+    "UNTRANSLATED"
+   ],
+   [
+    "app.cancel",
+    "3",
+    "UNTRANSLATED"
+   ],
+   [
+    "app.pay_now",
+    "7",
+    "OK"
+   ],
+   [
+    "app.place_order",
+    "2",
+    "GLOSSARY"
+   ],
+   [
+    "app.track",
+    "2",
+    "TOO_LONG"
+   ],
+   [
+    "app.tab_account",
+    "4",
+    "OK"
+   ],
+   [
+    "app.tab_settings",
+    "2",
+    "GLOSSARY"
+   ],
+   [
+    "app.tab_orders",
+    "3",
+    "TOO_LONG"
+   ],
+   [
+    "app.address",
+    "1",
+    "GLOSSARY"
+   ],
+   [
+    "app.method",
+    "3",
+    "OK"
+   ],
+   [
+    "app.welcome",
+    "2",
+    "OK"
+   ],
+   [
+    "app.shipped",
+    "2",
+    "PLACEHOLDER"
+   ],
+   [
+    "app.paid",
+    "3",
+    "GLOSSARY"
+   ],
+   [
+    "app.cart_one",
+    "3",
+    "PLACEHOLDER"
+   ],
+   [
+    "app.cart_other",
+    "2",
+    "OK"
+   ],
+   [
+    "app.eta",
+    "3",
+    "OK"
+   ],
+   [
+    "app.gift",
+    "1",
+    "OK"
+   ],
+   [
+    "app.balance",
+    "1",
+    "GLOSSARY"
+   ],
+   [
+    "app.history",
+    "1",
+    "OK"
+   ],
+   [
+    "app.reset",
+    "2",
+    "OK"
+   ],
+   [
+    "app.coupon",
+    "1",
+    "TOO_LONG"
+   ],
+   [
+    "app.unread",
+    "2",
+    "PLACEHOLDER"
+   ],
+   [
+    "app.account_settings",
+    "3",
+    "GLOSSARY"
+   ],
+   [
+    "app.transit",
+    "4",
+    "OK"
+   ],
+   [
+    "app.retry",
+    "3",
+    "GLOSSARY"
+   ],
+   [
+    "app.otp",
+    "3",
+    "OK"
+   ],
+   [
+    "app.tab_help",
+    "1",
+    "TOO_LONG"
+   ],
+   [
+    "app.logout",
+    "1",
+    "UNTRANSLATED"
+   ],
+   [
+    "app.order_cancelled",
+    "2",
+    "GLOSSARY"
+   ],
+   [
+    "app.add_cart",
+    "2",
+    "TOO_LONG"
+   ]
+  ],
+  "forbidden_keys": [],
+  "notice": {
+   "en": "QA the Hindi translations before the app release.\n1. Use the translation with the highest revision number for each key: revisions.csv overrides strings.csv only when its revision is higher than the one in strings.csv. If revisions.csv has several rows for a key, the highest revision wins. Report the revision you used.\n2. Give each key exactly one status, checking in this order and stopping at the first that applies:\n   UNTRANSLATED - the translation is empty or only spaces, or (ignoring leading and trailing spaces) exactly equals the English source.\n   PLACEHOLDER - the placeholders differ. Placeholders are {name}-style tokens, {{count}}-style tokens, %s, %d and numbered tokens such as %1$s. Compare them as a multiset: order does not matter, but every token must appear the same number of times with exactly the same text.\n   GLOSSARY - the English source contains a glossary term (case-insensitive; \"Orders\" contains \"Order\") and the translation either lacks the required Hindi term or contains the forbidden Hindi term.\n   TOO_LONG - a button longer than 18 characters or a tab longer than 8 characters. Count Unicode code points after NFC normalization, including invisible joiners (U+200C, U+200D) and spaces. Labels, messages and plurals have no limit.\n   OK - none of the above.\n\nFormat notes: dates appear as YYYY-MM-DD, as DD/MM/YYYY (day first), or with a month name. Times appear in 24-hour form or with AM/PM. Amounts may include ₹ or Rs, commas (including Indian lakh grouping such as 1,25,000) or a .00 suffix. Codes and IDs may carry stray spaces or different letter case. All values in a file are authoritative as written.",
+   "hi": "ऐप रिलीज़ से पहले हिंदी अनुवादों की जाँच करें।\n1. हर कुंजी के लिए सबसे बड़े संशोधन (revision) नंबर वाला अनुवाद लें: revisions.csv तभी strings.csv की जगह लेगा जब उसका संशोधन नंबर strings.csv वाले नंबर से बड़ा हो। अगर revisions.csv में एक कुंजी की कई पंक्तियाँ हों, तो सबसे बड़ा संशोधन मान्य है। इस्तेमाल किया गया संशोधन नंबर लिखें।\n2. हर कुंजी को ठीक एक status दें। इसी क्रम में जाँचें और जो पहली शर्त लागू हो, वहीं रुकें:\n   UNTRANSLATED - अनुवाद खाली है या सिर्फ़ स्पेस है, या (शुरू और आख़िर के स्पेस छोड़कर) बिल्कुल अंग्रेज़ी स्रोत जैसा है।\n   PLACEHOLDER - प्लेसहोल्डर अलग हैं। प्लेसहोल्डर ये हैं: {name} जैसे टोकन, {{count}} जैसे टोकन, %s, %d और %1$s जैसे क्रमांकित टोकन। इन्हें मल्टीसेट की तरह मिलाएँ: क्रम मायने नहीं रखता, पर हर टोकन उतनी ही बार और बिल्कुल उसी लिखावट में आना चाहिए।\n   GLOSSARY - अंग्रेज़ी स्रोत में शब्दावली का कोई शब्द है (छोटे-बड़े अक्षर का फ़र्क नहीं; \"Orders\" में \"Order\" शामिल है) और अनुवाद में अनिवार्य हिंदी शब्द नहीं है या वर्जित हिंदी शब्द मौजूद है।\n   TOO_LONG - 18 अक्षरों से लंबा बटन या 8 अक्षरों से लंबा टैब। NFC नॉर्मलाइज़ेशन के बाद यूनिकोड कोड पॉइंट गिनें, जिनमें अदृश्य जोड़क (U+200C, U+200D) और स्पेस भी शामिल हैं। लेबल, संदेश और बहुवचन रूपों की कोई सीमा नहीं है।\n   OK - ऊपर में से कुछ भी नहीं।\n\nप्रारूप संबंधी नोट: तारीखें YYYY-MM-DD, DD/MM/YYYY (पहले दिन) या महीने के नाम के साथ लिखी हो सकती हैं। अंक देवनागरी (०-९) या अंग्रेज़ी अंकों में हो सकते हैं। समय 24-घंटे के रूप में या सुबह (4-11 बजे), दोपहर (12-3 बजे), शाम (4-7 बजे) और रात (8-11 बजे) के साथ 12-घंटे के रूप में लिखा हो सकता है। राशि में ₹, रुपये या रु., कॉमा (जैसे 1,25,000) या .00 हो सकता है। कोड और आईडी में अतिरिक्त स्पेस या अलग अक्षर-रूप हो सकते हैं। फ़ाइलों में लिखे सभी मान प्रामाणिक हैं।"
+  },
+  "files": [
+   {
+    "name": "in/strings.csv",
+    "headers": {
+     "en": [
+      "key",
+      "kind",
+      "source_en",
+      "hindi",
+      "revision"
+     ],
+     "hi": [
+      "कुंजी",
+      "प्रकार",
+      "अंग्रेज़ी स्रोत",
+      "हिंदी अनुवाद",
+      "संशोधन"
+     ]
+    },
+    "rows": {
+     "en": [
+      [
+       "web.save",
+       "button ",
+       "Save",
+       "सहेजें",
+       "2"
+      ],
+      [
+       "web.cancel",
+       "button",
+       "Cancel",
+       "रद्द करें",
+       "2"
+      ],
+      [
+       "web.pay_now",
+       "button",
+       "Pay now",
+       "अभी भुगतान करें",
+       "1"
+      ],
+      [
+       "web.place_order",
+       "button",
+       "Place order",
+       "ऑर्डर करें",
+       "3"
+      ],
+      [
+       "web.track",
+       "button ",
+       "Track delivery",
+       "डिलीवरी ट्रैक करें",
+       "2"
+      ],
+      [
+       "web.tab_account",
+       "tab",
+       "Account",
+       "खाता",
+       "1"
+      ],
+      [
+       "web.tab_settings",
+       "tab",
+       "Settings",
+       "सेटिंग्स",
+       "2"
+      ],
+      [
+       "web.tab_orders",
+       "tab",
+       "Orders",
+       "ऑर्डर",
+       "3"
+      ],
+      [
+       "web.address",
+       "label",
+       "Delivery address",
+       "डिलीवरी का पता",
+       "3"
+      ],
+      [
+       "web.method",
+       "label",
+       "Payment method",
+       "भुगतान का तरीका",
+       "3"
+      ],
+      [
+       "web.welcome",
+       "message",
+       "Hello {name}, welcome back!",
+       "नमस्ते {name}, आपका फिर से स्वागत है!",
+       "3"
+      ],
+      [
+       "web.shipped",
+       "message",
+       "Your order {order_id} has shipped.",
+       "आपका ऑर्डर {order_id} भेज दिया गया है।",
+       "1"
+      ],
+      [
+       "web.paid",
+       "message",
+       "Payment of ₹{amount} received.",
+       "₹{amount} का भुगतान मिल गया।",
+       "2"
+      ],
+      [
+       "web.cart_one",
+       "plural_one",
+       "{{count}} item in your cart",
+       "आपके कार्ट में {{count}} आइटम है",
+       "2"
+      ],
+      [
+       "web.cart_other",
+       "plural_other",
+       "{{count}} items in your cart",
+       "आपके कार्ट में {{count}} आइटम हैं",
+       "1"
+      ],
+      [
+       "web.eta",
+       "message",
+       "Delivery expected by %s",
+       "डिलीवरी %s तक अपेक्षित है",
+       "2"
+      ],
+      [
+       "web.gift",
+       "message",
+       "%1$s sent you %2$s",
+       "%1$s ने आपको %2$s भेजा",
+       "2"
+      ],
+      [
+       "web.balance",
+       "message",
+       "Your account balance is ₹{balance}",
+       "आपके खाते में ₹{balance} शेष हैं",
+       "2"
+      ],
+      [
+       "web.history",
+       "label",
+       "Order history",
+       "ऑर्डर इतिहास",
+       "2"
+      ],
+      [
+       "web.reset",
+       "message",
+       "Reset your password",
+       "अपना पासवर्ड रीसेट करें",
+       "3"
+      ],
+      [
+       "web.coupon",
+       "button",
+       "Apply coupon",
+       "कूपन लगाएँ",
+       "2"
+      ],
+      [
+       "web.unread",
+       "message",
+       "You have %d new messages",
+       "आपके %d नए संदेश हैं",
+       "2"
+      ],
+      [
+       "web.account_settings",
+       "label",
+       "Account settings",
+       "खाता सेटिंग्स",
+       "2"
+      ],
+      [
+       "web.transit",
+       "message",
+       "Delivery to {city} takes {days} days",
+       "{city} तक डिलीवरी में {days} दिन लगते हैं",
+       "2"
+      ],
+      [
+       "web.retry",
+       "button",
+       "Retry payment",
+       "भुगतान फिर से करें",
+       "2"
+      ],
+      [
+       "web.otp",
+       "message",
+       "Hi {name}, your OTP is {otp}",
+       "नमस्ते {name}, आपका ओटीपी {otp} है",
+       "1"
+      ],
+      [
+       "web.tab_help",
+       "tab",
+       "Help",
+       "सहायता",
+       "3"
+      ],
+      [
+       "web.logout",
+       "button",
+       "Log out",
+       "लॉग आउट",
+       "1"
+      ],
+      [
+       "web.order_cancelled",
+       "message",
+       "Order {order_id} cancelled",
+       "ऑर्डर {order_id} रद्द किया गया",
+       "1"
+      ],
+      [
+       "web.add_cart",
+       "button",
+       "Add to cart",
+       "कार्ट में जोड़ें",
+       "1"
+      ],
+      [
+       "app.save",
+       "button",
+       "Save",
+       "Save",
+       "2"
+      ],
+      [
+       "app.cancel",
+       "button",
+       "Cancel",
+       "  ",
+       "3"
+      ],
+      [
+       "app.pay_now",
+       "button",
+       "Pay now",
+       "अभी पेमेंट करें",
+       "2"
+      ],
+      [
+       "app.place_order",
+       "button",
+       "Place order",
+       "आदेश दें",
+       "2"
+      ],
+      [
+       "app.track",
+       "button",
+       "Track delivery",
+       "डिलीवरी ट्‍रैक करें",
+       "2"
+      ],
+      [
+       "app.tab_account",
+       "tab",
+       "Account",
+       "अकाउंट",
+       "2"
+      ],
+      [
+       "app.tab_settings",
+       "tab",
+       "Settings",
+       "सेटिंग्‍स",
+       "2"
+      ],
+      [
+       "app.tab_orders",
+       "tab",
+       "Orders",
+       "ऑर्डर सूची",
+       "3"
+      ],
+      [
+       "app.address",
+       "label",
+       "Delivery address",
+       "डिलीवरी (वितरण) का पता",
+       "1"
+      ],
+      [
+       "app.method",
+       "label",
+       "Payment method",
+       "भुगतान का तरीका",
+       "3"
+      ],
+      [
+       "app.welcome",
+       "message",
+       "Hello {name}, welcome back!",
+       "नमस्ते {नाम}, आपका फिर से स्वागत है!",
+       "1"
+      ],
+      [
+       "app.shipped",
+       "message",
+       "Your order {order_id} has shipped.",
+       "आपका ऑर्डर भेज दिया गया है।",
+       "2"
+      ],
+      [
+       "app.paid",
+       "message",
+       "Payment of ₹{amount} received.",
+       "₹{amount} का पेमेंट मिल गया।",
+       "3"
+      ],
+      [
+       "app.cart_one",
+       "plural_one",
+       "{{count}} item in your cart",
+       "आपके कार्ट में {count} आइटम है",
+       "3"
+      ],
+      [
+       "app.cart_other",
+       "plural_other",
+       "{{count}} items in your cart",
+       "आपके कार्ट में {{count}} आइटम हैं",
+       "2"
+      ],
+      [
+       "app.eta",
+       "message",
+       "Delivery expected by %s",
+       "डिलीवरी %d तक अपेक्षित है",
+       "1"
+      ],
+      [
+       "app.gift",
+       "message",
+       "%1$s sent you %2$s",
+       "%2$s आपको %1$s ने भेजा",
+       "1"
+      ],
+      [
+       "app.balance",
+       "message",
+       "Your account balance is ₹{balance}",
+       "आपके अकाउंट में ₹{balance} शेष हैं",
+       "1"
+      ],
+      [
+       "app.history",
+       "label",
+       "Order history",
+       "ऑर्डर इतिहास",
+       "1"
+      ],
+      [
+       "app.reset",
+       "message",
+       "Reset your password",
+       "Reset your password",
+       "1"
+      ],
+      [
+       "app.coupon",
+       "button",
+       "Apply coupon",
+       "कृपया यहाँ कूपन कोड लगाएँ",
+       "1"
+      ],
+      [
+       "app.unread",
+       "message",
+       "You have %d new messages",
+       "आपके %s नए संदेश हैं",
+       "2"
+      ],
+      [
+       "app.account_settings",
+       "label",
+       "Account settings",
+       "खाता समायोजन",
+       "3"
+      ],
+      [
+       "app.transit",
+       "message",
+       "Delivery to {city} takes {days} days",
+       "{city} तक डिलीवरी में {days} {days} दिन लगते हैं",
+       "3"
+      ],
+      [
+       "app.retry",
+       "button",
+       "Retry payment",
+       "पेमेंट फिर से करें",
+       "3"
+      ],
+      [
+       "app.otp",
+       "message ",
+       "Hi {name}, your OTP is {otp}",
+       "नमस्ते {name}, आपका ओटीपी {OTP} है",
+       "1"
+      ],
+      [
+       "app.tab_help",
+       "tab",
+       "Help",
+       "मदद केंद्र",
+       "1"
+      ],
+      [
+       "app.logout",
+       "button",
+       "Log out",
+       "Log out ",
+       "1"
+      ],
+      [
+       "app.order_cancelled",
+       "message",
+       "Order {order_id} cancelled",
+       "{order_id} आदेश रद्द किया गया",
+       "2"
+      ],
+      [
+       "app.add_cart",
+       "button",
+       "Add to cart",
+       "सब कार्ट में जोड़ें",
+       "2"
+      ]
+     ],
+     "hi": [
+      [
+       "web.save",
+       "बटन ",
+       "Save",
+       "सहेजें",
+       "2"
+      ],
+      [
+       "web.cancel",
+       "बटन",
+       "Cancel",
+       "रद्द करें",
+       "2"
+      ],
+      [
+       "web.pay_now",
+       "बटन",
+       "Pay now",
+       "अभी भुगतान करें",
+       "1"
+      ],
+      [
+       "web.place_order",
+       "बटन",
+       "Place order",
+       "ऑर्डर करें",
+       "3"
+      ],
+      [
+       "web.track",
+       "बटन ",
+       "Track delivery",
+       "डिलीवरी ट्रैक करें",
+       "2"
+      ],
+      [
+       "web.tab_account",
+       "टैब",
+       "Account",
+       "खाता",
+       "1"
+      ],
+      [
+       "web.tab_settings",
+       "टैब",
+       "Settings",
+       "सेटिंग्स",
+       "2"
+      ],
+      [
+       "web.tab_orders",
+       "टैब",
+       "Orders",
+       "ऑर्डर",
+       "3"
+      ],
+      [
+       "web.address",
+       "लेबल",
+       "Delivery address",
+       "डिलीवरी का पता",
+       "3"
+      ],
+      [
+       "web.method",
+       "लेबल",
+       "Payment method",
+       "भुगतान का तरीका",
+       "3"
+      ],
+      [
+       "web.welcome",
+       "संदेश",
+       "Hello {name}, welcome back!",
+       "नमस्ते {name}, आपका फिर से स्वागत है!",
+       "3"
+      ],
+      [
+       "web.shipped",
+       "संदेश",
+       "Your order {order_id} has shipped.",
+       "आपका ऑर्डर {order_id} भेज दिया गया है।",
+       "1"
+      ],
+      [
+       "web.paid",
+       "संदेश",
+       "Payment of ₹{amount} received.",
+       "₹{amount} का भुगतान मिल गया।",
+       "2"
+      ],
+      [
+       "web.cart_one",
+       "एकवचन",
+       "{{count}} item in your cart",
+       "आपके कार्ट में {{count}} आइटम है",
+       "2"
+      ],
+      [
+       "web.cart_other",
+       "बहुवचन",
+       "{{count}} items in your cart",
+       "आपके कार्ट में {{count}} आइटम हैं",
+       "1"
+      ],
+      [
+       "web.eta",
+       "संदेश",
+       "Delivery expected by %s",
+       "डिलीवरी %s तक अपेक्षित है",
+       "2"
+      ],
+      [
+       "web.gift",
+       "संदेश",
+       "%1$s sent you %2$s",
+       "%1$s ने आपको %2$s भेजा",
+       "2"
+      ],
+      [
+       "web.balance",
+       "संदेश",
+       "Your account balance is ₹{balance}",
+       "आपके खाते में ₹{balance} शेष हैं",
+       "2"
+      ],
+      [
+       "web.history",
+       "लेबल",
+       "Order history",
+       "ऑर्डर इतिहास",
+       "2"
+      ],
+      [
+       "web.reset",
+       "संदेश",
+       "Reset your password",
+       "अपना पासवर्ड रीसेट करें",
+       "3"
+      ],
+      [
+       "web.coupon",
+       "बटन",
+       "Apply coupon",
+       "कूपन लगाएँ",
+       "2"
+      ],
+      [
+       "web.unread",
+       "संदेश",
+       "You have %d new messages",
+       "आपके %d नए संदेश हैं",
+       "2"
+      ],
+      [
+       "web.account_settings",
+       "लेबल",
+       "Account settings",
+       "खाता सेटिंग्स",
+       "2"
+      ],
+      [
+       "web.transit",
+       "संदेश",
+       "Delivery to {city} takes {days} days",
+       "{city} तक डिलीवरी में {days} दिन लगते हैं",
+       "2"
+      ],
+      [
+       "web.retry",
+       "बटन",
+       "Retry payment",
+       "भुगतान फिर से करें",
+       "2"
+      ],
+      [
+       "web.otp",
+       "संदेश",
+       "Hi {name}, your OTP is {otp}",
+       "नमस्ते {name}, आपका ओटीपी {otp} है",
+       "1"
+      ],
+      [
+       "web.tab_help",
+       "टैब",
+       "Help",
+       "सहायता",
+       "3"
+      ],
+      [
+       "web.logout",
+       "बटन",
+       "Log out",
+       "लॉग आउट",
+       "1"
+      ],
+      [
+       "web.order_cancelled",
+       "संदेश",
+       "Order {order_id} cancelled",
+       "ऑर्डर {order_id} रद्द किया गया",
+       "1"
+      ],
+      [
+       "web.add_cart",
+       "बटन",
+       "Add to cart",
+       "कार्ट में जोड़ें",
+       "1"
+      ],
+      [
+       "app.save",
+       "बटन",
+       "Save",
+       "Save",
+       "2"
+      ],
+      [
+       "app.cancel",
+       "बटन",
+       "Cancel",
+       "  ",
+       "3"
+      ],
+      [
+       "app.pay_now",
+       "बटन",
+       "Pay now",
+       "अभी पेमेंट करें",
+       "2"
+      ],
+      [
+       "app.place_order",
+       "बटन",
+       "Place order",
+       "आदेश दें",
+       "2"
+      ],
+      [
+       "app.track",
+       "बटन",
+       "Track delivery",
+       "डिलीवरी ट्‍रैक करें",
+       "2"
+      ],
+      [
+       "app.tab_account",
+       "टैब",
+       "Account",
+       "अकाउंट",
+       "2"
+      ],
+      [
+       "app.tab_settings",
+       "टैब",
+       "Settings",
+       "सेटिंग्‍स",
+       "2"
+      ],
+      [
+       "app.tab_orders",
+       "टैब",
+       "Orders",
+       "ऑर्डर सूची",
+       "3"
+      ],
+      [
+       "app.address",
+       "लेबल",
+       "Delivery address",
+       "डिलीवरी (वितरण) का पता",
+       "1"
+      ],
+      [
+       "app.method",
+       "लेबल",
+       "Payment method",
+       "भुगतान का तरीका",
+       "3"
+      ],
+      [
+       "app.welcome",
+       "संदेश",
+       "Hello {name}, welcome back!",
+       "नमस्ते {नाम}, आपका फिर से स्वागत है!",
+       "1"
+      ],
+      [
+       "app.shipped",
+       "संदेश",
+       "Your order {order_id} has shipped.",
+       "आपका ऑर्डर भेज दिया गया है।",
+       "2"
+      ],
+      [
+       "app.paid",
+       "संदेश",
+       "Payment of ₹{amount} received.",
+       "₹{amount} का पेमेंट मिल गया।",
+       "3"
+      ],
+      [
+       "app.cart_one",
+       "एकवचन",
+       "{{count}} item in your cart",
+       "आपके कार्ट में {count} आइटम है",
+       "3"
+      ],
+      [
+       "app.cart_other",
+       "बहुवचन",
+       "{{count}} items in your cart",
+       "आपके कार्ट में {{count}} आइटम हैं",
+       "2"
+      ],
+      [
+       "app.eta",
+       "संदेश",
+       "Delivery expected by %s",
+       "डिलीवरी %d तक अपेक्षित है",
+       "1"
+      ],
+      [
+       "app.gift",
+       "संदेश",
+       "%1$s sent you %2$s",
+       "%2$s आपको %1$s ने भेजा",
+       "1"
+      ],
+      [
+       "app.balance",
+       "संदेश",
+       "Your account balance is ₹{balance}",
+       "आपके अकाउंट में ₹{balance} शेष हैं",
+       "1"
+      ],
+      [
+       "app.history",
+       "लेबल",
+       "Order history",
+       "ऑर्डर इतिहास",
+       "1"
+      ],
+      [
+       "app.reset",
+       "संदेश",
+       "Reset your password",
+       "Reset your password",
+       "1"
+      ],
+      [
+       "app.coupon",
+       "बटन",
+       "Apply coupon",
+       "कृपया यहाँ कूपन कोड लगाएँ",
+       "1"
+      ],
+      [
+       "app.unread",
+       "संदेश",
+       "You have %d new messages",
+       "आपके %s नए संदेश हैं",
+       "2"
+      ],
+      [
+       "app.account_settings",
+       "लेबल",
+       "Account settings",
+       "खाता समायोजन",
+       "3"
+      ],
+      [
+       "app.transit",
+       "संदेश",
+       "Delivery to {city} takes {days} days",
+       "{city} तक डिलीवरी में {days} {days} दिन लगते हैं",
+       "3"
+      ],
+      [
+       "app.retry",
+       "बटन",
+       "Retry payment",
+       "पेमेंट फिर से करें",
+       "3"
+      ],
+      [
+       "app.otp",
+       "संदेश ",
+       "Hi {name}, your OTP is {otp}",
+       "नमस्ते {name}, आपका ओटीपी {OTP} है",
+       "1"
+      ],
+      [
+       "app.tab_help",
+       "टैब",
+       "Help",
+       "मदद केंद्र",
+       "1"
+      ],
+      [
+       "app.logout",
+       "बटन",
+       "Log out",
+       "Log out ",
+       "1"
+      ],
+      [
+       "app.order_cancelled",
+       "संदेश",
+       "Order {order_id} cancelled",
+       "{order_id} आदेश रद्द किया गया",
+       "2"
+      ],
+      [
+       "app.add_cart",
+       "बटन",
+       "Add to cart",
+       "सब कार्ट में जोड़ें",
+       "2"
+      ]
+     ]
+    }
+   },
+   {
+    "name": "in/revisions.csv",
+    "headers": {
+     "en": [
+      "key",
+      "revision",
+      "hindi"
+     ],
+     "hi": [
+      "कुंजी",
+      "संशोधन",
+      "हिंदी अनुवाद"
+     ]
+    },
+    "rows": {
+     "en": [
+      [
+       "app.otp",
+       "3",
+       "नमस्ते {name}, आपका ओटीपी {otp} है"
+      ],
+      [
+       "web.method",
+       "4",
+       "पेमेंट का तरीका"
+      ],
+      [
+       "app.eta",
+       "3",
+       "डिलीवरी %s तक अपेक्षित है"
+      ],
+      [
+       "app.coupon",
+       "1",
+       "कूपन लगाएँ"
+      ],
+      [
+       "app.reset",
+       "2",
+       "अपना पासवर्ड रीसेट करें"
+      ],
+      [
+       "app.welcome",
+       "2",
+       "नमस्ते {name}, आपका फिर से स्वागत है!"
+      ],
+      [
+       "app.pay_now",
+       "7",
+       "अभी पेमेंट करें"
+      ],
+      [
+       "app.pay_now",
+       "4",
+       "अभी भुगतान करें"
+      ],
+      [
+       "app.tab_account",
+       "4",
+       "खाता"
+      ],
+      [
+       "app.transit",
+       "4",
+       "{city} तक डिलीवरी में {days} दिन लगते हैं"
+      ],
+      [
+       "web.tab_help",
+       "4",
+       "सहायता‌केंद्र"
+      ],
+      [
+       "web.logout",
+       "2",
+       "लॉग  आउट करें अभी तुरंत यहाँ से"
+      ],
+      [
+       "web.history",
+       "3",
+       "Order history"
+      ],
+      [
+       "app.logout",
+       "1",
+       "लॉग आउट"
+      ],
+      [
+       "app.shipped",
+       "1",
+       "आपका ऑर्डर {order_id} भेज दिया गया है।"
+      ]
+     ],
+     "hi": [
+      [
+       "app.otp",
+       "3",
+       "नमस्ते {name}, आपका ओटीपी {otp} है"
+      ],
+      [
+       "web.method",
+       "4",
+       "पेमेंट का तरीका"
+      ],
+      [
+       "app.eta",
+       "3",
+       "डिलीवरी %s तक अपेक्षित है"
+      ],
+      [
+       "app.coupon",
+       "1",
+       "कूपन लगाएँ"
+      ],
+      [
+       "app.reset",
+       "2",
+       "अपना पासवर्ड रीसेट करें"
+      ],
+      [
+       "app.welcome",
+       "2",
+       "नमस्ते {name}, आपका फिर से स्वागत है!"
+      ],
+      [
+       "app.pay_now",
+       "7",
+       "अभी पेमेंट करें"
+      ],
+      [
+       "app.pay_now",
+       "4",
+       "अभी भुगतान करें"
+      ],
+      [
+       "app.tab_account",
+       "4",
+       "खाता"
+      ],
+      [
+       "app.transit",
+       "4",
+       "{city} तक डिलीवरी में {days} दिन लगते हैं"
+      ],
+      [
+       "web.tab_help",
+       "4",
+       "सहायता‌केंद्र"
+      ],
+      [
+       "web.logout",
+       "2",
+       "लॉग  आउट करें अभी तुरंत यहाँ से"
+      ],
+      [
+       "web.history",
+       "3",
+       "Order history"
+      ],
+      [
+       "app.logout",
+       "1",
+       "लॉग आउट"
+      ],
+      [
+       "app.shipped",
+       "1",
+       "आपका ऑर्डर {order_id} भेज दिया गया है।"
+      ]
+     ]
+    }
+   },
+   {
+    "name": "in/glossary.csv",
+    "headers": {
+     "en": [
+      "term_en",
+      "required_hi",
+      "forbidden_hi"
+     ],
+     "hi": [
+      "अंग्रेज़ी शब्द",
+      "अनिवार्य हिंदी",
+      "वर्जित हिंदी"
+     ]
+    },
+    "rows": {
+     "en": [
+      [
+       "Account",
+       "खाता",
+       "अकाउंट"
+      ],
+      [
+       "Order",
+       "ऑर्डर",
+       "आदेश"
+      ],
+      [
+       "Settings",
+       "सेटिंग्स",
+       "समायोजन"
+      ],
+      [
+       "Payment",
+       "भुगतान",
+       "पेमेंट"
+      ],
+      [
+       "Delivery",
+       "डिलीवरी",
+       "वितरण"
+      ]
+     ],
+     "hi": [
+      [
+       "Account",
+       "खाता",
+       "अकाउंट"
+      ],
+      [
+       "Order",
+       "ऑर्डर",
+       "आदेश"
+      ],
+      [
+       "Settings",
+       "सेटिंग्स",
+       "समायोजन"
+      ],
+      [
+       "Payment",
+       "भुगतान",
+       "पेमेंट"
+      ],
+      [
+       "Delivery",
+       "डिलीवरी",
+       "वितरण"
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "08-search-normalization",
+  "title": "Grocery search normalization",
+  "goals": {
+   "en": "Resolve every customer search query to the matching grocery products.",
+   "hi": "ग्राहकों की हर खोज को मिलते-जुलते किराना उत्पादों से जोड़ें।",
+   "hinglish": "Har customer search query ko matching grocery products se resolve karo."
+  },
+  "output": [
+   "query",
+   "matches"
+  ],
+  "key_columns": 1,
+  "numeric": [],
+  "answer": [
+   [
+    "Q001",
+    "P07"
+   ],
+   [
+    "Q002",
+    "P07"
+   ],
+   [
+    "Q003",
+    "P07"
+   ],
+   [
+    "Q004",
+    "P06"
+   ],
+   [
+    "Q005",
+    "P06"
+   ],
+   [
+    "Q006",
+    "P06"
+   ],
+   [
+    "Q007",
+    "P02"
+   ],
+   [
+    "Q008",
+    "P02"
+   ],
+   [
+    "Q009",
+    "NONE"
+   ],
+   [
+    "Q010",
+    "P05"
+   ],
+   [
+    "Q011",
+    "P05"
+   ],
+   [
+    "Q012",
+    "P09"
+   ],
+   [
+    "Q013",
+    "P09"
+   ],
+   [
+    "Q014",
+    "NONE"
+   ],
+   [
+    "Q015",
+    "P09"
+   ],
+   [
+    "Q016",
+    "P09"
+   ],
+   [
+    "Q017",
+    "P06"
+   ],
+   [
+    "Q018",
+    "P06"
+   ],
+   [
+    "Q019",
+    "P01"
+   ],
+   [
+    "Q020",
+    "P01"
+   ],
+   [
+    "Q021",
+    "NONE"
+   ],
+   [
+    "Q022",
+    "P01"
+   ],
+   [
+    "Q023",
+    "P02"
+   ],
+   [
+    "Q024",
+    "P07"
+   ],
+   [
+    "Q025",
+    "NONE"
+   ],
+   [
+    "Q026",
+    "P10+P11"
+   ],
+   [
+    "Q027",
+    "P10+P11"
+   ],
+   [
+    "Q028",
+    "P11"
+   ],
+   [
+    "Q029",
+    "P10"
+   ],
+   [
+    "Q030",
+    "P11"
+   ],
+   [
+    "Q031",
+    "P41"
+   ],
+   [
+    "Q032",
+    "P41"
+   ],
+   [
+    "Q033",
+    "P41"
+   ],
+   [
+    "Q034",
+    "P41"
+   ],
+   [
+    "Q035",
+    "NONE"
+   ],
+   [
+    "Q036",
+    "P40"
+   ],
+   [
+    "Q037",
+    "P14"
+   ],
+   [
+    "Q038",
+    "P14"
+   ],
+   [
+    "Q039",
+    "P14"
+   ],
+   [
+    "Q040",
+    "P15"
+   ],
+   [
+    "Q041",
+    "P15"
+   ],
+   [
+    "Q042",
+    "P15"
+   ],
+   [
+    "Q043",
+    "P15"
+   ],
+   [
+    "Q044",
+    "P34"
+   ],
+   [
+    "Q045",
+    "P34"
+   ],
+   [
+    "Q046",
+    "NONE"
+   ],
+   [
+    "Q047",
+    "NONE"
+   ],
+   [
+    "Q048",
+    "NONE"
+   ],
+   [
+    "Q049",
+    "NONE"
+   ],
+   [
+    "Q050",
+    "NONE"
+   ],
+   [
+    "Q051",
+    "NONE"
+   ],
+   [
+    "Q052",
+    "P24"
+   ],
+   [
+    "Q053",
+    "P24"
+   ],
+   [
+    "Q054",
+    "P24"
+   ],
+   [
+    "Q055",
+    "P24"
+   ],
+   [
+    "Q056",
+    "P02"
+   ],
+   [
+    "Q057",
+    "P29"
+   ],
+   [
+    "Q058",
+    "P29"
+   ],
+   [
+    "Q059",
+    "P29"
+   ],
+   [
+    "Q060",
+    "P29"
+   ],
+   [
+    "Q061",
+    "P33"
+   ],
+   [
+    "Q062",
+    "P33"
+   ],
+   [
+    "Q063",
+    "P33"
+   ],
+   [
+    "Q064",
+    "P21"
+   ],
+   [
+    "Q065",
+    "P21"
+   ],
+   [
+    "Q066",
+    "P21"
+   ],
+   [
+    "Q067",
+    "P21"
+   ],
+   [
+    "Q068",
+    "P28"
+   ],
+   [
+    "Q069",
+    "NONE"
+   ],
+   [
+    "Q070",
+    "P28"
+   ],
+   [
+    "Q071",
+    "P28"
+   ],
+   [
+    "Q072",
+    "P23"
+   ],
+   [
+    "Q073",
+    "NONE"
+   ],
+   [
+    "Q074",
+    "P23"
+   ],
+   [
+    "Q075",
+    "P23"
+   ],
+   [
+    "Q076",
+    "P23"
+   ],
+   [
+    "Q077",
+    "P38"
+   ],
+   [
+    "Q078",
+    "P38"
+   ],
+   [
+    "Q079",
+    "P38"
+   ],
+   [
+    "Q080",
+    "NONE"
+   ],
+   [
+    "Q081",
+    "P31"
+   ],
+   [
+    "Q082",
+    "P31"
+   ],
+   [
+    "Q083",
+    "P31"
+   ],
+   [
+    "Q084",
+    "P32"
+   ],
+   [
+    "Q085",
+    "P32"
+   ],
+   [
+    "Q086",
+    "P32"
+   ],
+   [
+    "Q087",
+    "P32"
+   ],
+   [
+    "Q088",
+    "P16"
+   ],
+   [
+    "Q089",
+    "P16"
+   ],
+   [
+    "Q090",
+    "P16"
+   ],
+   [
+    "Q091",
+    "P17"
+   ],
+   [
+    "Q092",
+    "P17"
+   ],
+   [
+    "Q093",
+    "P17"
+   ],
+   [
+    "Q094",
+    "P18"
+   ],
+   [
+    "Q095",
+    "P18"
+   ],
+   [
+    "Q096",
+    "NONE"
+   ],
+   [
+    "Q097",
+    "P19"
+   ],
+   [
+    "Q098",
+    "P19"
+   ],
+   [
+    "Q099",
+    "NONE"
+   ],
+   [
+    "Q100",
+    "P20"
+   ],
+   [
+    "Q101",
+    "NONE"
+   ],
+   [
+    "Q102",
+    "P20"
+   ],
+   [
+    "Q103",
+    "P30"
+   ],
+   [
+    "Q104",
+    "P30"
+   ],
+   [
+    "Q105",
+    "P37"
+   ],
+   [
+    "Q106",
+    "P37"
+   ],
+   [
+    "Q107",
+    "P37"
+   ],
+   [
+    "Q108",
+    "P39"
+   ],
+   [
+    "Q109",
+    "P39"
+   ],
+   [
+    "Q110",
+    "P39"
+   ],
+   [
+    "Q111",
+    "P40"
+   ],
+   [
+    "Q112",
+    "P12"
+   ],
+   [
+    "Q113",
+    "P12"
+   ],
+   [
+    "Q114",
+    "P12"
+   ],
+   [
+    "Q115",
+    "P13"
+   ],
+   [
+    "Q116",
+    "P13"
+   ],
+   [
+    "Q117",
+    "P14"
+   ],
+   [
+    "Q118",
+    "P35"
+   ],
+   [
+    "Q119",
+    "P35"
+   ],
+   [
+    "Q120",
+    "P03"
+   ],
+   [
+    "Q121",
+    "P03"
+   ],
+   [
+    "Q122",
+    "P03"
+   ],
+   [
+    "Q123",
+    "P04"
+   ],
+   [
+    "Q124",
+    "P04"
+   ],
+   [
+    "Q125",
+    "P04"
+   ],
+   [
+    "Q126",
+    "P05"
+   ],
+   [
+    "Q127",
+    "P05"
+   ],
+   [
+    "Q128",
+    "P27"
+   ],
+   [
+    "Q129",
+    "P27"
+   ],
+   [
+    "Q130",
+    "P27"
+   ],
+   [
+    "Q131",
+    "P25"
+   ],
+   [
+    "Q132",
+    "P25"
+   ],
+   [
+    "Q133",
+    "NONE"
+   ],
+   [
+    "Q134",
+    "P26"
+   ],
+   [
+    "Q135",
+    "P26"
+   ],
+   [
+    "Q136",
+    "P08"
+   ],
+   [
+    "Q137",
+    "P08"
+   ],
+   [
+    "Q138",
+    "P08"
+   ]
+  ],
+  "forbidden_keys": [],
+  "notice": {
+   "en": "Resolve customer search queries to grocery products.\n1. Apply amendments.csv in ascending seq order (the file is not sorted): ADD_ALIAS adds an alias, REMOVE_ALIAS removes that exact alias, DISCONTINUE sets the product to DISCONTINUED, and REACTIVATE sets it back to ACTIVE.\n2. Only ACTIVE products can match. aliases holds several aliases separated by semicolons.\n3. Normalize every query, display name and alias the same way: apply Unicode NFC; delete zero-width joiners and non-joiners (U+200D, U+200C); delete the nukta sign U+093C, including the nukta inside letters such as ज़ and ड़ (they become ज and ड); replace chandrabindu (ँ) with anusvara (ं); convert Devanagari digits to ASCII digits; convert letters to lower case; remove accent marks from Latin letters (ā becomes a); replace hyphens with spaces; collapse runs of spaces into one space and trim the ends. Make no other changes: no spelling correction, no partial or prefix matches, and no transliteration between scripts.\n4. A query matches a product when its normalized text equals the normalized display name or one of its normalized aliases.\n5. Report every query: matches lists all matching product IDs in ascending order joined with +, or NONE.\n\nFormat notes: dates appear as YYYY-MM-DD, as DD/MM/YYYY (day first), or with a month name. Times appear in 24-hour form or with AM/PM. Amounts may include ₹ or Rs, commas (including Indian lakh grouping such as 1,25,000) or a .00 suffix. Codes and IDs may carry stray spaces or different letter case. All values in a file are authoritative as written.",
+   "hi": "ग्राहकों की खोज को किराना उत्पादों से मिलाएँ।\n1. amendments.csv को क्रम (seq) के बढ़ते क्रम में लागू करें (फ़ाइल क्रमबद्ध नहीं है): \"उपनाम जोड़ें\" एक उपनाम जोड़ता है, \"उपनाम हटाएँ\" बिल्कुल वही उपनाम हटाता है, \"बंद करें\" उत्पाद की स्थिति बंद करता है, और \"फिर से चालू करें\" उसे फिर सक्रिय करता है।\n2. सिर्फ़ सक्रिय उत्पाद मिलान में आ सकते हैं। उपनाम कॉलम में कई उपनाम अर्धविराम (;) से अलग किए गए हैं।\n3. हर खोज, प्रदर्शित नाम और उपनाम को एक ही तरह नॉर्मलाइज़ करें: यूनिकोड NFC लागू करें; शून्य-चौड़ाई वाले जोड़क और अजोड़क (U+200D, U+200C) हटाएँ; नुक़्ता चिह्न U+093C हटाएँ, ज़ और ड़ जैसे अक्षरों के अंदर का नुक़्ता भी (वे ज और ड बन जाते हैं); चंद्रबिंदु (ँ) की जगह अनुस्वार (ं) लिखें; देवनागरी अंकों को अंग्रेज़ी अंकों में बदलें; अक्षरों को छोटे (lower case) करें; लैटिन अक्षरों से उच्चारण चिह्न हटाएँ (ā को a); हाइफ़न की जगह स्पेस लिखें; लगातार कई स्पेस को एक स्पेस करें और दोनों सिरों से स्पेस हटाएँ। इसके अलावा कोई बदलाव न करें: न वर्तनी सुधार, न आंशिक या शुरुआती हिस्से से मिलान, और न एक लिपि से दूसरी लिपि में लिप्यंतरण।\n4. खोज किसी उत्पाद से तब मिलती है जब उसका नॉर्मलाइज़ किया गया पाठ उस उत्पाद के नॉर्मलाइज़ किए गए प्रदर्शित नाम या किसी नॉर्मलाइज़ किए गए उपनाम के बराबर हो।\n5. हर खोज की रिपोर्ट दें: matches में मिलने वाले सभी उत्पाद आईडी बढ़ते क्रम में + से जोड़कर लिखें, या NONE।\n\nप्रारूप संबंधी नोट: तारीखें YYYY-MM-DD, DD/MM/YYYY (पहले दिन) या महीने के नाम के साथ लिखी हो सकती हैं। अंक देवनागरी (०-९) या अंग्रेज़ी अंकों में हो सकते हैं। समय 24-घंटे के रूप में या सुबह (4-11 बजे), दोपहर (12-3 बजे), शाम (4-7 बजे) और रात (8-11 बजे) के साथ 12-घंटे के रूप में लिखा हो सकता है। राशि में ₹, रुपये या रु., कॉमा (जैसे 1,25,000) या .00 हो सकता है। कोड और आईडी में अतिरिक्त स्पेस या अलग अक्षर-रूप हो सकते हैं। फ़ाइलों में लिखे सभी मान प्रामाणिक हैं।"
+  },
+  "files": [
+   {
+    "name": "in/catalog.csv",
+    "headers": {
+     "en": [
+      "product",
+      "display_name",
+      "aliases",
+      "status"
+     ],
+     "hi": [
+      "उत्पाद",
+      "प्रदर्शित नाम",
+      "उपनाम",
+      "स्थिति"
+     ]
+    },
+    "rows": {
+     "en": [
+      [
+       "P01",
+       "चना दाल",
+       "chana dal; channa daal",
+       "active"
+      ],
+      [
+       "P02",
+       "मूँग दाल",
+       "moong dal; mung dal",
+       "ACTIVE"
+      ],
+      [
+       "P03",
+       "अरहर दाल",
+       "arhar dal; toor dal; tur dal",
+       "ACTIVE"
+      ],
+      [
+       "P04",
+       "मसूर दाल",
+       "masoor dal; masur dal",
+       "ACTIVE"
+      ],
+      [
+       "P05",
+       "उड़द दाल",
+       "urad dal",
+       "active"
+      ],
+      [
+       "P06",
+       "ज़ीरा",
+       "jeera; zeera; cumin",
+       "ACTIVE"
+      ],
+      [
+       "P07",
+       "हल्दी",
+       "haldi; turmeric",
+       "active"
+      ],
+      [
+       "P08",
+       "धनिया",
+       "dhaniya; coriander",
+       "ACTIVE"
+      ],
+      [
+       "P09",
+       "गुड़",
+       "gud; jaggery; gur",
+       "active"
+      ],
+      [
+       "P10",
+       "शक्कर",
+       "shakkar; sugar",
+       "ACTIVE"
+      ],
+      [
+       "P11",
+       "चीनी",
+       "cheeni; sugar",
+       "active"
+      ],
+      [
+       "P12",
+       "आटा",
+       "atta; wheat flour",
+       "active"
+      ],
+      [
+       "P13",
+       "मैदा",
+       "maida; refined flour",
+       "ACTIVE"
+      ],
+      [
+       "P14",
+       "बेसन",
+       "besan; gram flour",
+       "active "
+      ],
+      [
+       "P15",
+       "सूजी",
+       "sooji; suji; rava",
+       "active"
+      ],
+      [
+       "P16",
+       "पोहा",
+       "poha; flattened rice",
+       "ACTIVE"
+      ],
+      [
+       "P17",
+       "साबूदाना",
+       "sabudana; sago",
+       "ACTIVE"
+      ],
+      [
+       "P18",
+       "इलायची",
+       "elaichi; cardamom",
+       "active"
+      ],
+      [
+       "P19",
+       "लौंग",
+       "laung; clove",
+       "active"
+      ],
+      [
+       "P20",
+       "दालचीनी",
+       "dalchini; cinnamon",
+       "ACTIVE"
+      ],
+      [
+       "P21",
+       "काली मिर्च",
+       "kali mirch; black pepper",
+       "active"
+      ],
+      [
+       "P22",
+       "लाल मिर्च",
+       "lal mirch; red chilli",
+       "active"
+      ],
+      [
+       "P23",
+       "सरसों का तेल",
+       "sarson ka tel; mustard oil",
+       "ACTIVE"
+      ],
+      [
+       "P24",
+       "मूँगफली",
+       "moongphali; peanuts; groundnut",
+       "ACTIVE"
+      ],
+      [
+       "P25",
+       "बादाम",
+       "badam; almonds",
+       "ACTIVE"
+      ],
+      [
+       "P26",
+       "किशमिश",
+       "kishmish; raisins",
+       "active"
+      ],
+      [
+       "P27",
+       "अजवाइन",
+       "ajwain; carom seeds",
+       "active"
+      ],
+      [
+       "P28",
+       "हींग",
+       "hing; asafoetida",
+       "active"
+      ],
+      [
+       "P29",
+       "सौंफ़",
+       "saunf; fennel",
+       "active"
+      ],
+      [
+       "P30",
+       "मेथी",
+       "methi; fenugreek",
+       "ACTIVE"
+      ],
+      [
+       "P31",
+       "राजमा",
+       "rajma; kidney beans",
+       "active"
+      ],
+      [
+       "P32",
+       "छोले",
+       "chhole; chole; chickpeas",
+       "active"
+      ],
+      [
+       "P33",
+       "खड़ा मसाला",
+       "khada masala; whole spices",
+       "ACTIVE"
+      ],
+      [
+       "P34",
+       "गरम मसाला",
+       "garam masala",
+       "DISCONTINUED"
+      ],
+      [
+       "P35",
+       "नमक",
+       "namak; salt",
+       "active"
+      ],
+      [
+       "P36",
+       "घी",
+       "ghee",
+       "active"
+      ],
+      [
+       "P37",
+       "पनीर",
+       "paneer; cottage cheese",
+       "active"
+      ],
+      [
+       "P38",
+       "दही",
+       "dahi; curd; yogurt",
+       "active"
+      ],
+      [
+       "P39",
+       "चावल",
+       "chawal; rice",
+       "ACTIVE"
+      ],
+      [
+       "P40",
+       "बासमती चावल",
+       "basmati chawal; basmati rice",
+       "ACTIVE"
+      ],
+      [
+       "P41",
+       "बासमती चावल 1121",
+       "basmati 1121; 1121 basmati",
+       "active"
+      ]
+     ],
+     "hi": [
+      [
+       "P01",
+       "चना दाल",
+       "chana dal; channa daal",
+       "सक्रिय"
+      ],
+      [
+       "P02",
+       "मूँग दाल",
+       "moong dal; mung dal",
+       "सक्रिय"
+      ],
+      [
+       "P03",
+       "अरहर दाल",
+       "arhar dal; toor dal; tur dal",
+       "सक्रिय"
+      ],
+      [
+       "P04",
+       "मसूर दाल",
+       "masoor dal; masur dal",
+       "सक्रिय"
+      ],
+      [
+       "P05",
+       "उड़द दाल",
+       "urad dal",
+       "सक्रिय"
+      ],
+      [
+       "P06",
+       "ज़ीरा",
+       "jeera; zeera; cumin",
+       "सक्रिय"
+      ],
+      [
+       "P07",
+       "हल्दी",
+       "haldi; turmeric",
+       "सक्रिय"
+      ],
+      [
+       "P08",
+       "धनिया",
+       "dhaniya; coriander",
+       "सक्रिय"
+      ],
+      [
+       "P09",
+       "गुड़",
+       "gud; jaggery; gur",
+       "सक्रिय"
+      ],
+      [
+       "P10",
+       "शक्कर",
+       "shakkar; sugar",
+       "सक्रिय"
+      ],
+      [
+       "P11",
+       "चीनी",
+       "cheeni; sugar",
+       "सक्रिय"
+      ],
+      [
+       "P12",
+       "आटा",
+       "atta; wheat flour",
+       "सक्रिय"
+      ],
+      [
+       "P13",
+       "मैदा",
+       "maida; refined flour",
+       "सक्रिय"
+      ],
+      [
+       "P14",
+       "बेसन",
+       "besan; gram flour",
+       "सक्रिय "
+      ],
+      [
+       "P15",
+       "सूजी",
+       "sooji; suji; rava",
+       "सक्रिय"
+      ],
+      [
+       "P16",
+       "पोहा",
+       "poha; flattened rice",
+       "सक्रिय"
+      ],
+      [
+       "P17",
+       "साबूदाना",
+       "sabudana; sago",
+       "सक्रिय"
+      ],
+      [
+       "P18",
+       "इलायची",
+       "elaichi; cardamom",
+       "सक्रिय"
+      ],
+      [
+       "P19",
+       "लौंग",
+       "laung; clove",
+       "सक्रिय"
+      ],
+      [
+       "P20",
+       "दालचीनी",
+       "dalchini; cinnamon",
+       "सक्रिय"
+      ],
+      [
+       "P21",
+       "काली मिर्च",
+       "kali mirch; black pepper",
+       "सक्रिय"
+      ],
+      [
+       "P22",
+       "लाल मिर्च",
+       "lal mirch; red chilli",
+       "सक्रिय"
+      ],
+      [
+       "P23",
+       "सरसों का तेल",
+       "sarson ka tel; mustard oil",
+       "सक्रिय"
+      ],
+      [
+       "P24",
+       "मूँगफली",
+       "moongphali; peanuts; groundnut",
+       "सक्रिय"
+      ],
+      [
+       "P25",
+       "बादाम",
+       "badam; almonds",
+       "सक्रिय"
+      ],
+      [
+       "P26",
+       "किशमिश",
+       "kishmish; raisins",
+       "सक्रिय"
+      ],
+      [
+       "P27",
+       "अजवाइन",
+       "ajwain; carom seeds",
+       "सक्रिय"
+      ],
+      [
+       "P28",
+       "हींग",
+       "hing; asafoetida",
+       "सक्रिय"
+      ],
+      [
+       "P29",
+       "सौंफ़",
+       "saunf; fennel",
+       "सक्रिय"
+      ],
+      [
+       "P30",
+       "मेथी",
+       "methi; fenugreek",
+       "सक्रिय"
+      ],
+      [
+       "P31",
+       "राजमा",
+       "rajma; kidney beans",
+       "सक्रिय"
+      ],
+      [
+       "P32",
+       "छोले",
+       "chhole; chole; chickpeas",
+       "सक्रिय"
+      ],
+      [
+       "P33",
+       "खड़ा मसाला",
+       "khada masala; whole spices",
+       "सक्रिय"
+      ],
+      [
+       "P34",
+       "गरम मसाला",
+       "garam masala",
+       "बंद"
+      ],
+      [
+       "P35",
+       "नमक",
+       "namak; salt",
+       "सक्रिय"
+      ],
+      [
+       "P36",
+       "घी",
+       "ghee",
+       "सक्रिय"
+      ],
+      [
+       "P37",
+       "पनीर",
+       "paneer; cottage cheese",
+       "सक्रिय"
+      ],
+      [
+       "P38",
+       "दही",
+       "dahi; curd; yogurt",
+       "सक्रिय"
+      ],
+      [
+       "P39",
+       "चावल",
+       "chawal; rice",
+       "सक्रिय"
+      ],
+      [
+       "P40",
+       "बासमती चावल",
+       "basmati chawal; basmati rice",
+       "सक्रिय"
+      ],
+      [
+       "P41",
+       "बासमती चावल 1121",
+       "basmati 1121; 1121 basmati",
+       "सक्रिय"
+      ]
+     ]
+    }
+   },
+   {
+    "name": "in/amendments.csv",
+    "headers": {
+     "en": [
+      "seq",
+      "product",
+      "action",
+      "alias"
+     ],
+     "hi": [
+      "क्रम",
+      "उत्पाद",
+      "कार्रवाई",
+      "उपनाम"
+     ]
+    },
+    "rows": {
+     "en": [
+      [
+       "4",
+       "P34",
+       "REACTIVATE",
+       ""
+      ],
+      [
+       "1",
+       "P09",
+       "REMOVE_ALIAS",
+       "gur"
+      ],
+      [
+       "8",
+       "P22",
+       "DISCONTINUE",
+       ""
+      ],
+      [
+       "7",
+       "P15",
+       "ADD_ALIAS",
+       "rava"
+      ],
+      [
+       "5",
+       "P02",
+       "ADD_ALIAS",
+       "green gram"
+      ],
+      [
+       "3",
+       "P36",
+       "DISCONTINUE",
+       ""
+      ],
+      [
+       "6",
+       "P15",
+       "REMOVE_ALIAS ",
+       "rava"
+      ],
+      [
+       "2",
+       "P14",
+       "ADD_ALIAS",
+       "chickpea flour"
+      ]
+     ],
+     "hi": [
+      [
+       "4",
+       "P34",
+       "फिर से चालू करें",
+       ""
+      ],
+      [
+       "1",
+       "P09",
+       "उपनाम हटाएँ",
+       "gur"
+      ],
+      [
+       "८",
+       "P22",
+       "बंद करें",
+       ""
+      ],
+      [
+       "7",
+       "P15",
+       "उपनाम जोड़ें",
+       "rava"
+      ],
+      [
+       "5",
+       "P02",
+       "उपनाम जोड़ें",
+       "green gram"
+      ],
+      [
+       "3",
+       "P36",
+       "बंद करें",
+       ""
+      ],
+      [
+       "6",
+       "P15",
+       "उपनाम हटाएँ ",
+       "rava"
+      ],
+      [
+       "2",
+       "P14",
+       "उपनाम जोड़ें",
+       "chickpea flour"
+      ]
+     ]
+    }
+   },
+   {
+    "name": "in/queries.csv",
+    "headers": {
+     "en": [
+      "query",
+      "text"
+     ],
+     "hi": [
+      "खोज",
+      "खोज शब्द"
+     ]
+    },
+    "rows": {
+     "en": [
+      [
+       "Q001",
+       "हल्‍दी"
+      ],
+      [
+       "Q002",
+       "हल्‌दी"
+      ],
+      [
+       "Q003",
+       "हल्दी"
+      ],
+      [
+       "Q004",
+       "जीरा"
+      ],
+      [
+       "Q005",
+       "ज़ीरा"
+      ],
+      [
+       "Q006",
+       "ज़ीरा"
+      ],
+      [
+       "Q007",
+       "मूंग दाल"
+      ],
+      [
+       "Q008",
+       "मूँग  दाल"
+      ],
+      [
+       "Q009",
+       "मूंगदाल"
+      ],
+      [
+       "Q010",
+       "उडद दाल"
+      ],
+      [
+       "Q011",
+       "उड़द दाल"
+      ],
+      [
+       "Q012",
+       "गुड"
+      ],
+      [
+       "Q013",
+       "गुड़"
+      ],
+      [
+       "Q014",
+       "gur"
+      ],
+      [
+       "Q015",
+       "Gud"
+      ],
+      [
+       "Q016",
+       "JAGGERY"
+      ],
+      [
+       "Q017",
+       "Jeera"
+      ],
+      [
+       "Q018",
+       "zeera "
+      ],
+      [
+       "Q019",
+       "chana-dal"
+      ],
+      [
+       "Q020",
+       "Chana Dal"
+      ],
+      [
+       "Q021",
+       "chana"
+      ],
+      [
+       "Q022",
+       "channa daal"
+      ],
+      [
+       "Q023",
+       "mūng dal"
+      ],
+      [
+       "Q024",
+       "haldī"
+      ],
+      [
+       "Q025",
+       "jīra"
+      ],
+      [
+       "Q026",
+       "sugar"
+      ],
+      [
+       "Q027",
+       "Sugar"
+      ],
+      [
+       "Q028",
+       "cheeni"
+      ],
+      [
+       "Q029",
+       "शक्कर"
+      ],
+      [
+       "Q030",
+       "चीनी"
+      ],
+      [
+       "Q031",
+       "बासमती चावल ११२१"
+      ],
+      [
+       "Q032",
+       "बासमती चावल 1121"
+      ],
+      [
+       "Q033",
+       "basmati-1121"
+      ],
+      [
+       "Q034",
+       "1121 Basmati"
+      ],
+      [
+       "Q035",
+       "basmati"
+      ],
+      [
+       "Q036",
+       "बासमती चावल"
+      ],
+      [
+       "Q037",
+       "chickpea flour"
+      ],
+      [
+       "Q038",
+       "besan"
+      ],
+      [
+       "Q039",
+       "gram  flour"
+      ],
+      [
+       "Q040",
+       "rava"
+      ],
+      [
+       "Q041",
+       "Rava"
+      ],
+      [
+       "Q042",
+       "sooji"
+      ],
+      [
+       "Q043",
+       "सूजी"
+      ],
+      [
+       "Q044",
+       "garam masala"
+      ],
+      [
+       "Q045",
+       "गरम मसाला"
+      ],
+      [
+       "Q046",
+       "ghee"
+      ],
+      [
+       "Q047",
+       "घी"
+      ],
+      [
+       "Q048",
+       "Lal Mirch"
+      ],
+      [
+       "Q049",
+       "लाल मिर्च"
+      ],
+      [
+       "Q050",
+       "red chilli"
+      ],
+      [
+       "Q051",
+       "red chili"
+      ],
+      [
+       "Q052",
+       "मूँगफली"
+      ],
+      [
+       "Q053",
+       "मूंगफली"
+      ],
+      [
+       "Q054",
+       "moongphali"
+      ],
+      [
+       "Q055",
+       "groundnut"
+      ],
+      [
+       "Q056",
+       "green gram"
+      ],
+      [
+       "Q057",
+       "सौंफ"
+      ],
+      [
+       "Q058",
+       "सौंफ़"
+      ],
+      [
+       "Q059",
+       "saunf"
+      ],
+      [
+       "Q060",
+       "सौंफ़‍"
+      ],
+      [
+       "Q061",
+       "खडा मसाला"
+      ],
+      [
+       "Q062",
+       "खड़ा मसाला"
+      ],
+      [
+       "Q063",
+       "khada-masala"
+      ],
+      [
+       "Q064",
+       "kali  mirch"
+      ],
+      [
+       "Q065",
+       "काली मिर्च"
+      ],
+      [
+       "Q066",
+       "black-pepper"
+      ],
+      [
+       "Q067",
+       "Black Pepper"
+      ],
+      [
+       "Q068",
+       "हींग"
+      ],
+      [
+       "Q069",
+       "हिंग"
+      ],
+      [
+       "Q070",
+       "hing"
+      ],
+      [
+       "Q071",
+       "asafoetida"
+      ],
+      [
+       "Q072",
+       "सरसों का तेल"
+      ],
+      [
+       "Q073",
+       "सरसो का तेल"
+      ],
+      [
+       "Q074",
+       "sarson-ka-tel"
+      ],
+      [
+       "Q075",
+       "mustard oil"
+      ],
+      [
+       "Q076",
+       "Mustard Oil"
+      ],
+      [
+       "Q077",
+       "दही"
+      ],
+      [
+       "Q078",
+       "dahi"
+      ],
+      [
+       "Q079",
+       "Curd"
+      ],
+      [
+       "Q080",
+       "yoghurt"
+      ],
+      [
+       "Q081",
+       "राजमा"
+      ],
+      [
+       "Q082",
+       "rajma"
+      ],
+      [
+       "Q083",
+       "Rājmā"
+      ],
+      [
+       "Q084",
+       "छोले"
+      ],
+      [
+       "Q085",
+       "chhole"
+      ],
+      [
+       "Q086",
+       "chole"
+      ],
+      [
+       "Q087",
+       "Chickpeas"
+      ],
+      [
+       "Q088",
+       "पोहा"
+      ],
+      [
+       "Q089",
+       "Poha"
+      ],
+      [
+       "Q090",
+       "poha "
+      ],
+      [
+       "Q091",
+       "साबूदाना"
+      ],
+      [
+       "Q092",
+       "sabudana"
+      ],
+      [
+       "Q093",
+       "sāgo"
+      ],
+      [
+       "Q094",
+       "cardamom"
+      ],
+      [
+       "Q095",
+       "इलायची"
+      ],
+      [
+       "Q096",
+       "इलाइची"
+      ],
+      [
+       "Q097",
+       "clove"
+      ],
+      [
+       "Q098",
+       "लौंग"
+      ],
+      [
+       "Q099",
+       "लोंग"
+      ],
+      [
+       "Q100",
+       "दालचीनी"
+      ],
+      [
+       "Q101",
+       "दाल चीनी"
+      ],
+      [
+       "Q102",
+       "cinnamon"
+      ],
+      [
+       "Q103",
+       "Methi"
+      ],
+      [
+       "Q104",
+       "मेथी"
+      ],
+      [
+       "Q105",
+       "paneer"
+      ],
+      [
+       "Q106",
+       "पनीर"
+      ],
+      [
+       "Q107",
+       "cottage-cheese"
+      ],
+      [
+       "Q108",
+       "chawal"
+      ],
+      [
+       "Q109",
+       "चावल"
+      ],
+      [
+       "Q110",
+       "Rice"
+      ],
+      [
+       "Q111",
+       "basmati rice"
+      ],
+      [
+       "Q112",
+       "आटा"
+      ],
+      [
+       "Q113",
+       "atta"
+      ],
+      [
+       "Q114",
+       "Wheat Flour"
+      ],
+      [
+       "Q115",
+       "मैदा"
+      ],
+      [
+       "Q116",
+       "maida"
+      ],
+      [
+       "Q117",
+       "बेसन"
+      ],
+      [
+       "Q118",
+       "नमक"
+      ],
+      [
+       "Q119",
+       "salt"
+      ],
+      [
+       "Q120",
+       "अरहर दाल"
+      ],
+      [
+       "Q121",
+       "toor-dal"
+      ],
+      [
+       "Q122",
+       "Tur Dal"
+      ],
+      [
+       "Q123",
+       "मसूर दाल"
+      ],
+      [
+       "Q124",
+       "masoor dal"
+      ],
+      [
+       "Q125",
+       "मसूर  दाल"
+      ],
+      [
+       "Q126",
+       "urad dal"
+      ],
+      [
+       "Q127",
+       "Urad-Dal"
+      ],
+      [
+       "Q128",
+       "अजवाइन"
+      ],
+      [
+       "Q129",
+       "ajwain"
+      ],
+      [
+       "Q130",
+       "carom seeds"
+      ],
+      [
+       "Q131",
+       "बादाम"
+      ],
+      [
+       "Q132",
+       "Badam"
+      ],
+      [
+       "Q133",
+       "almond"
+      ],
+      [
+       "Q134",
+       "किशमिश"
+      ],
+      [
+       "Q135",
+       "kishmish"
+      ],
+      [
+       "Q136",
+       "धनिया"
+      ],
+      [
+       "Q137",
+       "dhaniya"
+      ],
+      [
+       "Q138",
+       "Coriander"
+      ]
+     ],
+     "hi": [
+      [
+       "Q001",
+       "हल्‍दी"
+      ],
+      [
+       "Q002",
+       "हल्‌दी"
+      ],
+      [
+       "Q003",
+       "हल्दी"
+      ],
+      [
+       "Q004",
+       "जीरा"
+      ],
+      [
+       "Q005",
+       "ज़ीरा"
+      ],
+      [
+       "Q006",
+       "ज़ीरा"
+      ],
+      [
+       "Q007",
+       "मूंग दाल"
+      ],
+      [
+       "Q008",
+       "मूँग  दाल"
+      ],
+      [
+       "Q009",
+       "मूंगदाल"
+      ],
+      [
+       "Q010",
+       "उडद दाल"
+      ],
+      [
+       "Q011",
+       "उड़द दाल"
+      ],
+      [
+       "Q012",
+       "गुड"
+      ],
+      [
+       "Q013",
+       "गुड़"
+      ],
+      [
+       "Q014",
+       "gur"
+      ],
+      [
+       "Q015",
+       "Gud"
+      ],
+      [
+       "Q016",
+       "JAGGERY"
+      ],
+      [
+       "Q017",
+       "Jeera"
+      ],
+      [
+       "Q018",
+       "zeera "
+      ],
+      [
+       "Q019",
+       "chana-dal"
+      ],
+      [
+       "Q020",
+       "Chana Dal"
+      ],
+      [
+       "Q021",
+       "chana"
+      ],
+      [
+       "Q022",
+       "channa daal"
+      ],
+      [
+       "Q023",
+       "mūng dal"
+      ],
+      [
+       "Q024",
+       "haldī"
+      ],
+      [
+       "Q025",
+       "jīra"
+      ],
+      [
+       "Q026",
+       "sugar"
+      ],
+      [
+       "Q027",
+       "Sugar"
+      ],
+      [
+       "Q028",
+       "cheeni"
+      ],
+      [
+       "Q029",
+       "शक्कर"
+      ],
+      [
+       "Q030",
+       "चीनी"
+      ],
+      [
+       "Q031",
+       "बासमती चावल ११२१"
+      ],
+      [
+       "Q032",
+       "बासमती चावल 1121"
+      ],
+      [
+       "Q033",
+       "basmati-1121"
+      ],
+      [
+       "Q034",
+       "1121 Basmati"
+      ],
+      [
+       "Q035",
+       "basmati"
+      ],
+      [
+       "Q036",
+       "बासमती चावल"
+      ],
+      [
+       "Q037",
+       "chickpea flour"
+      ],
+      [
+       "Q038",
+       "besan"
+      ],
+      [
+       "Q039",
+       "gram  flour"
+      ],
+      [
+       "Q040",
+       "rava"
+      ],
+      [
+       "Q041",
+       "Rava"
+      ],
+      [
+       "Q042",
+       "sooji"
+      ],
+      [
+       "Q043",
+       "सूजी"
+      ],
+      [
+       "Q044",
+       "garam masala"
+      ],
+      [
+       "Q045",
+       "गरम मसाला"
+      ],
+      [
+       "Q046",
+       "ghee"
+      ],
+      [
+       "Q047",
+       "घी"
+      ],
+      [
+       "Q048",
+       "Lal Mirch"
+      ],
+      [
+       "Q049",
+       "लाल मिर्च"
+      ],
+      [
+       "Q050",
+       "red chilli"
+      ],
+      [
+       "Q051",
+       "red chili"
+      ],
+      [
+       "Q052",
+       "मूँगफली"
+      ],
+      [
+       "Q053",
+       "मूंगफली"
+      ],
+      [
+       "Q054",
+       "moongphali"
+      ],
+      [
+       "Q055",
+       "groundnut"
+      ],
+      [
+       "Q056",
+       "green gram"
+      ],
+      [
+       "Q057",
+       "सौंफ"
+      ],
+      [
+       "Q058",
+       "सौंफ़"
+      ],
+      [
+       "Q059",
+       "saunf"
+      ],
+      [
+       "Q060",
+       "सौंफ़‍"
+      ],
+      [
+       "Q061",
+       "खडा मसाला"
+      ],
+      [
+       "Q062",
+       "खड़ा मसाला"
+      ],
+      [
+       "Q063",
+       "khada-masala"
+      ],
+      [
+       "Q064",
+       "kali  mirch"
+      ],
+      [
+       "Q065",
+       "काली मिर्च"
+      ],
+      [
+       "Q066",
+       "black-pepper"
+      ],
+      [
+       "Q067",
+       "Black Pepper"
+      ],
+      [
+       "Q068",
+       "हींग"
+      ],
+      [
+       "Q069",
+       "हिंग"
+      ],
+      [
+       "Q070",
+       "hing"
+      ],
+      [
+       "Q071",
+       "asafoetida"
+      ],
+      [
+       "Q072",
+       "सरसों का तेल"
+      ],
+      [
+       "Q073",
+       "सरसो का तेल"
+      ],
+      [
+       "Q074",
+       "sarson-ka-tel"
+      ],
+      [
+       "Q075",
+       "mustard oil"
+      ],
+      [
+       "Q076",
+       "Mustard Oil"
+      ],
+      [
+       "Q077",
+       "दही"
+      ],
+      [
+       "Q078",
+       "dahi"
+      ],
+      [
+       "Q079",
+       "Curd"
+      ],
+      [
+       "Q080",
+       "yoghurt"
+      ],
+      [
+       "Q081",
+       "राजमा"
+      ],
+      [
+       "Q082",
+       "rajma"
+      ],
+      [
+       "Q083",
+       "Rājmā"
+      ],
+      [
+       "Q084",
+       "छोले"
+      ],
+      [
+       "Q085",
+       "chhole"
+      ],
+      [
+       "Q086",
+       "chole"
+      ],
+      [
+       "Q087",
+       "Chickpeas"
+      ],
+      [
+       "Q088",
+       "पोहा"
+      ],
+      [
+       "Q089",
+       "Poha"
+      ],
+      [
+       "Q090",
+       "poha "
+      ],
+      [
+       "Q091",
+       "साबूदाना"
+      ],
+      [
+       "Q092",
+       "sabudana"
+      ],
+      [
+       "Q093",
+       "sāgo"
+      ],
+      [
+       "Q094",
+       "cardamom"
+      ],
+      [
+       "Q095",
+       "इलायची"
+      ],
+      [
+       "Q096",
+       "इलाइची"
+      ],
+      [
+       "Q097",
+       "clove"
+      ],
+      [
+       "Q098",
+       "लौंग"
+      ],
+      [
+       "Q099",
+       "लोंग"
+      ],
+      [
+       "Q100",
+       "दालचीनी"
+      ],
+      [
+       "Q101",
+       "दाल चीनी"
+      ],
+      [
+       "Q102",
+       "cinnamon"
+      ],
+      [
+       "Q103",
+       "Methi"
+      ],
+      [
+       "Q104",
+       "मेथी"
+      ],
+      [
+       "Q105",
+       "paneer"
+      ],
+      [
+       "Q106",
+       "पनीर"
+      ],
+      [
+       "Q107",
+       "cottage-cheese"
+      ],
+      [
+       "Q108",
+       "chawal"
+      ],
+      [
+       "Q109",
+       "चावल"
+      ],
+      [
+       "Q110",
+       "Rice"
+      ],
+      [
+       "Q111",
+       "basmati rice"
+      ],
+      [
+       "Q112",
+       "आटा"
+      ],
+      [
+       "Q113",
+       "atta"
+      ],
+      [
+       "Q114",
+       "Wheat Flour"
+      ],
+      [
+       "Q115",
+       "मैदा"
+      ],
+      [
+       "Q116",
+       "maida"
+      ],
+      [
+       "Q117",
+       "बेसन"
+      ],
+      [
+       "Q118",
+       "नमक"
+      ],
+      [
+       "Q119",
+       "salt"
+      ],
+      [
+       "Q120",
+       "अरहर दाल"
+      ],
+      [
+       "Q121",
+       "toor-dal"
+      ],
+      [
+       "Q122",
+       "Tur Dal"
+      ],
+      [
+       "Q123",
+       "मसूर दाल"
+      ],
+      [
+       "Q124",
+       "masoor dal"
+      ],
+      [
+       "Q125",
+       "मसूर  दाल"
+      ],
+      [
+       "Q126",
+       "urad dal"
+      ],
+      [
+       "Q127",
+       "Urad-Dal"
+      ],
+      [
+       "Q128",
+       "अजवाइन"
+      ],
+      [
+       "Q129",
+       "ajwain"
+      ],
+      [
+       "Q130",
+       "carom seeds"
+      ],
+      [
+       "Q131",
+       "बादाम"
+      ],
+      [
+       "Q132",
+       "Badam"
+      ],
+      [
+       "Q133",
+       "almond"
+      ],
+      [
+       "Q134",
+       "किशमिश"
+      ],
+      [
+       "Q135",
+       "kishmish"
+      ],
+      [
+       "Q136",
+       "धनिया"
+      ],
+      [
+       "Q137",
+       "dhaniya"
+      ],
+      [
+       "Q138",
+       "Coriander"
+      ]
+     ]
+    }
+   }
+  ]
+ }
+]

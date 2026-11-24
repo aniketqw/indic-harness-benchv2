@@ -1,0 +1,242 @@
+[
+  {
+    "id": "10-ui-placeholders",
+    "title": "UI placeholder repair",
+    "goals": {
+      "en": "Prepare the approved replacement strings for the Hindi interface. Return every key in the file.",
+      "hi": "हिंदी इंटरफ़ेस के लिए स्वीकृत स्ट्रिंग तैयार करें। फ़ाइल की सभी कुंजियाँ लौटाएँ।",
+      "hinglish": "Hindi UI ke liye approved replacement strings banao. File ki saari keys return karo."
+    },
+    "headers": {
+      "en": [
+        "key",
+        "current",
+        "required_token"
+      ],
+      "hi": [
+        "कुंजी",
+        "मौजूदा_स्ट्रिंग",
+        "अनिवार्य_टोकन"
+      ]
+    },
+    "records": [
+      [
+        "welcome",
+        "नमस्ते %s",
+        "{name}"
+      ],
+      [
+        "items_one",
+        "{n} वस्तुएँ",
+        "{n}"
+      ],
+      [
+        "items_many",
+        "{n} वस्तु",
+        "{n}"
+      ],
+      [
+        "dismiss",
+        "बंद करें",
+        ""
+      ]
+    ],
+    "notice": {
+      "en": "Use the required token literally. For welcome keep the word नमस्ते and replace only its broken token. Swap the noun forms used in items_one and items_many. Leave dismiss exactly as supplied.",
+      "hi": "अनिवार्य टोकन ज्यों का त्यों रखें। welcome में नमस्ते शब्द रखें और केवल गलत टोकन बदलें। items_one और items_many में इस्तेमाल हुए संज्ञा के रूप आपस में बदल दें। dismiss को बिल्कुल वैसा ही रखें।"
+    },
+    "output": [
+      "key",
+      "text"
+    ],
+    "answer": [
+      [
+        "welcome",
+        "नमस्ते {name}"
+      ],
+      [
+        "items_one",
+        "{n} वस्तु"
+      ],
+      [
+        "items_many",
+        "{n} वस्तुएँ"
+      ],
+      [
+        "dismiss",
+        "बंद करें"
+      ]
+    ]
+  },
+  {
+    "id": "11-search-aliases",
+    "title": "Romanized search aliases",
+    "goals": {
+      "en": "Build a search alias index from the directory.",
+      "hi": "निर्देशिका से खोज के लिए उपनामों की सूची बनाएँ।",
+      "hinglish": "Directory se search aliases ka index banao."
+    },
+    "headers": {
+      "en": [
+        "entry",
+        "name",
+        "suggested_alias",
+        "alias_status"
+      ],
+      "hi": [
+        "प्रविष्टि",
+        "नाम",
+        "सुझाया_उपनाम",
+        "उपनाम_स्थिति"
+      ]
+    },
+    "records": [
+      [
+        "L1",
+        "कला भवन",
+        " Kala Bhavan ",
+        "OK"
+      ],
+      [
+        "L2",
+        "कला भवन शाखा",
+        "Kala  Bhavan",
+        "OK"
+      ],
+      [
+        "L3",
+        "संगीत घर",
+        "Sangeet Ghar",
+        "OLD"
+      ],
+      [
+        "L3",
+        "संगीत घर",
+        "Sangeetghar",
+        "OK"
+      ],
+      [
+        "L4",
+        "नया सभागार",
+        "Naya-Sabha",
+        "OK"
+      ]
+    ],
+    "notice": {
+      "en": "Use only OK suggestions. Remove surrounding whitespace, fold interior runs of spaces into one space, and use lowercase Roman letters. Preserve hyphens and original display names. An alias shared by different entries gets one row per entry.",
+      "hi": "केवल OK सुझाव लें। शुरू और अंत के खाली स्थान हटाएँ, अंदर लगातार कई स्पेस को एक स्पेस करें और रोमन अक्षरों को छोटे अक्षरों में लिखें। हाइफ़न और मूल नाम सुरक्षित रखें। एक उपनाम कई प्रविष्टियों के लिए हो तो हर प्रविष्टि की अपनी पंक्ति रखें।"
+    },
+    "output": [
+      "entry",
+      "alias",
+      "display_name"
+    ],
+    "answer": [
+      [
+        "L1",
+        "kala bhavan",
+        "कला भवन"
+      ],
+      [
+        "L2",
+        "kala bhavan",
+        "कला भवन शाखा"
+      ],
+      [
+        "L3",
+        "sangeetghar",
+        "संगीत घर"
+      ],
+      [
+        "L4",
+        "naya-sabha",
+        "नया सभागार"
+      ]
+    ]
+  },
+  {
+    "id": "12-caption-fixes",
+    "title": "Mixed-script caption correction",
+    "goals": {
+      "en": "Produce the corrected caption export, including cues that stay unchanged.",
+      "hi": "संशोधित कैप्शन एक्सपोर्ट बनाएँ। जिन संकेतों में बदलाव नहीं है, उन्हें भी शामिल करें।",
+      "hinglish": "Corrected caption export banao. Jo cues change nahi hote, unko bhi include karo."
+    },
+    "headers": {
+      "en": [
+        "cue",
+        "start_ms",
+        "end_ms",
+        "text"
+      ],
+      "hi": [
+        "संकेत",
+        "शुरुआत_मिलीसेकंड",
+        "अंत_मिलीसेकंड",
+        "पाठ"
+      ]
+    },
+    "records": [
+      [
+        "C1",
+        "0",
+        "1000",
+        "कार्यक्रम शुरू"
+      ],
+      [
+        "C2",
+        "1000",
+        "2300",
+        "Welcome, Anika"
+      ],
+      [
+        "C3",
+        "2300",
+        "3700",
+        "अभी बात होगी"
+      ],
+      [
+        "C4",
+        "3700",
+        "5100",
+        "Salaam, Noor"
+      ]
+    ],
+    "notice": {
+      "en": "Production correction: in C2 replace Anika with अनिका and extend its end by 200 ms. Move only the start of C3 to the new end of C2. C4 is a verbatim quote: keep its original spelling. Preserve all other data.",
+      "hi": "निर्माण दल का संशोधन: C2 में Anika की जगह अनिका लिखें और उसका अंत 200 मिलीसेकंड आगे करें। C3 की सिर्फ शुरुआत को C2 के नए अंत पर रखें। C4 हूबहू उद्धरण है, इसलिए उसकी मूल वर्तनी रखें। बाकी सभी जानकारी वैसी ही रखें।"
+    },
+    "output": [
+      "cue",
+      "start_ms",
+      "end_ms",
+      "text"
+    ],
+    "answer": [
+      [
+        "C1",
+        "0",
+        "1000",
+        "कार्यक्रम शुरू"
+      ],
+      [
+        "C2",
+        "1000",
+        "2500",
+        "Welcome, अनिका"
+      ],
+      [
+        "C3",
+        "2500",
+        "3700",
+        "अभी बात होगी"
+      ],
+      [
+        "C4",
+        "3700",
+        "5100",
+        "Salaam, Noor"
+      ]
+    ]
+  }
+]

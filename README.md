@@ -12,6 +12,12 @@ contracts and original deterministic graders remain fixed.
 - [Research data and editable figures](output/pdf/Indic_Harness_Bench_50_Task_Research_Data.zip)
 - [Combined data description](output/pdf/report_data/README.md)
 - [Original GPT-OSS report](pdf/Indic_Harness_Bench_Experiment_Report.pdf)
+- [Phase 2 (suite v2.1) code and design](phase2/README.md): 16 synthetic tasks
+  across eight Indian domains, with three instruction languages, two workspace
+  languages and two models (GLM-5.3-Flash and Nemotron 3 Super), for 192 conditions.
+  See the [findings](phase2/reports/v21-findings.html) and the
+  [audit report](phase2/reports/v2-audit-and-v21.html).
+- [Results fact sheet, tables and figures](paper_kit/index.html) for both phases
 
 The original GPT-OSS campaign evaluated 54 tasks across three languages; its strict
 analysis retained 46 whole task groups after primary infrastructure exclusions.
