@@ -185,10 +185,13 @@ def learn_tips(log, outdir, seeds):
             valid = [a for a in grp if not (a["error"] and "harness_error" in a["error"])]
             if len(valid) < 2:
                 continue
-            best = max(valid, key=lambda a: a["score"]); worst = min(valid, key=lambda a: a["score"])
+            # "badness" = wrong fields (a missing file counts as worst). Practice variants are often nearly perfect, so a
+            # score-gap threshold would learn nothing; any difference in wrong fields is a usable signal.
+            bad = lambda a: 10 ** 6 if a.get("reason") else a.get("wrong_total", 0)
+            best = min(valid, key=lambda a: (bad(a), -a["score"])); worst = max(valid, key=lambda a: (bad(a), -a["score"]))
             scores = [round(a["score"], 3) for a in grp]
-            if best["score"] - worst["score"] < 0.1:
-                report.append({"task": task, "flang": fl, "scores": scores, "tips": [], "note": "no spread"}); continue
+            if bad(best) == bad(worst):
+                report.append({"task": task, "flang": fl, "scores": scores, "tips": [], "note": "no difference in wrong fields"}); continue
             new = reflect(task, seeds[task], fl, best, worst, tips)
             tips += [t for t in new if t not in tips]
             report.append({"task": task, "flang": fl, "scores": scores, "tips": new})
