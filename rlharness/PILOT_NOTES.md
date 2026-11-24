@@ -185,3 +185,22 @@ details; Nemotron: budget exhaustion with no file). Source: phase2/reports/v21-f
 Relevance to RL: tasks come from authoring generators (canonical dataset -> en/hi workspaces from a fixed seed), i.e.
 the Reasoning-Gym/SWE-smith pattern; fully-correct is a clean verifiable reward. To verify: can generators emit new seeds?
 Phase 1 pilot (8 tasks, GPT-OSS) baseline continues running separately; it is unaffected by the merge.
+
+---------------------------------------------------------------------------------------------------
+## 12. Phase 2 chosen as the RL focus (user, 2026-11-25) and seeded task generation result
+Decision: RL work moves to Phase 2 (16 tasks, 8 Indian domains). Phase-1 pilot (GPT-OSS, 8 tasks) kept only as a
+side reference; its baseline was 35/72 done, mean 0.479, very bimodal (many exact 0.0 / ~0.8 outcomes).
+
+`rlharness/p2gen.py` regenerates Phase 2 tasks for any seed WITHOUT editing upstream files (wraps random.Random so the
+seed string becomes '<task id>:<seed>'). Checks:
+- seed=None reproduces all 16 frozen upstream tasks exactly (answers, files, notice, output, goals): 0 mismatches.
+- 20 seeds x 16 tasks: 296 of 320 instances valid under upstream's own build.check() (deterministic solver AND
+  ignoring any single rule changes the answer): 92.5%.
+- 14 tasks reseed well (18-20/20 valid, data and answers differ every seed). Exceptions: 08-search-normalization ignores
+  the seed (identical data every time, 0/20 differ); 03-bus-roster valid for only 4/20 seeds (rule `stop_at_misfit`
+  often vacuous); 06-seed-allocation 16/20.
+Answer key is computed by each task's own solve() from the generated data, so new seeds get matching answers.
+Open: Phase 2 used GLM-5.3-Flash and Nemotron 3 Super with high thinking, 32k tokens per response, 1200 s, 40 requests.
+Local Ollama lists `glm-5.3:cloud` (flash variant unconfirmed); `nemotron-3-super:cloud` answers when called.
+Proposed split: train on new seeds of train-tasks; test on (a) frozen instances of held-out tasks, (b) frozen instances
+of train-tasks. Reward: fraction of correct fields (grade_rows score/100), full completion tracked separately.
