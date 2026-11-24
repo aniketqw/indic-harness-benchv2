@@ -19,7 +19,7 @@ Why Phase 2: published results show model-specific, fixable failures. GLM gets f
 files); Nemotron runs out of budget and writes no file. A harness change could plausibly address both.
 
 Research questions
-1. **RQ1 Baseline:** per model, prompt language and file language, with a measured noise floor.
+1. **RQ1 Baseline:** the published Phase 2 results per model, language and task (not re-run), checked by a small reproduction run.
 2. **RQ2 Effect:** does reward-derived guidance beat (a) no guidance and (b) an equal-length placebo on held-out tasks?
 3. **RQ3 Mechanism:** which fields, languages and failure types change, and which lessons matter?
 4. **RQ4 Transfer:** new seeds of practiced tasks, unseen domains, the other model, other instruction languages.
@@ -118,7 +118,7 @@ Each task is held out exactly once across the four folds. Excluded from seeded p
 
 | Condition | Guidance in the prompt |
 |---|---|
-| C0 baseline | none |
+| C0 baseline | none: the published results, not re-run (plus a small reproduction check) |
 | C1 placebo | generic text of equal length |
 | C2 learned | lessons from the practice phase |
 | C3 shuffled | lessons from a different domain, equal length |
@@ -131,8 +131,8 @@ Practice sampling uses temperature 0.7 so a group of attempts differs.
 
 ```mermaid
 flowchart TD
-    S0["S0 Smoke test: 2 attempts"] --> S1["S1 Baseline C0 on pilot tasks, 96 attempts"]
-    S1 --> NF["Noise floor: repeat a subset"]
+    S0["S0 Smoke test: 2 attempts"] --> S1["S1 Baseline = published results, plus a small reproduction check"]
+    S1 --> NF["Noise floor: repeat a small subset of improved-harness runs"]
     NF --> G1{"Gate 1: noise floor small enough?"}
     G1 -->|no| FIX["Increase repeats or tighten the setup"]
     FIX --> NF
@@ -155,29 +155,52 @@ capped at 8 and consolidated each epoch.
 - Failure taxonomy before and after: no file (budget), wrong values, missing or extra rows, header or format, timeout.
 - Leave-one-lesson-out ablation; lesson language (English vs Hindi or Hinglish); number of lessons.
 - Cost: tokens, turns, elapsed time (a longer prompt is itself an effect).
-- **Claim rule:** a change counts only if it exceeds the C0 noise floor **and** beats C1 and C3.
+- **Claim rule:** a change counts only if it exceeds the noise floor **and** beats C1 and C3 (and the published baseline).
 
-## 9. Results so far (baselines)
+## 9. Baseline: the published results (we do not re-run them)
 
-All stored result files are committed under
-[`rlharness/results/`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/rlharness/results).
-They are exported from the git-ignored `runs/` folder by `export_results.py`; re-run it to refresh.
+**Policy.** "Without harness improvement" is already measured by the published studies, on the same models. We do not
+re-run those plain conditions. We run only the improved-harness conditions (and the equal-length placebo and shuffled
+controls, which are the same-harness comparison). A small **reproduction check** (a handful of plain runs, not 96) will
+confirm that our harness behaves like the published one before we rely on the comparison.
 
-| Experiment | State | Files |
-|---|---|---|
-| Phase 2 smoke test, task 05, en/en | done: GLM 1.0 (297 s), Nemotron 1.0 (106 s) | [`phase2-smoke/smoke.json`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/results/phase2-smoke/smoke.json) |
-| **Phase 2 baseline C0**, 96 attempts | running; export when finished | `results/phase2-openclaw-baseline/` (`attempts.csv`, `attempts.jsonl`, `summary.json`) |
-| Phase 1 baseline, GPT-OSS on OpenClaw, 8 tasks x 3 langs x 3 repeats | interim, 51 of 72 attempts | [`phase1-openclaw-gptoss-baseline/`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/rlharness/results/phase1-openclaw-gptoss-baseline) |
+Models (frozen, served by Ollama Cloud; the model IDs used by the published code and by our runs):
 
-Interim phase-1 baseline (mean score 0 to 1, 51 attempts, no lessons): overall **0.433**; English 0.543, Hindi 0.324,
-Hinglish 0.431. Per task: 036 citation audit 0.78, 063 alert dedup 0.67, 071 ecommerce routing 0.55,
-034 evidence matrix 0.43, 027 contract summary 0.40, 033 offline QA 0.29, 035 conflicting sources 0.22,
-062 k8s audit 0.14. Strongly bimodal: many attempts score exactly 0 or about 0.8. Caveat: phase 1 is a side reference
-(different models and tasks from Phase 2).
+| Study | Model | ID used by the study | ID on your Ollama (ours) | Published headline |
+|---|---|---|---|---|
+| Phase 1 | GPT-OSS-20B | `gpt-oss:20b` | `gpt-oss:20b-cloud` | mean 39.98/100 over 50 tasks x 3 languages |
+| Phase 1 | Nemotron 3 Super | `nemotron-3-super` | `nemotron-3-super:cloud` | mean 51.21/100 |
+| Phase 2 | GLM-5.3-Flash | `glm-5.3-flash` | `glm-5.3-flash:cloud` | 74 of 96 fully correct (77.1%) |
+| Phase 2 | Nemotron 3 Super | `nemotron-3-super` | `nemotron-3-super:cloud` | 72 of 96 fully correct (75.0%) |
 
-An earlier, separate pilot by another session (simple 3-tool loop, not OpenClaw, GPT-OSS, 4 held-out tasks, 2 repeats,
-no placebo) reported baseline 41.6 to 47.4 with lessons; English fell 55.0 to 48.7 while Hinglish rose 28.0 to 47.6.
-Not attributable to lesson content (no control). See [`PILOT_NOTES.md`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/PILOT_NOTES.md) section 8.
+Our main experiment uses the two **Phase 2** models. Phase 1 (GPT-OSS) is optional and secondary.
+
+Where the published baseline lives in this repo:
+
+| Data | File |
+|---|---|
+| Phase 2, per task and model (correct out of 6 conditions) | [`paper_kit/tables/p2_v21_by_task.csv`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/paper_kit/tables/p2_v21_by_task.csv) |
+| Phase 2, by model, instruction language, file language | [`paper_kit/tables/p2_v21_by_factor.csv`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/paper_kit/tables/p2_v21_by_factor.csv) |
+| Phase 2, outcome types per model and file language | [`paper_kit/tables/p2_v21_outcomes_model_workspace.csv`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/paper_kit/tables/p2_v21_outcomes_model_workspace.csv) |
+| Phase 2, findings report | [`phase2/reports/v21-findings.html`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/phase2/reports/v21-findings.html) |
+| Phase 1, all 300 conditions (task, language, model, score) | [`output/pdf/report_data/matched_conditions.csv`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/output/pdf/report_data/matched_conditions.csv) |
+| Phase 1, per-task scores | [`output/pdf/report_data/task_score_atlas.csv`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/output/pdf/report_data/task_score_atlas.csv) |
+
+Limits of using the published baseline:
+- Phase 2's per-condition raw rows are not in the repo; only per task and model (out of 6) and factor-level tables. So
+  comparisons are at the task-by-model level, not per prompt-language-by-file-language cell.
+- The published runs used the study's own relay and accounting stack; ours uses a proxy and host grading. Hence the
+  reproduction check and the placebo and shuffled controls, which are run in our harness.
+- One run per condition at temperature 0 in the study; we cannot see its run-to-run noise.
+
+Our own runs so far (all in [`rlharness/results/`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/results)):
+- Phase 2 smoke test, one task (`05-grower-payout`, English): both models fully correct. Published for that task:
+  GLM 6/6, Nemotron 2/6 conditions.
+- Two self-run plain baselines were **stopped on purpose, unfinished** (Phase 1: 54 of 72 attempts; Phase 2: 2 of 96)
+  because the published results replace them. Their files are kept for the record only and are **not** a baseline.
+
+An earlier, separate pilot by another session (simple 3-tool loop, not OpenClaw, no placebo) is noted in
+[`PILOT_NOTES.md`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/PILOT_NOTES.md) section 8; it is not part of this baseline.
 
 ## 10. Optional Track B: real RL on a small open model
 
@@ -206,8 +229,8 @@ Local only, git-ignored: `rlharness/runs/` (raw attempts, transcripts, logs).
 
 ## 12. Budget, risks and limits
 
-- One Phase 2 attempt takes about 2 to 5 minutes. Baseline on the 8 pilot tasks: 96 attempts, roughly 2.5 to 3.5 hours at
-  two workers. The full design is several days of cloud quota, hence the stage gates.
+- One Phase 2 attempt takes about 2 to 5 minutes. The plain baseline is not re-run (published results), which removes the largest single cost. The
+  remaining runs (placebo, shuffled, learned, practice) are still a multi-day quota, hence the stage gates.
 - Small samples and non-determinism at temperature 0; lessons may be generic or give a null result; absolute scores can
-  differ from the published Phase 2 report (different relay, accounting and host), so always compare against our own C0.
+  differ from the published Phase 2 report (different relay, accounting and host), hence the reproduction check and the same-harness controls.
 - Translations and tasks are AI-authored (upstream caveat); no claim about Indian languages in general.

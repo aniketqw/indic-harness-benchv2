@@ -189,7 +189,7 @@ Phase 1 pilot (8 tasks, GPT-OSS) baseline continues running separately; it is un
 ---------------------------------------------------------------------------------------------------
 ## 12. Phase 2 chosen as the RL focus (user, 2026-11-25) and seeded task generation result
 Decision: RL work moves to Phase 2 (16 tasks, 8 Indian domains). Phase-1 pilot (GPT-OSS, 8 tasks) kept only as a
-side reference; its baseline was 35/72 done, mean 0.479, very bimodal (many exact 0.0 / ~0.8 outcomes).
+side reference; its self-run baseline was stopped unfinished (see section 13).
 
 `rlharness/p2gen.py` regenerates Phase 2 tasks for any seed WITHOUT editing upstream files (wraps random.Random so the
 seed string becomes '<task id>:<seed>'). Checks:
@@ -204,3 +204,13 @@ Open: Phase 2 used GLM-5.3-Flash and Nemotron 3 Super with high thinking, 32k to
 Local Ollama lists `glm-5.3:cloud` (flash variant unconfirmed); `nemotron-3-super:cloud` answers when called.
 Proposed split: train on new seeds of train-tasks; test on (a) frozen instances of held-out tasks, (b) frozen instances
 of train-tasks. Reward: fraction of correct fields (grade_rows score/100), full completion tracked separately.
+
+---------------------------------------------------------------------------------------------------
+## 13. Baseline policy (user decision, 2026-11-25): use the published results, do not re-run
+"Without harness improvement" is already measured by the published studies on the same models (Phase 1: GPT-OSS-20B and
+Nemotron 3 Super; Phase 2: GLM-5.3-Flash and Nemotron 3 Super). We do NOT re-run those plain conditions. We run only the
+improved-harness conditions plus the equal-length placebo and shuffled controls, and a small reproduction check that our
+harness matches the published scores. Both self-run plain baselines were stopped on purpose, unfinished (Phase 1 at
+54 of 72 attempts, Phase 2 at 2 of 96); their files remain in `rlharness/results/` for the record and are NOT a baseline.
+Published baseline files and model IDs are listed in ARCHITECTURE.md section 9. Phase 2 per-condition raw rows are not in
+the repo (only per task x model out of 6 and factor tables), so comparisons are at task x model level.

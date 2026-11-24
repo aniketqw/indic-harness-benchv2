@@ -90,26 +90,37 @@ if the gain is **bigger than that wobble** and **beats both filler and wrong tip
 
 Then we look at **why**: which cells and rules went from wrong to right, which languages gained, and which single tips mattered.
 
-## 7. Where we are right now (updated 2026-11-25)
+## 7. Which AI models are involved
+
+The AIs are run by a service (Ollama Cloud). We cannot open them up or train them; we can only talk to them.
+
+| Test | AI model | Notes |
+|---|---|---|
+| Phase 2 (our main test) | **GLM-5.3-Flash** | usually gives an answer, sometimes with wrong details |
+| Phase 2 (our main test) | **Nemotron 3 Super** | thinks a lot; sometimes runs out of budget and gives no answer |
+| Phase 1 (side check) | GPT-OSS-20B and Nemotron 3 Super | the original 50-job study |
+
+We use the **same models** that the published studies used, so we do not have to repeat their "without tips" runs: the
+published results are our starting point. We only run the new versions (with tips, with filler, with wrong tips).
+We will do a small check to make sure our setup gives similar scores to the published ones.
+
+## 8. Where we are right now (updated 2026-11-25)
 
 | Step | Status |
 |---|---|
 | Tools built: sealed box, marking, new-practice-job maker | Done and tested |
-| Phase 2 test run, one job, both AIs | Done: both fully right (GLM 297 s, Nemotron 106 s) |
-| **Phase 2 "plain" baseline** (96 attempts) | **Just started: 1 of 96 done**, expected 3 to 4 more hours |
-| Phase 1 "plain" baseline (GPT-OSS, 72 attempts) | **Not finished: 53 of 72 done** (average 43%) |
-| Practice and tips | Not started (waits for the baseline) |
+| One test job on both AIs | Done: both got it fully right |
+| "Without tips" starting point | Taken from the published results (not re-run) |
+| Small check that our setup matches the published scores | Not done yet |
+| Practice, tips, and testing with tips | Not started |
 
-Everything so far is a **baseline**: how the AI does with **no** tips. No tip has been tested yet, so we have no result
-about whether tips help.
+We have **no result yet** about whether tips help. We stopped the two partial "without tips" runs on purpose, because the
+published results already cover them.
 
-Important: the Phase 1 numbers are a side check on a different AI (GPT-OSS) and different jobs. They are not the main
-result. Numbers will only be quoted as final once a run is complete.
-
-## 8. Words used in the documents
+## 9. Words used in the documents
 
 - **Harness:** everything around the AI except the AI itself.
-- **Baseline:** how the AI does with no tips. The yardstick for everything else.
+- **Baseline:** how the AI does with no tips. We take it from the published studies.
 - **Reward:** the score from the marking program (0 to 1).
 - **Held-out / unseen:** jobs the AI never practiced on, used only for testing.
 - **Seed:** a number that makes a new version of a practice job; same rules, different data.
@@ -118,7 +129,7 @@ result. Numbers will only be quoted as final once a run is complete.
 - **GRPO:** the training method that inspired the "compare the best and worst try" step. We borrow the comparison idea.
   We do not train the AI, so this is **not** reinforcement learning on the model.
 
-## 9. Where things are
+## 10. Where things are
 
 All files are on the `rl-harness` branch of the fork:
 <https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/rlharness>
