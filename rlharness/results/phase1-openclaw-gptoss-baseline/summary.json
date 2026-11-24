@@ -1,0 +1,80 @@
+{
+ "run": "oc_base1",
+ "attempts": 51,
+ "overall": {
+  "n": 51,
+  "mean_score": 0.4326,
+  "full": 0,
+  "no_file": 0
+ },
+ "task": {
+  "027-contract-summary-risk": {
+   "n": 9,
+   "mean_score": 0.3968,
+   "full": 0,
+   "no_file": 0
+  },
+  "033-offline-knowledge-qa": {
+   "n": 6,
+   "mean_score": 0.2889,
+   "full": 0,
+   "no_file": 0
+  },
+  "034-evidence-matrix-claims": {
+   "n": 6,
+   "mean_score": 0.4333,
+   "full": 0,
+   "no_file": 0
+  },
+  "035-conflicting-source-resolution": {
+   "n": 6,
+   "mean_score": 0.2247,
+   "full": 0,
+   "no_file": 0
+  },
+  "036-citation-consistency-audit": {
+   "n": 6,
+   "mean_score": 0.78,
+   "full": 0,
+   "no_file": 0
+  },
+  "062-k8s-config-audit": {
+   "n": 6,
+   "mean_score": 0.14,
+   "full": 0,
+   "no_file": 0
+  },
+  "063-alert-dedup-noise": {
+   "n": 6,
+   "mean_score": 0.6685,
+   "full": 0,
+   "no_file": 0
+  },
+  "071-ecommerce-support-routing": {
+   "n": 6,
+   "mean_score": 0.5467,
+   "full": 0,
+   "no_file": 0
+  }
+ },
+ "lang": {
+  "en": {
+   "n": 17,
+   "mean_score": 0.543,
+   "full": 0,
+   "no_file": 0
+  },
+  "hi": {
+   "n": 17,
+   "mean_score": 0.324,
+   "full": 0,
+   "no_file": 0
+  },
+  "hinglish": {
+   "n": 17,
+   "mean_score": 0.4308,
+   "full": 0,
+   "no_file": 0
+  }
+ }
+}

@@ -1,99 +1,213 @@
-# Architecture and experiment design (Phase 2, OpenClaw, cloud models)
+# Runtime harness improvement on Indic Harness Bench Phase 2
 
-Status: PROPOSED design, 2026-11-25. Decided: Phase 2 tasks, OpenClaw harness, GLM-5.3-Flash + Nemotron 3 Super,
-baselines before anything else. Open: scale, Track B (real RL on a small open model).
+Status: PROPOSED design with baselines in progress (updated 2026-11-25).
+Branch: [`rl-harness`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness) of the fork
+`aniketqw/indic-harness-benchv2` (upstream: `yahall0/indic-harness-benchv2`).
 
-## 1. What we are asking
+## 1. Framing: this is harness improvement, not training the model
 
-Phase 2 shows the models fail in specific, different ways (GLM: wrong field values, especially with Hindi files;
-Nemotron: runs out of budget and writes no file). Question: can a loop that uses the grader as a reward, in the
-spirit of GRPO, find runtime guidance that fixes such failures, does it transfer, and why does it work or not?
+An agent's performance depends on the **model** and on the **harness** around it: the instructions it receives, the
+tools and limits it runs with, and how its attempts are selected and scored. The models here (GLM-5.3-Flash,
+Nemotron 3 Super on Ollama Cloud) are frozen, so their weights never change. We improve the harness, specifically its
+**guidance layer** (short lessons added to the prompt), using the benchmark's grader as a reward signal, in the spirit of
+GRPO's group-relative comparison.
 
-RQ1 Baseline: per model, prompt language x file language, with a measured noise floor.
-RQ2 Does practice-derived guidance raise held-out scores over (a) no guidance and (b) a placebo of equal length?
-RQ3 Where and why: which languages, tasks, fields and failure types change; which lessons matter?
-RQ4 Transfer: new seeds of practiced tasks, unseen tasks/domains, the other model, other instruction languages.
+> Honest label: *training-free, reward-driven harness optimization*. It is **not** reinforcement learning on the model.
+> Real GRPO on an open model is a separate optional track (section 10).
 
-## 2. System
+Why Phase 2: published results show model-specific, fixable failures. GLM gets field values wrong (worst with Hindi
+files); Nemotron runs out of budget and writes no file. A harness change could plausibly address both.
 
+Research questions
+1. **RQ1 Baseline:** per model, prompt language and file language, with a measured noise floor.
+2. **RQ2 Effect:** does reward-derived guidance beat (a) no guidance and (b) an equal-length placebo on held-out tasks?
+3. **RQ3 Mechanism:** which fields, languages and failure types change, and which lessons matter?
+4. **RQ4 Transfer:** new seeds of practiced tasks, unseen domains, the other model, other instruction languages.
+
+## 2. System architecture
+
+```mermaid
+flowchart LR
+    subgraph TASKS["Task layer, Phase 2"]
+        FZ["16 frozen upstream tasks"]
+        GEN["p2gen.py: seeded new instances"]
+    end
+    subgraph TRAINER["Trainer on the Mac, Python"]
+        SAM["Sampler: G attempts per task and seed"]
+        GR["Grader: upstream grade_rows"]
+        RW["Reward: correct fields / total fields"]
+        ADV["Group advantage: reward minus group mean"]
+        REF["Reflector: best vs worst attempt"]
+        LIB["Lesson library, max 8"]
+    end
+    subgraph SANDBOX["Docker, internal network, no internet"]
+        AG["OpenClaw agent container: read write edit exec"]
+        PX["rlh-proxy2: allow-list proxy"]
+    end
+    OL["Your Ollama then Ollama Cloud: GLM or Nemotron"]
+
+    FZ --> SAM
+    GEN --> SAM
+    LIB -->|"lessons prepended to prompt"| SAM
+    SAM -->|"workspace tar and prompt"| AG
+    AG -->|"only route out"| PX
+    PX -->|"chat on 2 allowed models"| OL
+    AG -->|"out/result.csv tar"| GR
+    GR --> RW
+    RW --> ADV
+    ADV --> REF
+    GR -.->|"row and column evidence"| REF
+    REF --> LIB
 ```
-            +----------------------- Task layer (Phase 2) -----------------------+
-            | frozen upstream tasks (16)      p2gen.py: new seeds (14 tasks ok)   |
-            | prompt(task, en|hi|hinglish)    inputs(task, en|hi files)           |
-            +-----------------------------------+--------------------------------+
-                                                | workspace tar + prompt (+ lessons)
- Trainer (Python, on Mac)                       v
- +----------------------+      +--------- Docker, internal network ---------+
- | sampler: G attempts  | ---> | OpenClaw agent container (read/write/edit/  |
- | per (task,seed,lang) |      | exec; no internet; no host mounts)          |
- |                      |      +----------------------+---------------------+
- |                      |                             | only route out
- |                      |                      +------v-------+  allow-list: chat on 2 models
- |                      |                      | rlh-proxy2   |  (blocks /api/pull, others)
- |                      |                      +------+-------+
- |                      |                             v
- |                      |                  your Ollama -> Ollama Cloud (GLM / Nemotron)
- |                      | <---- out/result.csv (tar) ----- agent container
- | grader (upstream     |
- |  grade_rows) -> field|  per-row, per-column correctness  = reward signal + failure evidence
- | reward = fields right|
- | / fields total       |
- | group advantage      |  (r - group mean)/std; no spread -> no learning
- | reflector -> lessons |  best vs worst attempt, grader row_checks as evidence
- | lesson library (<=8) |  prepended to the prompt on later attempts
- +----------------------+
+
+What is the "harness" here? Everything in the diagram except the frozen model: guidance text, tool set, limits
+(1200 s, 32,768-token responses, 131,072-token context, high thinking), the internal-network sandbox and the grader.
+Only the **lesson library** is optimized; the rest is held fixed so results are attributable.
+
+## 3. One attempt, step by step
+
+```mermaid
+sequenceDiagram
+    participant T as Trainer
+    participant D as Docker agent container
+    participant P as Proxy rlh-proxy2
+    participant M as Cloud model
+    participant G as Grader
+    T->>D: create container, copy in/ files and config
+    T->>D: openclaw agent --thinking high with prompt and lessons
+    loop until finished or 1200 s
+        D->>P: chat request
+        P->>M: forward if model is allowed
+        M-->>D: reasoning and tool calls
+        D->>D: read, write, edit, exec in /workspace
+    end
+    T->>D: tar out /workspace
+    T->>G: out/result.csv and input hashes
+    G-->>T: score, full completion, per-row per-column results
+    T->>D: remove container
 ```
-Weights never change (cloud models). The "policy" being improved is the guidance text. This is training-free
-group-relative optimization; it must not be described as RL on the model.
 
-## 3. Reward
-reward = (correct fields) / (total fields incl. extra rows) from upstream grade_rows, 0..1. Full completion (all fields)
-tracked separately as the headline "fully correct". Input tampering zeroes the score upstream (already handled).
-Infrastructure failures (harness error, provider 5xx) get no reward and are excluded. No speed bonus, no extra terms
-(Bespoke: simple reward is more stable). Optional later: partial credit for "file written" as a diagnostic only.
+Isolation: the agent container sits on an internal Docker network with no internet and no host mounts. The proxy
+refuses everything except chat requests for the two allowed models (tested: `/api/pull` and other models return 403).
 
-## 4. Data and splits
-16 tasks = 8 domains x 2. Train on freshly SEEDED instances of tasks in the training domains; evaluate on the FROZEN
-upstream instances (the published benchmark) so results connect to the Phase 2 report.
-Folds: 4 folds, each holds out 2 domains (4 tasks); each task is held out exactly once.
-Test sets per fold: (A) frozen instances of held-out-domain tasks (cross-domain transfer), (B) frozen instances of
-practiced tasks (in-seed generalization). Never practice on a frozen instance that is also a test instance.
-Seeds: 03-bus-roster (4/20 valid) and 08-search-normalization (seed ignored) are excluded from seeded practice.
+## 4. Reward
 
-## 5. Conditions (each evaluated at temperature 0, same harness)
-C0 baseline (no lessons); C1 placebo (equal-length generic text); C2 learned lessons; C3 shuffled lessons (random
-lessons from another domain, equal length); optional C4 hand-written lessons targeting the known failure modes.
-Factors: model (2) x prompt language (3) x file language (2). Repeats for noise floor on C0 first.
+`reward = correct fields / (fields in expected rows + extra rows)` from upstream `grade_rows`, range 0 to 1. **Fully
+correct** (all fields) is tracked separately and is the headline metric. Tampering with inputs zeroes the score upstream.
+Infrastructure failures (harness error, provider 5xx) get no reward and are excluded. No speed bonus or extra terms
+(Bespoke Labs found simple correctness rewards more stable than composite ones).
 
-## 6. Procedure per model and fold
-1. Baseline C0 on test sets, r repeats -> noise floor.
-2. Practice epochs: per train task, S seeds, language combos, G=4 attempts at temperature 0.7.
-3. Reflect on best vs worst per group (only if spread >= 0.1), grader row_checks as evidence; update library.
-4. Evaluate C1, C2, C3 on the test sets. 5. Rotate fold. 6. Cross-model transfer: lessons from GLM on Nemotron and back.
+## 5. Data and splits
 
-## 7. Analyses ("why")
-- Per-field deltas: which columns/rules flip wrong -> right; per-task and per-language effect sizes with
-  task-cluster bootstrap intervals (task = unit), as in the original study.
-- Failure taxonomy before/after: no file (budget), wrong values, missing/extra rows, format/header, timeout.
-- Leave-one-lesson-out ablation; lesson language (English vs Hindi/Hinglish translation); lesson count.
-- Cost: tokens, turns, elapsed before/after (longer prompt effect).
-- Claim rule: a change counts only if it exceeds the C0 noise floor AND beats C1/C3.
+```mermaid
+flowchart TB
+    ALL["16 tasks = 8 domains x 2 tasks"] --> F1["Fold 1: hold out 2 domains"]
+    ALL --> F2["Fold 2"]
+    ALL --> F3["Fold 3"]
+    ALL --> F4["Fold 4"]
+    F1 --> TR["Practice: new seeds of 6 training domains"]
+    F1 --> TA["Test A: frozen tasks of the 2 held-out domains"]
+    F1 --> TB["Test B: frozen tasks of the practiced domains"]
+```
 
-## 8. Budget (be honest)
-One Phase 2 attempt ~3-5 min. Baseline on the 8 pilot tasks x 3 x 2 x 2 models = 96 attempts (~2.5 h at 2 workers).
-Full 192 ~ 5 h. One fold of practice at S=2, 2 lang combos, G=4: ~100-200 attempts per model per epoch. The whole
-design is multi-day of cloud quota, so it is staged with go/no-go gates after each stage.
+Practice only on **seeded** instances; test on the **frozen** upstream instances so results connect to the Phase 2 report.
+Each task is held out exactly once across the four folds. Excluded from seeded practice: `03-bus-roster` (valid for 4 of
+20 seeds) and `08-search-normalization` (ignores the seed). Seeding check: 296 of 320 generated instances valid.
 
-## 9. Stages and gates
-S0 smoke (2 attempts) -> S1 baseline on pilot tasks -> gate: noise floor acceptable? -> S2 one fold, one model, small
-practice -> gate: lessons beat placebo? -> S3 both models, all folds -> S4 analysis and report.
+## 6. Conditions and factors
 
-## 10. Track B (optional, real RL)
-GRPO + LoRA on a small open model (e.g. Qwen3-1.7B/3B) using seeded Phase 2 tasks as the environment and the same
-reward. Needs a GPU (shared A6000 is marginal). Separate from the cloud track; would answer "does real RL transfer",
-not "can we improve GLM/Nemotron". Existing: 1.7B untrained baseline on phase-1 prompts scored 14.98/100.
+| Condition | Guidance in the prompt |
+|---|---|
+| C0 baseline | none |
+| C1 placebo | generic text of equal length |
+| C2 learned | lessons from the practice phase |
+| C3 shuffled | lessons from a different domain, equal length |
+| C4 optional | hand-written lessons targeting the known failure modes |
 
-## 11. Risks
-Small sample and non-determinism at temperature 0; lessons may be generic or null; quota/time; GLM Flash vs flash
-naming resolved (glm-5.3-flash:cloud works); our harness differs from the published relay/accounting stack, so
-absolute scores may differ from the Phase 2 report: always compare to our own C0.
+Factors: model (GLM, Nemotron) x prompt language (en, hi, hinglish) x file language (en, hi). Evaluated at temperature 0.
+Practice sampling uses temperature 0.7 so a group of attempts differs.
+
+## 7. Experiment procedure with gates
+
+```mermaid
+flowchart TD
+    S0["S0 Smoke test: 2 attempts"] --> S1["S1 Baseline C0 on pilot tasks, 96 attempts"]
+    S1 --> NF["Noise floor: repeat a subset"]
+    NF --> G1{"Gate 1: noise floor small enough?"}
+    G1 -->|no| FIX["Increase repeats or tighten the setup"]
+    FIX --> NF
+    G1 -->|yes| S2["S2 One fold, one model: practice then evaluate C1 C2 C3"]
+    S2 --> G2{"Gate 2: learned beats placebo and shuffled?"}
+    G2 -->|no| REP["Report null result, inspect lessons by hand"]
+    G2 -->|yes| S3["S3 Both models, all folds, cross-model transfer"]
+    S3 --> S4["S4 Why analyses and report"]
+```
+
+Practice step: for each training task and seed, sample G=4 attempts, compute group-relative advantage
+(reward minus group mean, divided by std), skip groups with no spread, and let the reflector turn the best-vs-worst
+difference into at most two general lessons, using the grader's row and column results as evidence. The library is
+capped at 8 and consolidated each epoch.
+
+## 8. Analyses ("why")
+
+- Per-field deltas: which columns and rules flip from wrong to right; per-task and per-language effects with
+  task-clustered bootstrap intervals (the task is the unit, as in the original study).
+- Failure taxonomy before and after: no file (budget), wrong values, missing or extra rows, header or format, timeout.
+- Leave-one-lesson-out ablation; lesson language (English vs Hindi or Hinglish); number of lessons.
+- Cost: tokens, turns, elapsed time (a longer prompt is itself an effect).
+- **Claim rule:** a change counts only if it exceeds the C0 noise floor **and** beats C1 and C3.
+
+## 9. Results so far (baselines)
+
+All stored result files are committed under
+[`rlharness/results/`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/rlharness/results).
+They are exported from the git-ignored `runs/` folder by `export_results.py`; re-run it to refresh.
+
+| Experiment | State | Files |
+|---|---|---|
+| Phase 2 smoke test, task 05, en/en | done: GLM 1.0 (297 s), Nemotron 1.0 (106 s) | [`phase2-smoke/smoke.json`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/results/phase2-smoke/smoke.json) |
+| **Phase 2 baseline C0**, 96 attempts | running; export when finished | `results/phase2-openclaw-baseline/` (`attempts.csv`, `attempts.jsonl`, `summary.json`) |
+| Phase 1 baseline, GPT-OSS on OpenClaw, 8 tasks x 3 langs x 3 repeats | interim, 51 of 72 attempts | [`phase1-openclaw-gptoss-baseline/`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/rlharness/results/phase1-openclaw-gptoss-baseline) |
+
+Interim phase-1 baseline (mean score 0 to 1, 51 attempts, no lessons): overall **0.433**; English 0.543, Hindi 0.324,
+Hinglish 0.431. Per task: 036 citation audit 0.78, 063 alert dedup 0.67, 071 ecommerce routing 0.55,
+034 evidence matrix 0.43, 027 contract summary 0.40, 033 offline QA 0.29, 035 conflicting sources 0.22,
+062 k8s audit 0.14. Strongly bimodal: many attempts score exactly 0 or about 0.8. Caveat: phase 1 is a side reference
+(different models and tasks from Phase 2).
+
+An earlier, separate pilot by another session (simple 3-tool loop, not OpenClaw, GPT-OSS, 4 held-out tasks, 2 repeats,
+no placebo) reported baseline 41.6 to 47.4 with lessons; English fell 55.0 to 48.7 while Hinglish rose 28.0 to 47.6.
+Not attributable to lesson content (no control). See [`PILOT_NOTES.md`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/PILOT_NOTES.md) section 8.
+
+## 10. Optional Track B: real RL on a small open model
+
+GRPO with LoRA on a small open model (for example Qwen3-1.7B or 3B) using seeded Phase 2 tasks as the environment and
+the same reward. It would answer "does real RL transfer?", not "can we improve GLM and Nemotron?". It needs a GPU; the
+shared A6000 is marginal (GPU memory and a full home disk). Existing reference: an untrained Qwen3-1.7B scored
+14.98/100 on phase-1 style prompts (other session; results in its own folder, not committed here).
+
+## 11. Where everything lives (branch `rl-harness`)
+
+| What | File |
+|---|---|
+| This design | [`rlharness/ARCHITECTURE.md`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/ARCHITECTURE.md) |
+| Plain-language notes, checks, findings log | [`rlharness/PILOT_NOTES.md`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/PILOT_NOTES.md) |
+| Phase 2 attempt runner (OpenClaw, grader) | [`rlharness/p2run.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/p2run.py) |
+| Phase 2 baseline runner | [`rlharness/p2baseline.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/p2baseline.py) |
+| Seeded task generator | [`rlharness/p2gen.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/p2gen.py) |
+| Allow-list proxy to Ollama | [`rlharness/proxy.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/proxy.py) |
+| Phase 1 OpenClaw runner, reward, loop | [`oc_runner.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/oc_runner.py), [`reward.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/reward.py), [`loop.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/loop.py), [`baseline.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/baseline.py) |
+| Result export script | [`rlharness/export_results.py`](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/rlharness/export_results.py) |
+| Stored results | [`rlharness/results/`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/rlharness/results) |
+| Phase 2 upstream (frozen tasks, grader, reports) | [`phase2/`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness/phase2), [findings](https://github.com/aniketqw/indic-harness-benchv2/blob/rl-harness/phase2/reports/v21-findings.html) |
+| Paper analysis (course case studies) | `p0/rl-papers/ANALYSIS.md` (local only, not in this repo) |
+
+Local only, git-ignored: `rlharness/runs/` (raw attempts, transcripts, logs).
+
+## 12. Budget, risks and limits
+
+- One Phase 2 attempt takes about 2 to 5 minutes. Baseline on the 8 pilot tasks: 96 attempts, roughly 2.5 to 3.5 hours at
+  two workers. The full design is several days of cloud quota, hence the stage gates.
+- Small samples and non-determinism at temperature 0; lessons may be generic or give a null result; absolute scores can
+  differ from the published Phase 2 report (different relay, accounting and host), so always compare against our own C0.
+- Translations and tasks are AI-authored (upstream caveat); no claim about Indian languages in general.

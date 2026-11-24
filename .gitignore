@@ -46,3 +46,6 @@ Desktop.ini
 # RL-harness run outputs and logs (local only)
 rlharness/runs/
 rlharness/*.log
+
+# Keep the committed, compact RL-harness result exports (the generic results/ rule above ignores them)
+!rlharness/results/

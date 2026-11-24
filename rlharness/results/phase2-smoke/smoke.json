@@ -1,0 +1,26 @@
+[
+ {
+  "model": "glm",
+  "task": "05-grower-payout",
+  "plang": "en",
+  "flang": "en",
+  "score": 1.0,
+  "full": true,
+  "reason": null,
+  "input_intact": true,
+  "elapsed": 296.6,
+  "error": null
+ },
+ {
+  "model": "nemotron",
+  "task": "05-grower-payout",
+  "plang": "en",
+  "flang": "en",
+  "score": 1.0,
+  "full": true,
+  "reason": null,
+  "input_intact": true,
+  "elapsed": 105.8,
+  "error": null
+ }
+]
