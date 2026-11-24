@@ -4,6 +4,8 @@ Status: PROPOSED design with baselines in progress (updated 2026-11-25).
 Branch: [`rl-harness`](https://github.com/aniketqw/indic-harness-benchv2/tree/rl-harness) of the fork
 `aniketqw/indic-harness-benchv2` (upstream: `yahall0/indic-harness-benchv2`).
 
+**First concrete experiment:** see [`EXPERIMENT_PLAN.md`](EXPERIMENT_PLAN.md) (small, pre-specified, matched comparison on GLM).
+
 ## 1. Framing: this is harness improvement, not training the model
 
 An agent's performance depends on the **model** and on the **harness** around it: the instructions it receives, the

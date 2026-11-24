@@ -2,6 +2,8 @@
 
 (The technical version is [`ARCHITECTURE.md`](ARCHITECTURE.md). Read this one first.)
 
+**Our first concrete experiment is described in [`EXPERIMENT_PLAN.md`](EXPERIMENT_PLAN.md).**
+
 ## The idea in one sentence
 
 We give an AI assistant some office-style jobs, check its work automatically, and test whether **short written tips**
