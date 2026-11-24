@@ -1,0 +1,359 @@
+## 01-upi-settlement en.en.nemotron status=completed score=98.1481 reason=None header=['invoice', 'net_received', 'due', 'status']
+  INV-0112 net_received: exp='25673' got='8573'
+  INV-0112 due: exp='17100' got='34200'
+## 01-upi-settlement hi.en.nemotron status=completed score=99.0741 reason=None header=['invoice', 'net_received', 'due', 'status']
+  INV-0135 net_received: exp='6733' got='7033'
+## 01-upi-settlement hi.hi.glm status=completed score=99.0741 reason=None header=['invoice', 'net_received', 'due', 'status']
+  INV-0134 net_received: exp='10632' got='8304'
+## 01-upi-settlement hinglish.en.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 02-gst-payables en.en.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 02-gst-payables hi.en.glm status=completed score=98.4375 reason=None header=['entry', 'decision', 'gst', 'tds', 'payable']
+  E002 gst: exp='106' got='71'
+  E002 payable: exp='696' got='661'
+  E023 gst: exp='3425' got='2284'
+  E023 payable: exp='22455' got='21314'
+## 03-bus-roster en.en.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 03-bus-roster hi.en.glm status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 03-bus-roster hinglish.hi.glm status=completed score=99.1525 reason=None header=['student', 'stop', 'route', 'bus']
+  S072 bus: exp='OV' got='WAITLIST'
+  S079 bus: exp='OV' got='WAITLIST'
+  S080 bus: exp='OV' got='WAITLIST'
+## 03-bus-roster hinglish.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 04-exam-seating en.hi.glm status=completed score=84.5588 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G02 rooms: exp='R201+R104' got='HALL'
+  G03 session: exp='AM' got='PM'
+  G03 rooms: exp='HALL' got='R202+R201'
+  G05 rooms: exp='R103+LAB1' got='R101+R203'
+  G07 rooms: exp='R201+R104' got='LAB1+R102'
+  G08 rooms: exp='R202' got='R104+R103'
+  G09 rooms: exp='R104+R103' got='R103+LAB1'
+  G10 rooms: exp='R101+R203' got=''
+  ... 21 mismatched cells total
+## 04-exam-seating hi.hi.glm status=completed score=99.2647 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G02 rooms: exp='R201+R104' got='R102'
+## 04-exam-seating hinglish.en.glm status=completed score=93.3824 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G16 rooms: exp='R104+R102' got='R104+R103'
+  G17 rooms: exp='' got='R102'
+  G17 status: exp='UNSEATED' got='SEATED'
+  G19 rooms: exp='' got='R101'
+  G19 status: exp='UNSEATED' got='SEATED'
+  G20 rooms: exp='R103+LAB1+R101' got=''
+  G20 status: exp='SEATED' got='UNSEATED'
+  G31 rooms: exp='R203' got='R101'
+  ... 9 mismatched cells total
+## 05-grower-payout hinglish.hi.glm status=completed score=97.5 reason=None header=['farmer', 'accepted_kg', 'gross', 'recovered', 'net_payable', 'outstanding']
+  F022 accepted_kg: exp='1240.8' got='0.0'
+  F022 gross: exp='31640' got='0'
+  F022 net_payable: exp='31640' got='0'
+## 05-grower-payout hinglish.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 06-seed-allocation en.en.glm status=completed score=72.6852 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R005 lots: exp='L09' got='L12'
+  R006 allocated_kg: exp='15' got='20'
+  R006 lots: exp='L20' got='L19'
+  R009 allocated_kg: exp='180' got='0'
+  R009 lots: exp='L13+L14' got=''
+  R009 pending_kg: exp='0' got='175'
+  R010 allocated_kg: exp='185' got='190'
+  ... 59 mismatched cells total
+## 06-seed-allocation en.en.nemotron status=completed score=63.4259 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R005 lots: exp='L09' got='L12'
+  R006 allocated_kg: exp='15' got='20'
+  R006 lots: exp='L20' got='L19'
+  R009 allocated_kg: exp='180' got='0'
+  R009 lots: exp='L13+L14' got=''
+  R009 pending_kg: exp='0' got='175'
+  R010 allocated_kg: exp='185' got='190'
+  ... 79 mismatched cells total
+## 06-seed-allocation en.hi.glm status=completed score=76.3889 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R004 allocated_kg: exp='450' got='460'
+  R004 lots: exp='L01' got='L04'
+  R008 allocated_kg: exp='0' got='30'
+  R008 lots: exp='' got='L08'
+  R008 pending_kg: exp='28' got='0'
+  R010 allocated_kg: exp='185' got='190'
+  R010 lots: exp='L19+L22' got='L22+L23'
+  ... 51 mismatched cells total
+## 06-seed-allocation hi.en.glm status=completed score=63.4259 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R005 lots: exp='L09' got='L12'
+  R006 allocated_kg: exp='15' got='20'
+  R006 lots: exp='L20' got='L19'
+  R009 allocated_kg: exp='180' got='0'
+  R009 lots: exp='L13+L14' got=''
+  R009 pending_kg: exp='0' got='175'
+  R010 allocated_kg: exp='185' got='190'
+  ... 79 mismatched cells total
+## 06-seed-allocation hi.en.nemotron status=completed score=63.4259 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R005 lots: exp='L09' got='L12'
+  R006 allocated_kg: exp='15' got='20'
+  R006 lots: exp='L20' got='L19'
+  R009 allocated_kg: exp='180' got='0'
+  R009 lots: exp='L13+L14' got=''
+  R009 pending_kg: exp='0' got='175'
+  R010 allocated_kg: exp='185' got='190'
+  ... 79 mismatched cells total
+## 06-seed-allocation hi.hi.glm status=completed score=76.3889 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R004 allocated_kg: exp='450' got='460'
+  R004 lots: exp='L01' got='L04'
+  R008 allocated_kg: exp='0' got='30'
+  R008 lots: exp='' got='L08'
+  R008 pending_kg: exp='28' got='0'
+  R010 allocated_kg: exp='185' got='190'
+  R010 lots: exp='L19+L22' got='L22+L23'
+  ... 51 mismatched cells total
+## 06-seed-allocation hi.hi.nemotron status=completed score=76.3889 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R004 allocated_kg: exp='450' got='460'
+  R004 lots: exp='L01' got='L04'
+  R008 allocated_kg: exp='0' got='30'
+  R008 lots: exp='' got='L08'
+  R008 pending_kg: exp='28' got='0'
+  R010 allocated_kg: exp='185' got='190'
+  R010 lots: exp='L19+L22' got='L22+L23'
+  ... 51 mismatched cells total
+## 06-seed-allocation hinglish.en.glm status=completed score=63.4259 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R005 lots: exp='L09' got='L12'
+  R006 allocated_kg: exp='15' got='20'
+  R006 lots: exp='L20' got='L19'
+  R009 allocated_kg: exp='180' got='0'
+  R009 lots: exp='L13+L14' got=''
+  R009 pending_kg: exp='0' got='175'
+  R010 allocated_kg: exp='185' got='190'
+  ... 79 mismatched cells total
+## 06-seed-allocation hinglish.en.nemotron status=completed score=71.7593 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L20'
+  R005 lots: exp='L09' got='L12'
+  R006 allocated_kg: exp='15' got='20'
+  R006 lots: exp='L20' got='L19'
+  R009 allocated_kg: exp='180' got='0'
+  R009 lots: exp='L13+L14' got=''
+  R009 pending_kg: exp='0' got='175'
+  R010 allocated_kg: exp='185' got='190'
+  ... 61 mismatched cells total
+## 06-seed-allocation hinglish.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 07-ui-strings hinglish.en.glm status=completed score=98.3333 reason=None header=['key', 'revision', 'status']
+  web.balance status: exp='GLOSSARY' got='OK'
+  app.tab_settings status: exp='GLOSSARY' got='TOO_LONG'
+## 08-search-normalization en.hi.glm status=completed score=0.0 reason=duplicate_output_key header=['query', 'matches']
+  missing keys (138): [('Q001',), ('Q002',), ('Q003',), ('Q004',), ('Q005',), ('Q006',)]
+  extra keys (137): [('हल्\u200dदी',), ('हल्\u200cदी',), ('हल्दी',), ('जीरा',), ('ज़ीरा',), ('मूंग दाल',)]
+## 08-search-normalization hi.en.nemotron status=completed score=0.0 reason=duplicate_output_key header=['query', 'matches']
+  missing keys (138): [('Q001',), ('Q002',), ('Q003',), ('Q004',), ('Q005',), ('Q006',)]
+  extra keys (137): [('हल्\u200dदी',), ('हल्\u200cदी',), ('हल्दी',), ('जीरा',), ('ज़ीरा',), ('मूंग दाल',)]
+## 08-search-normalization hinglish.en.nemotron status=completed score=99.2754 reason=None header=['query', 'matches']
+  Q073 matches: exp='NONE' got='P23'
+## 08-search-normalization hinglish.hi.glm status=completed score=0.0 reason=duplicate_output_key header=['query', 'matches']
+  missing keys (138): [('Q001',), ('Q002',), ('Q003',), ('Q004',), ('Q005',), ('Q006',)]
+  extra keys (137): [('हल्\u200dदी',), ('हल्\u200cदी',), ('हल्दी',), ('जीरा',), ('ज़ीरा',), ('मूंग दाल',)]
+## 09-water-schedule en.en.glm status=completed score=0.0 reason=incorrect_header header=['W01', '2026-11-18', '15:45', '20:30', '285', 'NO'] EXPECTED=['ward', 'date', 'start', 'end', 'minutes', 'tanker']
+  missing keys (1): [('W01', '2026-11-18')]
+## 09-water-schedule hi.en.glm status=completed score=0.0 reason=incorrect_row_width header=['ward', 'date', 'start', 'end', 'minutes', 'tanker']
+  missing keys (5): [('W02', '2026-11-18'), ('W03', '2026-11-19'), ('W04', '2026-11-21'), ('W05', '2026-11-19'), ('W05', '2026-11-22')]
+  W12:2026-11-20 end: exp='17:15' got='15:45'
+  W12:2026-11-20 minutes: exp='150' got='60'
+  W12:2026-11-20 tanker: exp='NO' got='YES'
+## 09-water-schedule hinglish.hi.glm status=completed score=97.5 reason=None header=['ward', 'date', 'start', 'end', 'minutes', 'tanker']
+  W05:2026-11-20 minutes: exp='210' got='180'
+  W10:2026-11-20 minutes: exp='120' got='90'
+  W10:2026-11-20 tanker: exp='NO' got='YES'
+  W12:2026-11-20 start: exp='14:45' got='08:15'
+  W12:2026-11-20 end: exp='17:15' got='11:15'
+  W12:2026-11-20 minutes: exp='150' got='210'
+## 10-grievance-dedup en.en.nemotron status=budget_exhausted score=87.5 reason=None header=['ticket', 'duplicates', 'department', 'due', 'breached']
+  missing keys (9): [('T0001',), ('T0012',), ('T0026',), ('T0032',), ('T0047',), ('T0058',)]
+## 10-grievance-dedup en.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 10-grievance-dedup hi.en.nemotron status=completed score=67.4242 reason=None header=['ticket', 'duplicates', 'department', 'due', 'breached']
+  extra keys (27): [('T0087',), ('T0078',), ('T0098',), ('T0040',), ('T0036',), ('T0102',)]
+  T0001 duplicates: exp='1' got='0'
+  T0002 duplicates: exp='1' got='0'
+  T0014 duplicates: exp='1' got='0'
+  T0021 duplicates: exp='2' got='0'
+  T0025 duplicates: exp='1' got='0'
+  T0032 duplicates: exp='1' got='0'
+  T0043 duplicates: exp='1' got='0'
+  T0045 duplicates: exp='2' got='0'
+  ... 21 mismatched cells total
+## 10-grievance-dedup hi.hi.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 10-grievance-dedup hinglish.hi.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 11-parcel-dispatch en.hi.nemotron status=completed score=97.1326 reason=None header=['parcel', 'dispatch_date', 'chargeable_kg', 'charge']
+  P0004 dispatch_date: exp='2026-11-21' got='2026-11-20'
+  P0025 dispatch_date: exp='2026-11-20' got='2026-11-19'
+  P0026 dispatch_date: exp='2026-11-20' got='2026-11-19'
+  P0029 dispatch_date: exp='2026-11-20' got='2026-11-19'
+  P0038 dispatch_date: exp='2026-11-21' got='2026-11-20'
+  P0054 dispatch_date: exp='2026-11-20' got='2026-11-19'
+  P0060 dispatch_date: exp='2026-11-20' got='2026-11-19'
+  P0081 dispatch_date: exp='2026-11-20' got='2026-11-19'
+## 11-parcel-dispatch hinglish.en.nemotron status=completed score=99.2832 reason=None header=['parcel', 'dispatch_date', 'chargeable_kg', 'charge']
+  P0009 charge: exp='1567' got='16070'
+  P0053 charge: exp='475' got='13830'
+## 12-delivery-audit en.en.nemotron status=completed score=67.2515 reason=None header=['line', 'received_units', 'difference', 'status']
+  M004 received_units: exp='110' got=''
+  M004 difference: exp='-10' got=''
+  M004 status: exp='SHORT' got='NO_PROOF'
+  M008 received_units: exp='360' got='240'
+  M008 difference: exp='0' got='-120'
+  M008 status: exp='MATCH' got='SHORT'
+  M016 received_units: exp='156' got='13'
+  M016 difference: exp='12' got='-131'
+  ... 56 mismatched cells total
+## 12-delivery-audit en.hi.glm status=completed score=98.8304 reason=None header=['line', 'received_units', 'difference', 'status']
+  M018 received_units: exp='24' got='12'
+  M018 difference: exp='-120' got='-132'
+## 12-delivery-audit hi.hi.glm status=completed score=97.076 reason=None header=['line', 'received_units', 'difference', 'status']
+  M018 received_units: exp='24' got='2'
+  M018 difference: exp='-120' got='-142'
+  M045 received_units: exp='96' got='76'
+  M045 difference: exp='6' got='-14'
+  M045 status: exp='EXCESS' got='SHORT'
+## 12-delivery-audit hi.hi.nemotron status=completed score=84.2105 reason=None header=['line', 'received_units', 'difference', 'status']
+  M005 received_units: exp='' got='-12'
+  M005 difference: exp='' got='-120'
+  M005 status: exp='NO_PROOF' got='SHORT'
+  M016 received_units: exp='156' got=''
+  M016 difference: exp='12' got=''
+  M016 status: exp='EXCESS' got='NO_PROOF'
+  M018 received_units: exp='24' got=''
+  M018 difference: exp='-120' got=''
+  ... 27 mismatched cells total
+## 12-delivery-audit hinglish.hi.nemotron status=completed score=88.3041 reason=None header=['line', 'received_units', 'difference', 'status']
+  M016 received_units: exp='156' got='13'
+  M016 difference: exp='12' got='-131'
+  M016 status: exp='EXCESS' got='SHORT'
+  M018 received_units: exp='24' got='2'
+  M018 difference: exp='-120' got='-142'
+  M020 received_units: exp='60' got='10'
+  M020 difference: exp='6' got='-44'
+  M020 status: exp='EXCESS' got='SHORT'
+  ... 20 mismatched cells total
+## 13-appointment-rebooking en.en.glm status=completed score=82.9268 reason=None header=['appointment', 'slot', 'doctor', 'status']
+  AP015 slot: exp='SL034' got='SL031'
+  AP015 doctor: exp='DR3' got='DR4'
+  AP034 slot: exp='SL047' got='SL036'
+  AP034 doctor: exp='DR2' got='DR1'
+  AP038 slot: exp='SL046' got=''
+  AP038 doctor: exp='DR2' got=''
+  AP038 status: exp='REBOOKED' got='WAITLIST'
+  AP047 slot: exp='SL038' got='SL034'
+  ... 21 mismatched cells total
+## 13-appointment-rebooking en.en.nemotron status=completed score=47.1545 reason=None header=['appointment', 'slot', 'doctor', 'status']
+  AP010 slot: exp='SL029' got='SL004'
+  AP010 doctor: exp='DR4' got='DR3'
+  AP015 slot: exp='SL034' got=''
+  AP015 doctor: exp='DR3' got=''
+  AP015 status: exp='REBOOKED' got='WAITLIST'
+  AP021 slot: exp='SL023' got='SL038'
+  AP021 doctor: exp='DR4' got='DR3'
+  AP023 slot: exp='SL010' got='SL022'
+  ... 65 mismatched cells total
+## 13-appointment-rebooking en.hi.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 13-appointment-rebooking hi.en.glm status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 13-appointment-rebooking hi.en.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 13-appointment-rebooking hi.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 13-appointment-rebooking hinglish.hi.glm status=completed score=62.6016 reason=None header=['appointment', 'slot', 'doctor', 'status']
+  AP010 slot: exp='SL029' got='SL004'
+  AP010 doctor: exp='DR4' got='DR3'
+  AP015 slot: exp='SL034' got='SL041'
+  AP015 doctor: exp='DR3' got='DR4'
+  AP021 slot: exp='SL023' got='SL026'
+  AP023 slot: exp='SL010' got='SL007'
+  AP024 slot: exp='SL021' got='SL056'
+  AP024 doctor: exp='DR2' got='DR1'
+  ... 46 mismatched cells total
+## 14-lab-flags en.en.glm status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'Creatinine'), ('LP001', 'Potassium'), ('LP002', 'Creatinine'), ('LP002', 'Hemoglobin'), ('LP002', 'Potassium'), ('LP003', 'Creatinine')]
+## 14-lab-flags en.en.nemotron status=completed score=37.2727 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (14): [('LP002', 'K'), ('LP003', 'CREAT'), ('LP003', 'K'), ('LP004', 'GLU'), ('LP004', 'K'), ('LP006', 'GLU')]
+  extra keys (44): [('LP002', 'Hemoglobin'), ('LP002', 'Potassium'), ('LP003', 'Creatinine'), ('LP003', 'Hemoglobin'), ('LP003', 'Potassium'), ('LP004', 'Glucose (fasting)')]
+  LP002:HB value: exp='6.9' got='9.8'
+  LP002:HB flag: exp='CRITICAL_LOW' got='LOW'
+  LP003:HB value: exp='17.0' got='11.4'
+  LP003:HB flag: exp='HIGH' got='LOW'
+  LP005:K value: exp='5.0' got='3.5'
+  LP009:HB value: exp='16.9' got='11.6'
+  LP009:HB flag: exp='HIGH' got='NORMAL'
+  LP012:CREAT value: exp='0.58' got='0.45'
+  ... 22 mismatched cells total
+## 14-lab-flags en.hi.glm status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'क्रिएटिनिन'), ('LP001', 'पोटैशियम'), ('LP002', 'क्रिएटिनिन'), ('LP002', 'पोटैशियम'), ('LP002', 'हीमोग्लोबिन'), ('LP003', 'क्रिएटिनिन')]
+## 14-lab-flags en.hi.nemotron status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP011', 'हीमोग्लोबिन'), ('LP024', 'पोटैशियम'), ('LP021', 'पोटैशियम'), ('LP010', 'ग्लूकोज़ (खाली पेट)'), ('LP025', 'पोटैशियम'), ('LP015', 'ग्लूकोज़ (खाली पेट)')]
+## 14-lab-flags hi.en.glm status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'Creatinine'), ('LP001', 'Potassium'), ('LP002', 'Creatinine'), ('LP002', 'Hemoglobin'), ('LP002', 'Potassium'), ('LP003', 'Creatinine')]
+## 14-lab-flags hi.en.nemotron status=budget_exhausted score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'creatinine'), ('LP001', 'potassium'), ('LP002', 'creatinine'), ('LP002', 'hemoglobin'), ('LP002', 'potassium'), ('LP003', 'creatinine')]
+## 14-lab-flags hi.hi.glm status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'क्रिएटिनिन'), ('LP001', 'पोटैशियम'), ('LP002', 'क्रिएटिनिन'), ('LP002', 'पोटैशियम'), ('LP002', 'हीमोग्लोबिन'), ('LP003', 'क्रिएटिनिन')]
+## 14-lab-flags hi.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 14-lab-flags hinglish.en.glm status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'Creatinine'), ('LP001', 'Potassium'), ('LP002', 'Creatinine'), ('LP002', 'Hemoglobin'), ('LP002', 'Potassium'), ('LP003', 'Creatinine')]
+## 14-lab-flags hinglish.en.nemotron status=completed score=38.1818 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (14): [('LP002', 'K'), ('LP003', 'CREAT'), ('LP003', 'K'), ('LP004', 'GLU'), ('LP004', 'K'), ('LP006', 'GLU')]
+  extra keys (44): [('LP002', 'Hemoglobin'), ('LP002', 'Potassium'), ('LP003', 'Creatinine'), ('LP003', 'Hemoglobin'), ('LP003', 'Potassium'), ('LP004', 'Glucose (fasting)')]
+  LP002:HB value: exp='6.9' got='9.8'
+  LP002:HB flag: exp='CRITICAL_LOW' got='LOW'
+  LP003:HB value: exp='17.0' got='11.4'
+  LP003:HB flag: exp='HIGH' got='LOW'
+  LP005:K value: exp='5.0' got='3.5'
+  LP009:HB value: exp='16.9' got='11.6'
+  LP009:HB flag: exp='HIGH' got='NORMAL'
+  LP012:CREAT value: exp='0.58' got='0.45'
+  ... 20 mismatched cells total
+## 14-lab-flags hinglish.hi.glm status=completed score=0.0 reason=None header=['patient', 'test', 'value', 'flag']
+  missing keys (66): [('LP001', 'CREAT'), ('LP001', 'K'), ('LP002', 'CREAT'), ('LP002', 'HB'), ('LP002', 'K'), ('LP003', 'CREAT')]
+  extra keys (66): [('LP001', 'पोटैशियम'), ('LP001', 'क्रिएटिनिन'), ('LP002', 'हीमोग्लोबिन'), ('LP002', 'पोटैशियम'), ('LP002', 'क्रिएटिनिन'), ('LP003', 'हीमोग्लोबिन')]
+## 14-lab-flags hinglish.hi.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 16-digitization-audit en.en.nemotron status=completed score=98.9333 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:31 status: exp='OK' got='MISSING'
+  V1:31 scans: exp='V1_0031.tif' got=''
+  V3:27 status: exp='OK' got='MISSING'
+  V3:27 scans: exp='V3_0027.tif' got=''
+## 16-digitization-audit en.hi.glm status=completed score=94.9333 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:1 label: exp='I' got='i'
+  V1:2 label: exp='II' got='ii'
+  V1:3 label: exp='III' got='iii'
+  V1:4 label: exp='IV' got='iv'
+  V1:5 label: exp='V' got='v'
+  V1:6 label: exp='VI' got='vi'
+  V2:1 label: exp='I' got='i'
+  V2:2 label: exp='II' got='ii'
+  ... 19 mismatched cells total
+## 16-digitization-audit en.hi.nemotron status=budget_exhausted score=98.9333 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:31 status: exp='OK' got='MISSING'
+  V1:31 scans: exp='V1_0031.tif' got=''
+  V3:27 status: exp='OK' got='MISSING'
+  V3:27 scans: exp='V3_0027.tif' got=''
+## 16-digitization-audit hi.hi.nemotron status=budget_exhausted score=98.9333 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:31 status: exp='OK' got='MISSING'
+  V1:31 scans: exp='V1_0031.tif' got=''
+  V3:27 status: exp='OK' got='MISSING'
+  V3:27 scans: exp='V3_0027.tif' got=''
+## 16-digitization-audit hinglish.en.nemotron status=budget_exhausted score=38.4 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:1 scans: exp='V1_0001.tif+V1_0004b.tif' got='V1_0001.tif+V1_0004b.tif+V2_0001.tif+V3_0001.tif'
+  V1:2 status: exp='OK' got='DUPLICATE'
+  V1:2 scans: exp='V1_0002.tif' got='V1_0002.tif+V2_0002.tif+V3_0002.tif'
+  V1:3 scans: exp='V1_0003.tif+V1_0005b.tif' got='V1_0003.tif+V1_0005b.tif+V2_0003.tif+V3_0003.tif'
+  V1:4 status: exp='OK' got='DUPLICATE'
+  V1:4 scans: exp='V1_0004.tif' got='V1_0004.tif+V2_0004.tif+V3_0004.tif'
+  V1:5 status: exp='OK' got='DUPLICATE'
+  V1:5 scans: exp='V1_0005.tif' got='V1_0005.tif+V2_0005.tif'
+  ... 231 mismatched cells total
+## 16-digitization-audit hinglish.hi.glm status=completed score=98.6667 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:1 status: exp='DUPLICATE' got='OK'
+  V1:5 status: exp='OK' got='DUPLICATE'
+  V1:5 scans: exp='V1_0005.tif' got='V1_0005.tif+V1_0011.tif'
+  V3:43 status: exp='MISPLACED' got='MISSING'
+  V3:43 scans: exp='V3_0009.tif' got=''

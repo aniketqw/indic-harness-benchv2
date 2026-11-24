@@ -1,0 +1,11 @@
+campaign,comparison,pairs,both_correct,neither,only_first,only_second,exact_mcnemar_p_unadjusted
+v2.1,Workspace: English vs Hindi,96,59,9,22,6,0.0037
+v2.1,Instruction: English vs Hindi,64,44,9,8,3,0.2266
+v2.1,Instruction: English vs Hinglish,64,37,2,15,10,0.4244
+v2.1,Instruction: Hindi vs Hinglish,64,40,10,7,7,1.0
+v2.1,Model: GLM vs Nemotron,96,52,2,22,20,0.8776
+v2,Workspace: English vs Hindi,96,40,16,20,20,1.0
+v2,Instruction: English vs Hindi,64,33,17,7,7,1.0
+v2,Instruction: English vs Hinglish,64,28,12,12,12,1.0
+v2,Instruction: Hindi vs Hinglish,64,27,11,13,13,1.0
+v2,Model: GLM vs Nemotron,96,40,16,23,17,0.4296

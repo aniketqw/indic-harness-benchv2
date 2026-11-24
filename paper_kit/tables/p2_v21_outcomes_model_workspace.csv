@@ -1,0 +1,5 @@
+model,workspace,full,correct_over_budget,partial,partial_budget,no_output_budget,no_output,format_error
+glm,en,42,0,6,0,0,0,0
+glm,hi,31,1,15,0,0,0,1
+nemotron,en,38,1,5,1,3,0,0
+nemotron,hi,31,2,3,1,10,0,1

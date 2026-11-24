@@ -1,0 +1,480 @@
+<title>Indic Harness Bench Fact Sheet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: one reading column of numbered fact blocks; tables and figures may run wider inside their own scrollers. */
+:root{
+  --bg:#f7f8f6; --panel:#ffffff; --fg:#17201b; --fg2:#4b5650; --muted:#7a847e; --line:#dde2dd;
+  --accent:#1f6f5c; --accent-soft:#e3f0ec; --warn:#8a5a00; --warn-soft:#fbf1dc; --paper:#fcfcfb;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121714; --panel:#1a201c; --fg:#e8ede9; --fg2:#b8c2bc; --muted:#8c9790; --line:#2e3631;
+  --accent:#6cc4ab; --accent-soft:#1e3029; --warn:#f0c36a; --warn-soft:#33291a; --paper:#fcfcfb; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#121714; --panel:#1a201c; --fg:#e8ede9; --fg2:#b8c2bc; --muted:#8c9790; --line:#2e3631;
+  --accent:#6cc4ab; --accent-soft:#1e3029; --warn:#f0c36a; --warn-soft:#33291a; --paper:#fcfcfb; color-scheme:dark }
+body{background:var(--bg);color:var(--fg);font:15px/1.6 var(--body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 64px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1{font:600 clamp(28px,4vw,40px)/1.15 var(--display);margin:0;text-wrap:balance}
+h2{font:600 24px/1.25 var(--display);margin:0;text-wrap:balance;padding-top:8px;border-top:1px solid var(--line)}
+h3{font:600 16px/1.35 var(--body);margin:0}
+p,ul,ol{margin:0;max-width:72ch}
+ul,ol{padding-left:20px;display:flex;flex-direction:column;gap:4px}
+section{display:flex;flex-direction:column;gap:14px;min-width:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sub{color:var(--fg2)}
+.note{background:var(--warn-soft);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.note h3{color:var(--warn)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.tile b{font:600 26px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.tile span{color:var(--fg2);font-size:13px}
+.scroll{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums;min-width:100%}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap}
+td.wrap-cell{white-space:normal;min-width:240px}
+th{font-weight:600;color:var(--fg2);font-size:12px;letter-spacing:.03em}
+td.n,th.n{text-align:right}
+figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:12.5px;color:#4b5650;font-family:var(--mono)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+code{font:13px var(--mono);background:var(--accent-soft);padding:1px 5px;border-radius:4px;word-break:break-word}
+.tag{display:inline-block;font:500 11px/1.6 var(--mono);padding:0 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+nav ol{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:4px 28px;padding-left:22px;max-width:none}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <div class="eyebrow">Course project · source material for the paper and blog</div>
+  <h1>Indic Harness Bench: results fact sheet</h1>
+  <p class="sub">Every number on this page was read from the saved result files in the repository and recomputed where possible. Two studies are covered: phase 1 (50 agent tasks, 300 scored runs) and phase 2 (16 synthetic Indian office tasks, 192 scored runs per campaign). Compiled 21 Nov 2026.</p>
+</header>
+
+<div class="note">
+  <h3>Read this first: how to use this page</h3>
+  <ul>
+    <li>This is a set of notes, tables and figures. It is deliberately not written as paper or blog paragraphs. Write your own sentences from it; do not paste fragments into the paper or blog.</li>
+    <li>Nothing here is designed to get past Pangram or any other detector, and it shouldn't be. The safe route is to write the text yourselves.</li>
+    <li>Ask the professor whether an AI-compiled data summary like this one counts as allowed help. If it does not, use only the raw CSVs and figures in <code>paper_kit/tables</code>, <code>paper_kit/figures</code> and <code>output/pdf/report_data</code>.</li>
+    <li>Figures are SVG (phase 2) and PNG/SVG (phase 1). Open an SVG in a browser or Inkscape to export PDF/PNG for Overleaf.</li>
+  </ul>
+</div>
+
+<nav><ol>
+  <li><a href="#overview">Project at a glance</a></li>
+  <li><a href="#p2-design">Phase 2 design</a></li>
+  <li><a href="#p2-results">Phase 2 results</a></li>
+  <li><a href="#p2-failures">How runs failed</a></li>
+  <li><a href="#p2-audit">v2 audit and v2.1</a></li>
+  <li><a href="#p2-tasks">Per-task table</a></li>
+  <li><a href="#p1">Phase 1</a></li>
+  <li><a href="#infra">Infrastructure and cost</a></li>
+  <li><a href="#limits">Limitations to disclose</a></li>
+  <li><a href="#outline">Where each number goes</a></li>
+  <li><a href="#files">Source files</a></li>
+</ol></nav>
+
+<section id="overview">
+  <h2>1. Project at a glance</h2>
+  <ul>
+    <li><b>Question:</b> does the language of the instruction (English, Hindi in Devanagari, Roman-script Hinglish), and in phase 2 the language of the input files, change how well open-weight LLM agents complete real file-based work tasks?</li>
+    <li><b>Agent harness:</b> OpenClaw, running inside a locked-down Docker container (non-root, read-only root filesystem, internal network only, no host mounts, no Docker socket, no real credentials). A separate relay holds the Ollama Cloud key and records token accounting. Graders run with no network.</li>
+    <li><b>Grading:</b> deterministic oracles only. No LLM judge anywhere.</li>
+    <li><b>Design:</b> matched. The same task is run in every language condition; only the language varies. One run per condition.</li>
+  </ul>
+  <div class="scroll"><table>
+    <tr><th></th><th>Phase 1 (completed Oct 2026)</th><th>Phase 2, suite v2.1 (primary, 18 Nov 2026)</th></tr>
+    <tr><td>Tasks</td><td>50 task units from a general agent benchmark (8 categories)</td><td>16 synthetic tasks, 2 per Indian domain (8 domains)</td></tr>
+    <tr><td>Factors</td><td>3 instruction languages × 2 models</td><td>3 instruction languages × 2 workspace languages × 2 models</td></tr>
+    <tr><td>Models</td><td>GPT-OSS-20B (medium reasoning) and Nemotron 3 Super (thinking on)</td><td>GLM-5.3-Flash and Nemotron 3 Super (both high thinking, temperature 0)</td></tr>
+    <tr><td>Scored conditions</td><td>300 (150 per model)</td><td>192 (96 per model)</td></tr>
+    <tr><td>Primary outcome</td><td>Mean task score 0-100 (partial credit)</td><td>Correct output: result file fully correct (all fields)</td></tr>
+    <tr><td>Headline</td><td>Nemotron 51.21 vs GPT-OSS 39.98 mean score; language intervals include zero</td><td>76.0% correct overall; English files 84.4% vs Hindi files 67.7%</td></tr>
+  </table></div>
+</section>
+
+<section id="p2-design">
+  <h2>2. Phase 2 design (suite v2 / v2.1)</h2>
+  <h3>Why phase 2 exists</h3>
+  <ul>
+    <li>Suite v1 (24 tasks) was too easy: in the first 7 conditions, 5 of 6 graded runs scored 100. A solution that ignored the amendment feed entirely would still have averaged 78%. v1 is archived in <code>phase2/archive/v1-easy/</code>.</li>
+    <li>v2 was designed after seeing those 7 runs and before any v2 model run. This must be disclosed.</li>
+  </ul>
+  <h3>Tasks</h3>
+  <ul>
+    <li>16 tasks, two per domain: finance, schools, agriculture, localization, municipal, logistics, clinic, archives.</li>
+    <li>Each workspace: 2 to 5 CSV files (24 to 140 rows in the main file) plus a notice with 4 to 8 interacting rules.</li>
+    <li>Difficulty comes from rule interaction, not size: an unsorted, seq-ordered amendment feed; precedence and tie-break rules; inclusive boundaries; unit conversion; half-up rounding; capacity/allocation logic.</li>
+    <li>Mixed real-world value formats: ISO, day-first and month-name dates; Indian lakh grouping; Rs/₹ amounts; AM/PM times; stray spaces.</li>
+    <li>Hindi workspace = the same facts with Hindi headers and labels, Devanagari digits in some cells, Hindi month names, and सुबह/दोपहर/शाम/रात time words. Localization and archive tasks also test Unicode handling (NFC, ZWJ/ZWNJ, nukta, chandrabindu).</li>
+    <li>Both workspaces are generated from one canonical dataset with a fixed seed and identical per-cell format choices; every rendered cell is parsed back and checked before freezing.</li>
+    <li>Hindi workspaces are 1.1× to 2.3× larger in bytes than English ones.</li>
+  </ul>
+  <h3>Rule ablations (difficulty check, done without any model)</h3>
+  <ul>
+    <li>For each task the reference solution was re-run with exactly one rule ignored and scored with the real grader. Every ablation scores below 100 on every task, so a perfect score requires every rule.</li>
+    <li>Mean field score with one rule ignored ranges from 65.9 (task 13) to 96.3 (task 07). A single-rule mistake often still leaves a field score above 90, which is why full correctness is the primary outcome and the field score is secondary.</li>
+    <li>Full per-task ablation table: <code>phase2/DESIGN-v2.md</code> (input rows, output rows, scored fields, Hindi bytes, rules ablated).</li>
+  </ul>
+  <h3>Grading</h3>
+  <ul>
+    <li>Graders key rows by business ID, accept reordered rows and equivalent numeric formats, score individual fields, and penalise missing, extra and duplicate rows and any change to the inputs.</li>
+    <li><b>Correct output</b> (primary): the saved file is fully correct when the attempt ends, however it ended. <b>Within budget</b> (stricter secondary): fully correct and did not hit the output budget.</li>
+  </ul>
+  <h3>Budgets (identical for both models)</h3>
+  <div class="scroll"><table>
+    <tr><th>Limit</th><th class="n">Phase 2</th><th class="n">Phase 1</th></tr>
+    <tr><td>Tokens per model response</td><td class="n">32,768</td><td class="n">4,096</td></tr>
+    <tr><td>Output tokens per attempt</td><td class="n">65,536</td><td class="n">16,000</td></tr>
+    <tr><td>Input tokens per attempt</td><td class="n">600,000</td><td class="n">200,000</td></tr>
+    <tr><td>Model requests per attempt</td><td class="n">40</td><td class="n">30</td></tr>
+    <tr><td>Wall time per attempt</td><td class="n">1,200 s</td><td class="n">≤ 600 s</td></tr>
+    <tr><td>Agent context window</td><td class="n">131,072</td><td class="n">n/a</td></tr>
+  </table></div>
+  <ul>
+    <li>Phase 2 budgets were raised from 8,192 / 16,000 / 200,000 / 30 / 600 s because GLM-5.3-Flash spent a whole 8,192-token response thinking on the first script-writing step; with 32,768 it finished thinking at 10,349 tokens.</li>
+    <li>GLM-5.3-Flash replaced GPT-OSS-120B on 17 Nov 2026. GPT-OSS-120B failed its first long generation in every v2 development attempt on Ollama Cloud (HTTP 500 or a cut-off stream), and a direct replay of one failed request reproduced the HTTP 500.</li>
+  </ul>
+</section>
+
+<section id="p2-results">
+  <h2>3. Phase 2 results (v2.1, primary)</h2>
+  <div class="tiles">
+    <div class="tile"><b>146 / 192</b><span>fully correct outputs, 76.0% (95% Wilson CI 69.5-81.5)</span></div>
+    <div class="tile"><b>84.4% vs 67.7%</b><span>correct with English vs Hindi workspace files (81/96 vs 65/96)</span></div>
+    <div class="tile"><b>22 vs 6</b><span>matched pairs correct only with English files vs only with Hindi files</span></div>
+    <div class="tile"><b>77.1% vs 75.0%</b><span>GLM-5.3-Flash vs Nemotron 3 Super (74/96 vs 72/96)</span></div>
+  </div>
+  <ul>
+    <li>Workspace (file) language matters more than instruction language. Hindi files cost about 16.7 percentage points. Hindi or Hinglish instructions cost about 7.8 points compared with English (81.2% vs 73.4% and 73.4%).</li>
+    <li>English workspace beats Hindi workspace in 11 of 16 tasks; Hindi wins in 2 (01 UPI settlement, 10 grievance dedup); 3 are tied (05, 08, 14).</li>
+    <li>The two models are close overall but fail differently (section 4).</li>
+    <li>The suite is not saturated: per-task results run from 5/12 (13 appointment rebooking) to 11/12 (02, 11).</li>
+  </ul>
+
+  <figure><img src="figures/p2_f1_correct_by_factor.svg" alt="Dot and interval chart of the share of fully correct outputs by model, instruction language and workspace language."><figcaption>figures/p2_f1_correct_by_factor.svg · intervals overlap; use the paired counts for within-task comparisons</figcaption></figure>
+
+  <h3>By factor (v2.1)</h3>
+  <div class="scroll"><table>
+    <tr><th>Group</th><th class="n">n</th><th class="n">Correct</th><th class="n">%</th><th class="n">95% CI</th><th class="n">Within budget</th><th class="n">Mean field score</th><th class="n">Mean input tok</th><th class="n">Mean output tok</th><th class="n">Median time (s)</th></tr>
+    <tr><td>All</td><td class="n">192</td><td class="n">146</td><td class="n">76.0</td><td class="n">69.5-81.5</td><td class="n">142</td><td class="n">90.4</td><td class="n">98,549</td><td class="n">24,375</td><td class="n">163</td></tr>
+    <tr><td>GLM-5.3-Flash</td><td class="n">96</td><td class="n">74</td><td class="n">77.1</td><td class="n">67.7-84.4</td><td class="n">73</td><td class="n">97.1</td><td class="n">113,238</td><td class="n">13,350</td><td class="n">79</td></tr>
+    <tr><td>Nemotron 3 Super</td><td class="n">96</td><td class="n">72</td><td class="n">75.0</td><td class="n">65.5-82.6</td><td class="n">69</td><td class="n">83.6</td><td class="n">83,860</td><td class="n">35,399</td><td class="n">367</td></tr>
+    <tr><td>English instruction</td><td class="n">64</td><td class="n">52</td><td class="n">81.2</td><td class="n">70.0-88.9</td><td class="n">51</td><td class="n">89.5</td><td class="n">100,857</td><td class="n">27,952</td><td class="n">161</td></tr>
+    <tr><td>Hindi instruction</td><td class="n">64</td><td class="n">47</td><td class="n">73.4</td><td class="n">61.5-82.7</td><td class="n">46</td><td class="n">91.3</td><td class="n">108,583</td><td class="n">21,864</td><td class="n">169</td></tr>
+    <tr><td>Hinglish instruction</td><td class="n">64</td><td class="n">47</td><td class="n">73.4</td><td class="n">61.5-82.7</td><td class="n">45</td><td class="n">90.3</td><td class="n">86,207</td><td class="n">23,308</td><td class="n">170</td></tr>
+    <tr><td>English workspace</td><td class="n">96</td><td class="n">81</td><td class="n">84.4</td><td class="n">75.8-90.3</td><td class="n">80</td><td class="n">95.0</td><td class="n">90,617</td><td class="n">21,779</td><td class="n">160</td></tr>
+    <tr><td>Hindi workspace</td><td class="n">96</td><td class="n">65</td><td class="n">67.7</td><td class="n">57.8-76.2</td><td class="n">62</td><td class="n">85.7</td><td class="n">106,481</td><td class="n">26,971</td><td class="n">180</td></tr>
+  </table></div>
+
+  <h3>Model × workspace</h3>
+  <div class="scroll"><table>
+    <tr><th>Cell</th><th class="n">Correct /48</th><th class="n">%</th><th class="n">95% CI</th><th class="n">Mean field score</th><th class="n">Mean input tok</th><th class="n">Mean output tok</th><th class="n">Median time (s)</th></tr>
+    <tr><td>GLM · English files</td><td class="n">42</td><td class="n">87.5</td><td class="n">75.3-94.1</td><td class="n">98.6</td><td class="n">97,707</td><td class="n">11,737</td><td class="n">76</td></tr>
+    <tr><td>GLM · Hindi files</td><td class="n">32</td><td class="n">66.7</td><td class="n">52.5-78.3</td><td class="n">95.7</td><td class="n">128,770</td><td class="n">14,963</td><td class="n">83</td></tr>
+    <tr><td>Nemotron · English files</td><td class="n">39</td><td class="n">81.2</td><td class="n">68.1-89.8</td><td class="n">91.3</td><td class="n">83,528</td><td class="n">31,820</td><td class="n">317</td></tr>
+    <tr><td>Nemotron · Hindi files</td><td class="n">33</td><td class="n">68.8</td><td class="n">54.7-80.1</td><td class="n">75.8</td><td class="n">84,192</td><td class="n">38,978</td><td class="n">411</td></tr>
+  </table></div>
+
+  <h3>Model × instruction, and instruction × workspace (correct / n)</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th class="n">English instr.</th><th class="n">Hindi instr.</th><th class="n">Hinglish instr.</th></tr>
+    <tr><td>GLM (of 32)</td><td class="n">27 (84.4%)</td><td class="n">24 (75.0%)</td><td class="n">23 (71.9%)</td></tr>
+    <tr><td>Nemotron (of 32)</td><td class="n">25 (78.1%)</td><td class="n">23 (71.9%)</td><td class="n">24 (75.0%)</td></tr>
+    <tr><td>English files (of 32)</td><td class="n">29 (90.6%)</td><td class="n">26 (81.2%)</td><td class="n">26 (81.2%)</td></tr>
+    <tr><td>Hindi files (of 32)</td><td class="n">23 (71.9%)</td><td class="n">21 (65.6%)</td><td class="n">21 (65.6%)</td></tr>
+  </table></div>
+  <ul><li>Best cell: English instruction + English files, 29/32 (90.6%). Worst cells: Hindi or Hinglish instruction + Hindi files, 21/32 (65.6%).</li></ul>
+
+  <h3>Paired comparisons (same task, all other factors fixed)</h3>
+  <div class="scroll"><table>
+    <tr><th>Comparison</th><th class="n">Pairs</th><th class="n">Both correct</th><th class="n">Neither</th><th class="n">Only first</th><th class="n">Only second</th><th class="n">Exact McNemar p*</th></tr>
+    <tr><td>Workspace: English vs Hindi</td><td class="n">96</td><td class="n">59</td><td class="n">9</td><td class="n">22</td><td class="n">6</td><td class="n">0.0037</td></tr>
+    <tr><td>Instruction: English vs Hindi</td><td class="n">64</td><td class="n">44</td><td class="n">9</td><td class="n">8</td><td class="n">3</td><td class="n">0.23</td></tr>
+    <tr><td>Instruction: English vs Hinglish</td><td class="n">64</td><td class="n">37</td><td class="n">2</td><td class="n">15</td><td class="n">10</td><td class="n">0.42</td></tr>
+    <tr><td>Instruction: Hindi vs Hinglish</td><td class="n">64</td><td class="n">40</td><td class="n">10</td><td class="n">7</td><td class="n">7</td><td class="n">1.00</td></tr>
+    <tr><td>Model: GLM vs Nemotron</td><td class="n">96</td><td class="n">52</td><td class="n">2</td><td class="n">22</td><td class="n">20</td><td class="n">0.88</td></tr>
+  </table></div>
+  <p class="sub" style="font-size:13px">*Computed for this fact sheet, not part of the project's own reports: two-sided exact sign test on discordant pairs, unadjusted for multiple comparisons, and pairs are not independent (they share tasks). The project's stated position is "exploratory, no significance claims". If you report it, report it with those caveats or leave it out.</p>
+  <figure><img src="figures/p2_f2_discordant_pairs.svg" alt="Diverging bars of discordant matched pairs for workspace, instruction and model comparisons."><figcaption>figures/p2_f2_discordant_pairs.svg</figcaption></figure>
+</section>
+
+<section id="p2-failures">
+  <h2>4. How runs failed (v2.1)</h2>
+  <div class="scroll"><table>
+    <tr><th>Outcome</th><th>Meaning</th><th class="n">GLM</th><th class="n">Nemotron</th><th class="n">Total</th></tr>
+    <tr><td>full</td><td>all fields correct, within budget</td><td class="n">73</td><td class="n">69</td><td class="n">142</td></tr>
+    <tr><td>correct, over budget</td><td>file fully correct, run hit the output budget</td><td class="n">1</td><td class="n">3</td><td class="n">4</td></tr>
+    <tr><td>partial</td><td>valid file, some fields wrong</td><td class="n">21</td><td class="n">8</td><td class="n">29</td></tr>
+    <tr><td>partial, over budget</td><td>partial file at the output budget</td><td class="n">0</td><td class="n">2</td><td class="n">2</td></tr>
+    <tr><td>no output, budget</td><td>all 65,536 output tokens used, no file written</td><td class="n">0</td><td class="n">13</td><td class="n">13</td></tr>
+    <tr><td>format error</td><td>wrong header or duplicate key</td><td class="n">1</td><td class="n">1</td><td class="n">2</td></tr>
+  </table></div>
+  <figure><img src="figures/p2_f3_outcomes_model_workspace.svg" alt="Stacked bars of run outcomes for each model and workspace language."><figcaption>figures/p2_f3_outcomes_model_workspace.svg</figcaption></figure>
+  <div class="scroll"><table>
+    <tr><th>Cell (48 runs each)</th><th class="n">Correct</th><th class="n">Partial</th><th class="n">No file (budget)</th><th class="n">Format error</th></tr>
+    <tr><td>GLM · English files</td><td class="n">42</td><td class="n">6</td><td class="n">0</td><td class="n">0</td></tr>
+    <tr><td>GLM · Hindi files</td><td class="n">32</td><td class="n">15</td><td class="n">0</td><td class="n">1</td></tr>
+    <tr><td>Nemotron · English files</td><td class="n">39</td><td class="n">6</td><td class="n">3</td><td class="n">0</td></tr>
+    <tr><td>Nemotron · Hindi files</td><td class="n">33</td><td class="n">4</td><td class="n">10</td><td class="n">1</td></tr>
+  </table></div>
+  <p class="sub" style="font-size:13px">Correct includes correct-over-budget; partial includes partial-over-budget.</p>
+  <h3>Two failure styles</h3>
+  <ul>
+    <li><b>GLM loses on details.</b> It wrote a file in all 96 runs (no missing files). With Hindi files it made more field errors: 15 partial outputs vs 6 with English files; mean field score 95.7 vs 98.6.</li>
+    <li><b>Nemotron loses on budget.</b> It works through much of the task in its reasoning before writing a script. 13 of its 96 runs ended with the full output budget used and no file; 10 of those 13 were Hindi-workspace runs.</li>
+    <li>When Nemotron does write a file it is more often right: 72 correct of 83 runs with a file (86.7%), against 74 of 96 for GLM (77.1%).</li>
+    <li>On Hindi files Nemotron produced about 22.5% more output tokens (38,978 vs 31,820 mean) and took about 30% longer (median 411 s vs 317 s).</li>
+    <li>Hindi files raised GLM's mean input by about 32% (128,770 vs 97,707 tokens).</li>
+    <li>Nemotron is much slower overall: median 367 s per run vs 79 s for GLM, and 2.65× the mean output tokens.</li>
+  </ul>
+  <figure><img src="figures/p2_f6_tokens.svg" alt="Bar charts of mean input and output tokens for each model and workspace language."><figcaption>figures/p2_f6_tokens.svg</figcaption></figure>
+  <h3>Typical wrong fields (from the failure audit)</h3>
+  <ul>
+    <li>Child reference ranges ignored for lab flags (task 14; patients born 2012-2015 are under 18 on the collection date).</li>
+    <li>Capacity chains in room and seed allocation that go wrong after one early slip (tasks 04, 06).</li>
+    <li>Revision precedence: an equal revision treated as an override (task 07; only a higher revision overrides).</li>
+    <li>Unicode length counts after NFC (task 07; ड़ stays decomposed, 19 code points vs an 18 limit).</li>
+    <li>A zero-width joiner hiding a required term (task 07, an intended trap).</li>
+    <li>Devanagari digits not equated with ASCII digits (task 16; label ३० equals 30).</li>
+    <li>Near-duplicate search queries matched despite the no-spelling-correction rule (task 08; सरसो vs सरसों).</li>
+    <li>Accession IDs written without their ACC- prefix (task 15).</li>
+    <li>Other partials: arithmetic in payouts and allocations, missed duplicate grievances, wrong slot choices in rebooking.</li>
+  </ul>
+</section>
+
+<section id="p2-audit">
+  <h2>5. The v2 audit and the v2.1 fix</h2>
+  <h3>Timeline (IST)</h3>
+  <div class="scroll"><table>
+    <tr><th>When</th><th>Event</th></tr>
+    <tr><td>17 Nov</td><td class="wrap-cell">v2 campaign <code>results/final</code>: 192 conditions. Stopped twice on dropped provider streams (task 02); resumed by hand. 2 infrastructure failures, each retried once.</td></tr>
+    <tr><td>17 Nov</td><td class="wrap-cell">Audit of every non-perfect v2 output, including re-solving each task under literal readings of undocumented value forms.</td></tr>
+    <tr><td>17 Nov</td><td class="wrap-cell">v2.1 built: glossary appended, v2 files archived with SHA-256 sums, offline validation re-run. Runtime change: a dropped stream no longer stops the campaign; three provider failures in a row still do.</td></tr>
+    <tr><td>17 Nov 22:25</td><td class="wrap-cell">Short provider outage: 4 conditions on task 05 failed to connect; the three-in-a-row rule stopped the run as designed. Resumed after connectivity check.</td></tr>
+    <tr><td>18 Nov 02:20</td><td class="wrap-cell">v2.1 campaign <code>results/final-v21</code> finished: 183 graded, 9 infrastructure failures (all provider transport).</td></tr>
+    <tr><td>18 Nov 03:09</td><td class="wrap-cell">One recovery attempt for each of the 9 (user-authorised): 7 fully correct, 2 out of output budget. Primary records kept.</td></tr>
+  </table></div>
+  <h3>Defects found in v2 (about 11 false failures)</h3>
+  <div class="scroll"><table>
+    <tr><th>Task</th><th>Defect</th><th>Effect in v2</th></tr>
+    <tr><td>14 Lab flags</td><td class="wrap-cell">Results mix test codes and names (HB, Hemoglobin); the notice never said which form the output must use.</td><td class="wrap-cell">All 6 GLM outputs score 100 once names map to codes; officially 0.</td></tr>
+    <tr><td>06 Seed allocation</td><td class="wrap-cell">Varieties appear as a code (WHEAT) and as a cultivar name (Wheat HD-2967); Hindi requests use both लघु किसान and छोटा किसान. The notice only promised case and spacing variation.</td><td class="wrap-cell">7 of 11 non-perfect outputs match the literal reading exactly or almost exactly.</td></tr>
+    <tr><td>12 Delivery audit</td><td>डिब्बे vs डिब्बा as unit forms</td><td>1 run</td></tr>
+    <tr><td>13 Appointment rebooking</td><td>STD vs standard</td><td>some Nemotron runs</td></tr>
+    <tr><td>04 Exam seating</td><td>AM vs Morning</td><td>minor</td></tr>
+  </table></div>
+  <ul>
+    <li><b>The fix (v2.1):</b> every notice gets one generic appended section built from the generator's own value tables: a glossary of every coded value written in more than one form, plus the exact codes required in each coded output column. Data, rules, prompts, answers and budgets are unchanged. Each v2 notice is an exact byte prefix of its v2.1 notice. Tasks 07 and 08 had no multi-form values and are byte-identical.</li>
+    <li><b>Disclosure:</b> the change was made after seeing v2 outcomes. It is generic, mechanically generated, adds no rules or hints, and applies the same way to every task. v2 is reported as a preliminary run; v2.1 is primary.</li>
+    <li>Genuine model errors confirmed in v2: 16 missing output files (almost all Nemotron at the budget), 5 format errors, query text written instead of query ID (task 08), lower-case Roman numerals despite an upper-case rule (task 16). A case-insensitive rescoring changed only the Roman-numeral run.</li>
+    <li>v2.1 re-audit: all 50 non-perfect v2.1 outputs were diffed cell by cell against the key. None traced to a task defect. One wording ambiguity remains (task 07: inflected खाते vs required term खाता), but every run that missed it also had other clear errors, so no outcome changes.</li>
+  </ul>
+  <h3>v2 vs v2.1 numbers</h3>
+  <div class="scroll"><table>
+    <tr><th>Outcome</th><th class="n">v2</th><th class="n">v2.1</th></tr>
+    <tr><td>full (correct, within budget)</td><td class="n">116</td><td class="n">142</td></tr>
+    <tr><td>correct, over budget</td><td class="n">4</td><td class="n">4</td></tr>
+    <tr><td><b>Correct output total</b></td><td class="n"><b>120 (62.5%)</b></td><td class="n"><b>146 (76.0%)</b></td></tr>
+    <tr><td>partial</td><td class="n">46</td><td class="n">29</td></tr>
+    <tr><td>partial, over budget</td><td class="n">5</td><td class="n">2</td></tr>
+    <tr><td>no output, budget</td><td class="n">13</td><td class="n">13</td></tr>
+    <tr><td>no output, within budget</td><td class="n">3</td><td class="n">0</td></tr>
+    <tr><td>format error</td><td class="n">5</td><td class="n">2</td></tr>
+  </table></div>
+  <div class="scroll"><table>
+    <tr><th>Task group (matched conditions)</th><th class="n">n</th><th class="n">Both correct</th><th class="n">Neither</th><th class="n">v2 only</th><th class="n">v2.1 only</th></tr>
+    <tr><td>Tasks 06 + 14 (defects fixed)</td><td class="n">24</td><td class="n">2</td><td class="n">6</td><td class="n">0</td><td class="n">16</td></tr>
+    <tr><td>Tasks 07 + 08 (byte-identical)</td><td class="n">24</td><td class="n">15</td><td class="n">2</td><td class="n">4</td><td class="n">3</td></tr>
+    <tr><td>Other 12 tasks (glossary added)</td><td class="n">144</td><td class="n">79</td><td class="n">14</td><td class="n">20</td><td class="n">31</td></tr>
+  </table></div>
+  <ul>
+    <li>The defect fixes explain most of the gain: on tasks 06 and 14, 16 conditions went from wrong to right and none the other way. Task 14 went 0 → 8 of 12; task 06 went 2 → 10.</li>
+    <li><b>Noise floor:</b> on the two byte-identical tasks, 7 of 24 conditions (29%) changed result between runs with nothing changed (4 down, 3 up). Single cells should not be interpreted on their own.</li>
+    <li>The Hindi-workspace penalty was hidden in v2: paired workspace counts were 20 vs 20 in v2 and 22 vs 6 in v2.1, because the task 06 defect mostly broke English-workspace runs.</li>
+    <li>Other v2 paired counts: instruction en vs hi 7 vs 7; en vs Hinglish 12 vs 12; model GLM vs Nemotron 23 vs 17.</li>
+  </ul>
+  <figure><img src="figures/p2_f5_v2_vs_v21_tasks.svg" alt="Dumbbell chart of correct runs per task in v2 and v2.1."><figcaption>figures/p2_f5_v2_vs_v21_tasks.svg</figcaption></figure>
+</section>
+
+<section id="p2-tasks">
+  <h2>6. Per-task results (v2.1)</h2>
+  <div class="scroll"><table>
+    <tr><th>Task</th><th>Domain</th><th class="n">GLM /6</th><th class="n">Nemotron /6</th><th class="n">EN files /6</th><th class="n">HI files /6</th><th class="n">v2.1 /12</th><th class="n">v2 /12</th><th class="n">Mean field score</th></tr>
+    <tr><td>01-upi-settlement</td><td>finance</td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">5</td><td class="n">9</td><td class="n">8</td><td class="n">89.8</td></tr>
+    <tr><td>02-gst-payables</td><td>finance</td><td class="n">6</td><td class="n">5</td><td class="n">6</td><td class="n">5</td><td class="n">11</td><td class="n">8</td><td class="n">91.7</td></tr>
+    <tr><td>03-bus-roster</td><td>schools</td><td class="n">6</td><td class="n">4</td><td class="n">6</td><td class="n">4</td><td class="n">10</td><td class="n">8</td><td class="n">83.3</td></tr>
+    <tr><td>04-exam-seating</td><td>schools</td><td class="n">2</td><td class="n">5</td><td class="n">4</td><td class="n">3</td><td class="n">7</td><td class="n">9</td><td class="n">98.5</td></tr>
+    <tr><td>05-grower-payout</td><td>agriculture</td><td class="n">6</td><td class="n">2</td><td class="n">4</td><td class="n">4</td><td class="n">8</td><td class="n">10</td><td class="n">80.1</td></tr>
+    <tr><td>06-seed-allocation</td><td>agriculture</td><td class="n">4</td><td class="n">6</td><td class="n">6</td><td class="n">4</td><td class="n">10</td><td class="n">2</td><td class="n">98.6</td></tr>
+    <tr><td>07-ui-strings</td><td>localization</td><td class="n">2</td><td class="n">6</td><td class="n">5</td><td class="n">3</td><td class="n">8</td><td class="n">11</td><td class="n">98.5</td></tr>
+    <tr><td>08-search-normalization</td><td>localization</td><td class="n">6</td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">10</td><td class="n">8</td><td class="n">91.6</td></tr>
+    <tr><td>09-water-schedule</td><td>municipal</td><td class="n">4</td><td class="n">6</td><td class="n">6</td><td class="n">4</td><td class="n">10</td><td class="n">9</td><td class="n">99.6</td></tr>
+    <tr><td>10-grievance-dedup</td><td>municipal</td><td class="n">4</td><td class="n">6</td><td class="n">4</td><td class="n">6</td><td class="n">10</td><td class="n">7</td><td class="n">96.7</td></tr>
+    <tr><td>11-parcel-dispatch</td><td>logistics</td><td class="n">6</td><td class="n">5</td><td class="n">6</td><td class="n">5</td><td class="n">11</td><td class="n">10</td><td class="n">91.7</td></tr>
+    <tr><td>12-delivery-audit</td><td>logistics</td><td class="n">5</td><td class="n">4</td><td class="n">6</td><td class="n">3</td><td class="n">9</td><td class="n">7</td><td class="n">95.7</td></tr>
+    <tr><td>13-appointment-rebooking</td><td>clinic</td><td class="n">4</td><td class="n">1</td><td class="n">3</td><td class="n">2</td><td class="n">5</td><td class="n">5</td><td class="n">56.9</td></tr>
+    <tr><td>14-lab-flags</td><td>clinic</td><td class="n">6</td><td class="n">2</td><td class="n">4</td><td class="n">4</td><td class="n">8</td><td class="n">0</td><td class="n">82.8</td></tr>
+    <tr><td>15-catalogue-merge</td><td>archives</td><td class="n">4</td><td class="n">6</td><td class="n">6</td><td class="n">4</td><td class="n">10</td><td class="n">12</td><td class="n">90.3</td></tr>
+    <tr><td>16-digitization-audit</td><td>archives</td><td class="n">4</td><td class="n">6</td><td class="n">6</td><td class="n">4</td><td class="n">10</td><td class="n">6</td><td class="n">99.9</td></tr>
+  </table></div>
+  <ul>
+    <li>By domain (correct of 24): finance 20, archives 20, logistics 20, municipal 20, agriculture 18, localization 18, schools 17, clinic 13 (54.2%, the hardest domain).</li>
+    <li>Model strengths differ by task: GLM 6/6 vs Nemotron 2/6 on 05 grower payout and 14 lab flags; Nemotron 6/6 vs GLM 2/6 on 07 UI strings, and 5 vs 2 on 04 exam seating.</li>
+  </ul>
+  <figure><img src="figures/p2_f4_task_workspace_dumbbell.svg" alt="Dumbbell chart comparing English and Hindi workspace correct runs per task."><figcaption>figures/p2_f4_task_workspace_dumbbell.svg</figcaption></figure>
+</section>
+
+<section id="p1">
+  <h2>7. Phase 1: 50-task study (GPT-OSS-20B vs Nemotron 3 Super)</h2>
+  <h3>Setup</h3>
+  <ul>
+    <li>Tasks taken from a general agent benchmark (copied reference snapshot kept unmodified in <code>vendor/harnessbench</code>) across 8 categories. Instruction bodies were translated to Hindi and Hinglish; technical literals, fixtures, required English prose outputs and the original deterministic graders stayed fixed.</li>
+    <li>Scope history: 40 original tasks → +14 added (54 tasks) → strict analysis kept 46 whole task groups after primary infrastructure exclusions → +4 previously unused tasks run on both models (24 new primaries, no new infrastructure failures or retries) → 50 tasks, 300 scored conditions.</li>
+    <li>Additions were selected after the first campaign but before their own outcomes, on offline feasibility, fixture size, category coverage and oracle validation, never on model scores. Disclose this expansion.</li>
+    <li>GPT-OSS-20B: OpenClaw 2026.9.7, temperature 0, medium reasoning effort. Translations: AI-produced with AI self-review, no independent human review.</li>
+    <li>Uncertainty: paired task-cluster bootstrap, 10,000 resamples, seed 20260930, percentile 2.5-97.5%, unadjusted. The unit is the original task (its six model/language conditions stay together).</li>
+  </ul>
+  <h3>Mean score (0-100) by model and instruction language</h3>
+  <div class="scroll"><table>
+    <tr><th>Model</th><th>Language</th><th class="n">n</th><th class="n">Mean</th><th class="n">95% CI</th><th class="n">Median</th><th class="n">Full completions</th><th class="n">Zero scores</th><th class="n">Budget exhausted</th></tr>
+    <tr><td>GPT-OSS-20B</td><td>English</td><td class="n">50</td><td class="n">39.95</td><td class="n">30.2-49.9</td><td class="n">28.8</td><td class="n">5</td><td class="n">9</td><td class="n">9</td></tr>
+    <tr><td>GPT-OSS-20B</td><td>Hindi</td><td class="n">50</td><td class="n">45.86</td><td class="n">36.7-55.0</td><td class="n">44.7</td><td class="n">4</td><td class="n">6</td><td class="n">6</td></tr>
+    <tr><td>GPT-OSS-20B</td><td>Hinglish</td><td class="n">50</td><td class="n">34.14</td><td class="n">25.0-43.4</td><td class="n">17.1</td><td class="n">4</td><td class="n">8</td><td class="n">9</td></tr>
+    <tr><td>Nemotron 3 Super</td><td>English</td><td class="n">50</td><td class="n">50.99</td><td class="n">40.8-61.0</td><td class="n">55.0</td><td class="n">6</td><td class="n">4</td><td class="n">7</td></tr>
+    <tr><td>Nemotron 3 Super</td><td>Hindi</td><td class="n">50</td><td class="n">53.58</td><td class="n">43.4-63.8</td><td class="n">59.4</td><td class="n">7</td><td class="n">5</td><td class="n">7</td></tr>
+    <tr><td>Nemotron 3 Super</td><td>Hinglish</td><td class="n">50</td><td class="n">49.07</td><td class="n">38.8-59.7</td><td class="n">46.7</td><td class="n">5</td><td class="n">6</td><td class="n">7</td></tr>
+  </table></div>
+  <ul>
+    <li>Overall mean: Nemotron 51.21, GPT-OSS 39.98. Hindi had the highest mean for both models.</li>
+    <li>Full completion is rare in phase 1: 4-7 of 50 per cell. This is one reason phase 2 switched to a full-correctness outcome on tasks designed to be solvable.</li>
+  </ul>
+  <h3>Paired contrasts (percentage points, bootstrap 95% CI)</h3>
+  <div class="scroll"><table>
+    <tr><th>Contrast</th><th class="n">Mean diff</th><th class="n">95% CI</th><th class="n">Wins / losses / ties</th></tr>
+    <tr><td>Nemotron − GPT-OSS, overall</td><td class="n">+11.2</td><td class="n">+1.0 to +21.3</td><td class="n">29 / 19 / 2</td></tr>
+    <tr><td>Nemotron − GPT-OSS, English</td><td class="n">+11.0</td><td class="n">−1.7 to +23.5</td><td class="n">20 / 13 / 17</td></tr>
+    <tr><td>Nemotron − GPT-OSS, Hindi</td><td class="n">+7.7</td><td class="n">−5.7 to +20.6</td><td class="n">24 / 14 / 12</td></tr>
+    <tr><td>Nemotron − GPT-OSS, Hinglish</td><td class="n">+14.9</td><td class="n">+1.9 to +28.0</td><td class="n">24 / 11 / 15</td></tr>
+    <tr><td>GPT-OSS: English − Hindi</td><td class="n">−5.9</td><td class="n">−16.5 to +4.5</td><td class="n"></td></tr>
+    <tr><td>GPT-OSS: English − Hinglish</td><td class="n">+5.8</td><td class="n">−3.8 to +15.6</td><td class="n"></td></tr>
+    <tr><td>Nemotron: English − Hindi</td><td class="n">−2.6</td><td class="n">−13.0 to +7.1</td><td class="n"></td></tr>
+    <tr><td>Nemotron: English − Hinglish</td><td class="n">+1.9</td><td class="n">−5.7 to +9.4</td><td class="n"></td></tr>
+  </table></div>
+  <ul>
+    <li>All language contrasts include zero. Phase 1 shows neither a consistent language penalty nor language equivalence.</li>
+    <li>Primary-only sensitivity (no recovery attempts, 46 tasks) points the same way: model overall +11.5 (+0.8 to +21.9), 27 / 17 / 2. Report the main view and this sensitivity together.</li>
+    <li>Translated prompts were only about 1% longer in first-context tokens than English (mean ratio 1.008-1.010).</li>
+    <li>Task spread: mean of the six scores per task ranges from 7.5 (071 e-commerce support routing) to 100 (007 session memory); median task mean 42.7. Only 1 task scored 100 in all six conditions; none scored 0 in all six.</li>
+  </ul>
+  <h3>By category (mean score)</h3>
+  <div class="scroll"><table>
+    <tr><th>Category</th><th class="n">Tasks</th><th class="n">GPT-OSS</th><th class="n">Nemotron</th><th class="n">Diff (pp)</th></tr>
+    <tr><td>Office & Business Communication</td><td class="n">7</td><td class="n">45.9</td><td class="n">74.1</td><td class="n">+28.2</td></tr>
+    <tr><td>Knowledge, Evidence & Retrieval</td><td class="n">6</td><td class="n">19.6</td><td class="n">45.1</td><td class="n">+25.5</td></tr>
+    <tr><td>Long-running Autonomy & State Adaptation</td><td class="n">6</td><td class="n">43.8</td><td class="n">62.2</td><td class="n">+18.4</td></tr>
+    <tr><td>SRE, DevOps & Release Ops</td><td class="n">6</td><td class="n">34.2</td><td class="n">47.7</td><td class="n">+13.4</td></tr>
+    <tr><td>Data, BI & Finance Analytics</td><td class="n">7</td><td class="n">39.0</td><td class="n">47.0</td><td class="n">+8.0</td></tr>
+    <tr><td>Vertical Professional Workflows</td><td class="n">5</td><td class="n">34.2</td><td class="n">42.0</td><td class="n">+7.7</td></tr>
+    <tr><td>Workspace, Tool Use & Multimodal Operations</td><td class="n">6</td><td class="n">50.6</td><td class="n">49.4</td><td class="n">−1.2</td></tr>
+    <tr><td>Software Engineering & Codebase Maintenance</td><td class="n">7</td><td class="n">49.3</td><td class="n">39.6</td><td class="n">−9.6</td></tr>
+  </table></div>
+  <ul><li>Most frequent failed checks: missing output files (notes/summary/decisions/CSV not written) and exact-header mismatches, for both models.</li></ul>
+  <h3>Phase 1 figures (from the completed combined report)</h3>
+  <div class="grid2">
+    <figure><img src="phase1_figures/01_mean_scores.png" alt="Phase 1 mean scores"><figcaption>phase1_figures/01_mean_scores</figcaption></figure>
+    <figure><img src="phase1_figures/02_full_completion.png" alt="Phase 1 full completion"><figcaption>phase1_figures/02_full_completion</figcaption></figure>
+    <figure><img src="phase1_figures/03_model_contrasts.png" alt="Phase 1 model contrasts"><figcaption>phase1_figures/03_model_contrasts</figcaption></figure>
+    <figure><img src="phase1_figures/04_paired_scores.png" alt="Phase 1 paired scores"><figcaption>phase1_figures/04_paired_scores</figcaption></figure>
+    <figure><img src="phase1_figures/05_language_contrasts.png" alt="Phase 1 language contrasts"><figcaption>phase1_figures/05_language_contrasts</figcaption></figure>
+    <figure><img src="phase1_figures/06_categories.png" alt="Phase 1 categories"><figcaption>phase1_figures/06_categories</figcaption></figure>
+    <figure><img src="phase1_figures/07_resources.png" alt="Phase 1 resources"><figcaption>phase1_figures/07_resources</figcaption></figure>
+    <figure><img src="phase1_figures/08_task_heatmap.png" alt="Phase 1 task heatmap"><figcaption>phase1_figures/08_task_heatmap</figcaption></figure>
+  </div>
+</section>
+
+<section id="infra">
+  <h2>8. Infrastructure, recoveries and cost</h2>
+  <h3>Phase 2 (v2.1)</h3>
+  <ul>
+    <li>9 infrastructure failures, all provider transport, none from the harness: 4 connection failures in the 22:25 outage (all task 05) and 5 dropped Nemotron streams (task 02 ×2, task 13 ×2, task 06).</li>
+    <li>Each retried exactly once, at the user's request, same protocol; primary record kept, retry logged in <code>phase2/results/final-v21/infrastructure_retries.json</code>. 7 retries scored 100; the 2 task-13 Nemotron retries used the full output budget without a file. All 192 conditions have a graded result.</li>
+    <li>Total: 18.92M input and 4.68M output tokens; 1,269 model requests; 13.4 agent-hours of wall time.</li>
+    <li>Cost about $4.43 at approximate list rates ($2.27 GLM, $2.16 Nemotron). v2 cost about $4.41. Rates used: GLM $0.15 / $0.50 per M input/output; Nemotron $0.015 / $0.60.</li>
+    <li>Token split: GLM 10.87M in / 1.28M out; Nemotron 8.05M in / 3.40M out.</li>
+  </ul>
+  <h3>Phase 1</h3>
+  <ul>
+    <li>All attempts, including excluded and retried ones: GPT-OSS 175 attempts (140 completed, 25 budget-exhausted, 10 infrastructure failures, 1 recovery); Nemotron 157 attempts (129 completed, 21 budget-exhausted, 7 infrastructure failures, 7 recoveries).</li>
+    <li>Known tokens: GPT-OSS 11.78M in / 1.07M out; Nemotron 10.64M in / 1.15M out.</li>
+    <li>Infrastructure failures were relay-accounting gates, transient errors and ambiguous transport (provider stream drops). Budget exhaustion counts as an agent outcome and is kept in the data.</li>
+    <li>One user-authorised recovery for task 037 (Hindi, GPT-OSS) scored 0. Both records are kept.</li>
+  </ul>
+</section>
+
+<section id="limits">
+  <h2>9. Limitations that must be disclosed</h2>
+  <ul>
+    <li>Synthetic data (phase 2). Hindi and Hinglish text in both phases was AI-written or AI-translated with AI self-review only, with no independent human review.</li>
+    <li>One run per condition. 16 tasks (phase 2) and 50 tasks (phase 1), two models each. Exploratory; no significance claims and no claims about Indian languages in general.</li>
+    <li>Run-to-run noise is large: 29% of identical conditions flipped between v2 and v2.1.</li>
+    <li>Post-outcome changes: phase 2 v2 was designed after seeing 7 v1 runs; v2.1's glossary was added after seeing v2 outcomes; phase 1's task set was expanded after the first campaign. None of these selected or removed tasks based on scores.</li>
+    <li>Fixed budgets favour concise models. Nemotron's missing files reflect this protocol's output budget, not its ability with unlimited budgets. Hindi files tokenize longer, so budget exhaustion is more likely in Hindi conditions.</li>
+    <li>Different models and budgets across the two phases, so phase 1 and phase 2 numbers are not directly comparable.</li>
+    <li>Managed cloud inference (Ollama Cloud) with provider-side variation and transport failures; costs are approximate list-rate estimates.</li>
+    <li>The phase 1 reference benchmark has no LICENSE file; keep the repository private unless redistribution rights are established.</li>
+  </ul>
+</section>
+
+<section id="outline">
+  <h2>10. Where each number fits (paper and blog checklist)</h2>
+  <div class="scroll"><table>
+    <tr><th>Paper section</th><th>Material from this page</th></tr>
+    <tr><td>Introduction</td><td class="wrap-cell">Research question; the two factors (instruction vs workspace language); headline 84.4% vs 67.7%</td></tr>
+    <tr><td>Related work</td><td class="wrap-cell">Not covered here: your own literature search</td></tr>
+    <tr><td>Benchmark design</td><td class="wrap-cell">Section 2: domains, rule types, Hindi workspace rendering, parse-back check, rule ablations, grading rules</td></tr>
+    <tr><td>Experimental setup</td><td class="wrap-cell">Models, harness, container isolation, budgets table, outcome definitions, one run per condition</td></tr>
+    <tr><td>Results</td><td class="wrap-cell">Section 3 tables, Figures p2_f1, p2_f2, p2_f4; paired counts as the main within-task evidence</td></tr>
+    <tr><td>Failure analysis</td><td class="wrap-cell">Section 4: two failure styles, outcome table, p2_f3, p2_f6, typical wrong fields</td></tr>
+    <tr><td>Benchmark validity</td><td class="wrap-cell">Section 5: v2 audit, glossary fix, transitions table, noise floor, p2_f5</td></tr>
+    <tr><td>Earlier study / appendix</td><td class="wrap-cell">Section 7 (phase 1) and its figures</td></tr>
+    <tr><td>Limitations, ethics</td><td class="wrap-cell">Section 9; container isolation and credential handling from section 1</td></tr>
+  </table></div>
+  <h3>Facts that suit a blog post</h3>
+  <ul>
+    <li>Same facts, different file language: correct outputs fall from 84% to 68%.</li>
+    <li>The language of the request mattered less than the language of the spreadsheet.</li>
+    <li>Two models, two ways to fail: one writes wrong details, the other thinks until its budget runs out.</li>
+    <li>An audit found answer-key ambiguities that had hidden the Hindi-file effect (20 vs 20 pairs before the fix, 22 vs 6 after).</li>
+    <li>The whole 192-run campaign cost about $4.43.</li>
+    <li>Identical reruns flipped 7 of 24 results, which is why one run per cell isn't enough to judge single tasks.</li>
+  </ul>
+</section>
+
+<section id="files">
+  <h2>11. Source files</h2>
+  <div class="scroll"><table>
+    <tr><th>File</th><th>Contents</th></tr>
+    <tr><td><code>paper_kit/tables/p2_v21_by_factor.csv</code></td><td>All factor and interaction rows in section 3</td></tr>
+    <tr><td><code>paper_kit/tables/p2_paired_comparisons.csv</code></td><td>Paired counts for v2 and v2.1, with the unadjusted exact p</td></tr>
+    <tr><td><code>paper_kit/tables/p2_v21_by_task.csv</code>, <code>p2_v21_by_domain.csv</code></td><td>Section 6</td></tr>
+    <tr><td><code>paper_kit/tables/p2_v21_outcomes_model_workspace.csv</code>, <code>p2_outcomes_v2_vs_v21.csv</code>, <code>p2_v2_to_v21_transitions.csv</code></td><td>Sections 4 and 5</td></tr>
+    <tr><td><code>paper_kit/tables/p2_v21_extra_facts.json</code></td><td>Totals, conditional accuracy, task win counts</td></tr>
+    <tr><td><code>phase2/results/final-v21/analysis/conditions.csv</code></td><td>One row per v2.1 condition (raw source for everything above)</td></tr>
+    <tr><td><code>phase2/results/final/analysis/conditions.csv</code></td><td>Same for v2</td></tr>
+    <tr><td><code>phase2/DESIGN-v2.md</code></td><td>Design notes, ablation table, v2.1 change, limitations</td></tr>
+    <tr><td><code>phase2/reports/*.html</code></td><td>The project's own v2.1 findings and audit reports</td></tr>
+    <tr><td><code>output/pdf/report_data/</code></td><td>Phase 1 matched conditions, task atlas, analysis summary</td></tr>
+    <tr><td><code>output/pdf/Indic_Harness_Bench_50_Task_Combined_Report.pdf</code></td><td>Phase 1 full report</td></tr>
+  </table></div>
+  <p class="sub" style="font-size:13px">Recompute the phase 2 tables with <code>py -B -X utf8 -m phase2.analysis.summarize final-v21 --compare final</code>. Phase 1 checks: <code>python -B -X utf8 -m scripts.portable summary</code>.</p>
+</section>
+</div>

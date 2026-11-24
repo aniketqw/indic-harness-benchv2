@@ -1,0 +1,582 @@
+[
+ {
+  "task": "01-upi-settlement",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 98.15,
+  "literal_best": 98.15,
+  "explained_by": "official"
+ },
+ {
+  "task": "01-upi-settlement",
+  "instr": "hi",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 99.07,
+  "literal_best": 99.07,
+  "explained_by": "official"
+ },
+ {
+  "task": "01-upi-settlement",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 99.07,
+  "literal_best": 99.07,
+  "explained_by": "official"
+ },
+ {
+  "task": "03-bus-roster",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 99.15,
+  "literal_best": 99.15,
+  "explained_by": "official"
+ },
+ {
+  "task": "05-grower-payout",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 97.5,
+  "literal_best": 97.5,
+  "explained_by": "official"
+ },
+ {
+  "task": "07-ui-strings",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 98.33,
+  "literal_best": 98.33,
+  "explained_by": "official"
+ },
+ {
+  "task": "09-water-schedule",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 97.5,
+  "literal_best": 97.5,
+  "explained_by": "official"
+ },
+ {
+  "task": "09-water-schedule",
+  "instr": "en",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "09-water-schedule",
+  "instr": "hi",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "11-parcel-dispatch",
+  "instr": "en",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 97.13,
+  "literal_best": 97.13,
+  "explained_by": "official"
+ },
+ {
+  "task": "11-parcel-dispatch",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 99.28,
+  "literal_best": 99.28,
+  "explained_by": "official"
+ },
+ {
+  "task": "13-appointment-rebooking",
+  "instr": "en",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 82.93,
+  "literal_best": 82.93,
+  "explained_by": "official"
+ },
+ {
+  "task": "13-appointment-rebooking",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 47.15,
+  "literal_best": 73.17,
+  "explained_by": "free_slots.kind='standard'"
+ },
+ {
+  "task": "13-appointment-rebooking",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 62.6,
+  "literal_best": 62.6,
+  "explained_by": "official"
+ },
+ {
+  "task": "02-gst-payables",
+  "instr": "hi",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 98.44,
+  "literal_best": 98.44,
+  "explained_by": "official"
+ },
+ {
+  "task": "04-exam-seating",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 99.26,
+  "literal_best": 99.26,
+  "explained_by": "official"
+ },
+ {
+  "task": "04-exam-seating",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 93.38,
+  "literal_best": 94.85,
+  "explained_by": "closures.session='Afternoon'"
+ },
+ {
+  "task": "04-exam-seating",
+  "instr": "en",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 84.56,
+  "literal_best": 84.56,
+  "explained_by": "official"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 63.43,
+  "literal_best": 75.46,
+  "explained_by": "requests.variety='Gram GNG-2144'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 71.76,
+  "literal_best": 83.8,
+  "explained_by": "requests.variety='Gram GNG-2144'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "en",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 72.69,
+  "literal_best": 84.72,
+  "explained_by": "requests.variety='Gram GNG-2144'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 63.43,
+  "literal_best": 75.46,
+  "explained_by": "requests.variety='Gram GNG-2144'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "en",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 76.39,
+  "literal_best": 89.81,
+  "explained_by": "requests.category='छोटा किसान'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "hi",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 63.43,
+  "literal_best": 75.46,
+  "explained_by": "requests.variety='Gram GNG-2144'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "hi",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 63.43,
+  "literal_best": 75.46,
+  "explained_by": "requests.variety='Gram GNG-2144'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 76.39,
+  "literal_best": 89.81,
+  "explained_by": "requests.category='छोटा किसान'"
+ },
+ {
+  "task": "06-seed-allocation",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 76.39,
+  "literal_best": 89.81,
+  "explained_by": "requests.category='छोटा किसान'"
+ },
+ {
+  "task": "08-search-normalization",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 100.0,
+  "literal_best": 100.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "08-search-normalization",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "08-search-normalization",
+  "instr": "en",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 100.0,
+  "literal_best": 100.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "08-search-normalization",
+  "instr": "en",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "08-search-normalization",
+  "instr": "hi",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "08-search-normalization",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 99.28,
+  "literal_best": 99.28,
+  "explained_by": "official"
+ },
+ {
+  "task": "10-grievance-dedup",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 87.5,
+  "literal_best": 87.5,
+  "explained_by": "official"
+ },
+ {
+  "task": "10-grievance-dedup",
+  "instr": "hi",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 67.42,
+  "literal_best": 67.42,
+  "explained_by": "official"
+ },
+ {
+  "task": "12-delivery-audit",
+  "instr": "en",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 100.0,
+  "literal_best": 100.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "12-delivery-audit",
+  "instr": "en",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 98.83,
+  "literal_best": 98.83,
+  "explained_by": "official"
+ },
+ {
+  "task": "12-delivery-audit",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 84.21,
+  "literal_best": 86.55,
+  "explained_by": "receipts.unit='डिब्बे'"
+ },
+ {
+  "task": "12-delivery-audit",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 97.08,
+  "literal_best": 97.08,
+  "explained_by": "official"
+ },
+ {
+  "task": "12-delivery-audit",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 88.3,
+  "literal_best": 100.0,
+  "explained_by": "receipts.unit='डिब्बे'"
+ },
+ {
+  "task": "12-delivery-audit",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 67.25,
+  "literal_best": 67.25,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "hi",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "hi",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 38.18,
+  "literal_best": 38.18,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "en",
+  "ws": "en",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 37.27,
+  "literal_best": 37.27,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "en",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "14-lab-flags",
+  "instr": "en",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 0.0,
+  "literal_best": 0.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "hi",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 98.93,
+  "literal_best": 98.93,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "hinglish",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 38.4,
+  "literal_best": 38.4,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 100.0,
+  "literal_best": 100.0,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "hinglish",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 98.67,
+  "literal_best": 98.67,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "en",
+  "ws": "en",
+  "model": "nemotron",
+  "status": "completed",
+  "official": 98.93,
+  "literal_best": 98.93,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "en",
+  "ws": "hi",
+  "model": "nemotron",
+  "status": "budget_exhausted",
+  "official": 98.93,
+  "literal_best": 98.93,
+  "explained_by": "official"
+ },
+ {
+  "task": "16-digitization-audit",
+  "instr": "en",
+  "ws": "hi",
+  "model": "glm",
+  "status": "completed",
+  "official": 94.93,
+  "literal_best": 94.93,
+  "explained_by": "official"
+ }
+]

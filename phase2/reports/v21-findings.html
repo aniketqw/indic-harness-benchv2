@@ -1,0 +1,209 @@
+<title>Indic Bench v2.1 Findings</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Devanagari:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<style>
+/* Layout: one reading column (~70ch) with full-width figures; summary first, evidence after. */
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#14171c; --ink-2:#4a5160; --ink-3:#6b7282; --rule:#dfe3ea;
+  --accent:#1f4f9e; --s-new:#2a78d6; --s-old:#9aa3b2; --s-hi:#eb6834;
+  --good:#1d7a3e; --warn:#a15c00; --bad:#b42318; --chip:#eef1f6;
+  --f-display:"Source Serif 4",Georgia,serif; --f-body:"IBM Plex Sans","IBM Plex Sans Devanagari",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111418; --panel:#181c22; --ink:#eceef2; --ink-2:#b5bccb; --ink-3:#8f97a8; --rule:#2b313b;
+  --accent:#8db4f0; --s-new:#3987e5; --s-old:#6b7484; --s-hi:#d95926; --good:#5cc27f; --warn:#e3a14a; --bad:#f07a6e; --chip:#222833; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111418; --panel:#181c22; --ink:#eceef2; --ink-2:#b5bccb; --ink-3:#8f97a8; --rule:#2b313b;
+  --accent:#8db4f0; --s-new:#3987e5; --s-old:#6b7484; --s-hi:#d95926; --good:#5cc27f; --warn:#e3a14a; --bad:#f07a6e; --chip:#222833; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body)}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font:700 clamp(30px,5vw,42px)/1.1 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 24px/1.25 var(--f-display);margin:0;text-wrap:balance}
+h3{font:600 16px/1.3 var(--f-body);margin:0}
+p{margin:0;max-width:70ch} section{display:flex;flex-direction:column;gap:14px}
+.lede{font-size:18px;color:var(--ink-2)}
+.meta{font:13px/1.5 var(--f-mono);color:var(--ink-3)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.tile b{font:600 28px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.tile span{font-size:13px;color:var(--ink-2)}
+ul,ol{margin:0;padding-left:22px;max-width:70ch;display:flex;flex-direction:column;gap:6px}
+.fig{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.fig figcaption{font-size:13px;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.bars{display:grid;grid-template-columns:minmax(120px,190px) 1fr 52px;gap:6px 10px;align-items:center;font-size:13px}
+.bars .lab{color:var(--ink-2);overflow-wrap:anywhere}
+.bars .val{font:12px var(--f-mono);color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+.track{position:relative;height:22px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.track .b{height:9px;border-radius:0 4px 4px 0;min-width:2px}
+.ci{display:grid;grid-template-columns:minmax(120px,190px) 1fr 92px;gap:8px 10px;align-items:center;font-size:13px}
+.ci .lab{color:var(--ink-2)} .ci .val{font:12px var(--f-mono);color:var(--ink-2);text-align:right}
+.citrack{position:relative;height:22px;background:linear-gradient(90deg,var(--rule) 1px,transparent 1px) 0 0/25% 100%}
+.citrack .w{position:absolute;top:10px;height:2px;border-radius:1px}
+.citrack .d{position:absolute;top:5px;width:12px;height:12px;border-radius:50%;transform:translateX(-6px);box-shadow:0 0 0 2px var(--panel)}
+.axis{display:grid;grid-template-columns:minmax(120px,190px) 1fr 92px;gap:10px;font:11px var(--f-mono);color:var(--ink-3)}
+.axis div:nth-child(2){display:flex;justify-content:space-between}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--ink-3);text-transform:uppercase;background:var(--chip)}
+tr:last-child td{border-bottom:0} td.n{text-align:right;font-family:var(--f-mono)}
+.chip{display:inline-block;font:500 11.5px/1.6 var(--f-mono);padding:0 7px;border-radius:10px;background:var(--chip);color:var(--ink-2);white-space:nowrap}
+.chip.good{color:var(--good)} .chip.bad{color:var(--bad)} .chip.warn{color:var(--warn)}
+.callout{border-left:3px solid var(--accent);padding:4px 0 4px 16px;display:flex;flex-direction:column;gap:8px}
+code{font:13px var(--f-mono);background:var(--chip);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.hi{font-family:"IBM Plex Sans Devanagari",var(--f-body)}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font:12px/1.4 var(--f-body);padding:6px 9px;border-radius:5px;max-width:260px;z-index:20}
+@media (max-width:560px){.bars,.ci,.axis{grid-template-columns:100px 1fr 46px}.ci .val{font-size:10.5px}}
+</style>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Indic Harness Bench · phase 2 · suite v2.1 · 18 Nov 2026</div>
+  <h1>What the corrected benchmark shows</h1>
+  <p class="lede">Results from the v2.1 campaign only: 16 synthetic office-automation tasks from eight Indian domains, given to two open models as agents. The instruction (English, Hindi or Hinglish) and the workspace files (English or Hindi) vary independently. Every condition was graded by an exact-match oracle.</p>
+  <div class="meta">192 conditions · GLM-5.3-Flash and Nemotron 3 Super · one run each · results/final-v21</div>
+</header>
+
+<section>
+  <h2>Headline</h2>
+  <div class="tiles">
+    <div class="tile"><b>146 / 192</b><span>fully correct outputs (76.0%, 95% CI 69.5–81.5%)</span></div>
+    <div class="tile"><b>84% vs 68%</b><span>correct with English vs Hindi workspace files</span></div>
+    <div class="tile"><b>22 vs 6</b><span>matched pairs correct only in the English vs only in the Hindi workspace</span></div>
+    <div class="tile"><b>77% vs 75%</b><span>GLM vs Nemotron, which fail in different ways</span></div>
+  </div>
+  <ul>
+    <li><b>The language of the files matters more than the language of the request.</b> Hindi workspace files cost about 16 percentage points. Hindi or Hinglish instructions cost about 8 points compared with English.</li>
+    <li><b>GLM loses on details; Nemotron loses on budget.</b> In Hindi workspaces, GLM's extra failures are mostly partially wrong files. Nemotron's are mostly runs that used the whole output budget without writing anything.</li>
+    <li><b>The suite is not saturated.</b> Task results range from 5/12 (appointment rebooking) to 11/12, and only 4 of 16 tasks reach 11/12.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Design in brief</h2>
+  <ul>
+    <li>16 tasks, two per domain: finance, schools, agriculture, localization, municipal, logistics, clinic, archives. Each task is generated from a fixed seed into one canonical dataset.</li>
+    <li>The English and Hindi workspaces render the same facts. The Hindi one adds Hindi headers and labels, Devanagari digits, Hindi month names and time words.</li>
+    <li>Difficulty comes from rule interaction: unsorted amendment feeds, precedence, inclusive boundaries, unit conversion, rounding, capacity allocation and Unicode normalisation. All rules are stated in the notice, which ends with a glossary of value spellings. Every rule is necessary: ignoring any single one scores below 100.</li>
+    <li>The agent works in a locked-down container with these budgets: 32,768 tokens per response, 65,536 output and 600,000 input tokens, 40 requests and 1,200 s per attempt.</li>
+    <li><b>Primary outcome: correct output</b>, meaning the result file is fully correct when the attempt ends. Secondary: correct and within budget (142/192).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Results by factor</h2>
+  <figure class="fig">
+    <div class="axis"><div></div><div><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div><div></div></div>
+    <div class="ci" id="factorci"></div>
+    <figcaption>Share of fully correct outputs, with 95% Wilson intervals. The intervals overlap a lot, so read the paired counts below for the within-task comparisons.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Paired comparison (same task, other factors fixed)</th><th class="n">Pairs</th><th class="n">Both</th><th class="n">Neither</th><th class="n">Only first</th><th class="n">Only second</th></tr>
+    <tr><td>Workspace: English vs Hindi</td><td class="n">96</td><td class="n">59</td><td class="n">9</td><td class="n">22</td><td class="n">6</td></tr>
+    <tr><td>Instruction: English vs Hindi</td><td class="n">64</td><td class="n">44</td><td class="n">9</td><td class="n">8</td><td class="n">3</td></tr>
+    <tr><td>Instruction: English vs Hinglish</td><td class="n">64</td><td class="n">37</td><td class="n">2</td><td class="n">15</td><td class="n">10</td></tr>
+    <tr><td>Model: GLM vs Nemotron</td><td class="n">96</td><td class="n">52</td><td class="n">2</td><td class="n">22</td><td class="n">20</td></tr>
+  </table></div>
+  <p>The workspace comparison is the clearest imbalance. The instruction-language comparisons lean towards English but are small. The model comparison is balanced.</p>
+</section>
+
+<section>
+  <h2>The workspace effect, model by model</h2>
+  <figure class="fig">
+    <div class="legend"><span><i style="background:var(--s-new)"></i>English workspace</span><span><i style="background:var(--s-hi)"></i>Hindi workspace</span></div>
+    <div class="bars" id="mwbars"></div>
+    <figcaption>Correct outputs out of 48 per cell.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Model · workspace</th><th class="n">Correct</th><th class="n">Partial</th><th class="n">No file (budget)</th><th class="n">Other</th><th class="n">Mean output tokens</th><th class="n">Median time</th></tr>
+    <tr><td>GLM · English</td><td class="n">42</td><td class="n">6</td><td class="n">0</td><td class="n">0</td><td class="n">11.7k</td><td class="n">76 s</td></tr>
+    <tr><td>GLM · Hindi</td><td class="n">32</td><td class="n">15</td><td class="n">0</td><td class="n">1 format</td><td class="n">15.0k</td><td class="n">83 s</td></tr>
+    <tr><td>Nemotron · English</td><td class="n">39</td><td class="n">6</td><td class="n">3</td><td class="n">0</td><td class="n">31.8k</td><td class="n">317 s</td></tr>
+    <tr><td>Nemotron · Hindi</td><td class="n">33</td><td class="n">4</td><td class="n">10</td><td class="n">1 format</td><td class="n">39.0k</td><td class="n">411 s</td></tr>
+  </table></div>
+  <p>Partial counts include partial files written at the budget, and correct counts include correct files written at the budget.</p>
+  <ul>
+    <li><b>GLM</b> nearly always writes a file. In Hindi workspaces it makes more field errors, with a mean score of 95.7 vs 98.6 in English.</li>
+    <li><b>Nemotron</b> works through much of the task in its reasoning before writing a script. On Hindi files it produces about 23% more output and takes about 30% longer, and 10 of 48 runs end without a file.</li>
+    <li><b>Nemotron is more accurate when it does write a file.</b> 72 of its 83 runs with a file are correct, against 74 of 96 for GLM.</li>
+  </ul>
+  <p>Across tasks, English workspaces beat Hindi in 11 tasks, Hindi wins in 2 (UPI settlement, grievance dedup) and 3 are tied.</p>
+</section>
+
+<section>
+  <h2>Results by task</h2>
+  <figure class="fig">
+    <div class="legend"><span><i style="background:var(--s-new)"></i>English workspace</span><span><i style="background:var(--s-hi)"></i>Hindi workspace</span></div>
+    <div class="bars" id="taskws"></div>
+    <figcaption>Correct outputs per task and workspace, out of 6 (3 instruction languages × 2 models).</figcaption>
+  </figure>
+  <div class="tbl"><table id="tasktbl">
+    <tr><th>Task</th><th>Domain</th><th class="n">GLM /6</th><th class="n">Nemotron /6</th><th class="n">Total /12</th><th>Typical failure</th></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>How runs fail</h2>
+  <div class="tbl"><table>
+    <tr><th>Outcome</th><th class="n">GLM</th><th class="n">Nemotron</th><th class="n">Total</th></tr>
+    <tr><td><span class="chip good">full</span> all fields correct, within budget</td><td class="n">73</td><td class="n">69</td><td class="n">142</td></tr>
+    <tr><td><span class="chip good">correct, over budget</span></td><td class="n">1</td><td class="n">3</td><td class="n">4</td></tr>
+    <tr><td><span class="chip warn">partial</span> valid file, some fields wrong</td><td class="n">21</td><td class="n">8</td><td class="n">29</td></tr>
+    <tr><td><span class="chip warn">partial, over budget</span></td><td class="n">0</td><td class="n">2</td><td class="n">2</td></tr>
+    <tr><td><span class="chip bad">no output, budget</span> 65,536 output tokens used, no file</td><td class="n">0</td><td class="n">13</td><td class="n">13</td></tr>
+    <tr><td><span class="chip bad">format error</span> header or duplicate key</td><td class="n">1</td><td class="n">1</td><td class="n">2</td></tr>
+  </table></div>
+  <p>Typical wrong fields:</p>
+  <ul>
+    <li>child reference ranges ignored for lab flags;</li>
+    <li>capacity chains in room and seed allocation that go wrong after one early slip;</li>
+    <li>revision precedence (an equal revision treated as an override);</li>
+    <li>Unicode length counts after NFC;</li>
+    <li>Devanagari digits not equated with ASCII digits;</li>
+    <li>near-duplicate search queries matched despite the no-spelling-correction rule;</li>
+    <li>accession IDs written without their prefix.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Can these results be trusted?</h2>
+  <ul>
+    <li><b>No task defects.</b> Every non-perfect output was diffed against the answer key, and each error that repeated across runs was checked against the notice and the input files. All of them follow from a stated rule. One wording ambiguity remains: in task 07 the inflected <span class="hi">खाते</span> may or may not count as the required term <span class="hi">खाता</span>. Every run that missed it also had other clear errors, so no outcome depends on it.</li>
+    <li><b>No infrastructure losses.</b> 9 conditions hit provider transport failures: a short outage and dropped streams. Each was retried once under the same protocol with the primary record kept. All 192 conditions have a graded result.</li>
+    <li><b>Run-to-run noise is large at the cell level.</b> Two tasks are identical to the preliminary run, and on them 7 of 24 conditions changed result between the two runs. Treat single cells as samples; the factor-level imbalances are the findings.</li>
+    <li>Cost: about $4.43 for all 192 conditions (approximate list rates). Total tokens: 18.9M input and 4.7M output.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Limitations</h2>
+  <ul>
+    <li>Synthetic data. Hindi and Hinglish text was AI-written with self-review only, not independent human review.</li>
+    <li>One run per condition, 16 tasks, two models: exploratory, with no significance claims and no claims about Indian languages in general.</li>
+    <li>Fixed budgets favour concise models. Nemotron's missing files reflect this protocol's output budget, not its ability under unlimited budgets.</li>
+  </ul>
+  <div class="callout">
+    <h3>Provenance</h3>
+    <p>v2.1 differs from the preliminary v2 campaign only in a generated value glossary at the end of each notice (data, rules, answers and budgets are identical). It was added after an audit of v2 found two tasks whose notices did not document all value spellings. The change was made after seeing v2 outcomes, and the v2 records and sources are preserved. Details are in the companion audit report and <code>phase2/DESIGN-v2.md</code>.</p>
+  </div>
+</section>
+</div>
+<div id="tip" hidden></div>
+<script>
+const F=[["Overall",146,192,69.5,81.5],["GLM",74,96,67.7,84.4],["Nemotron",72,96,65.5,82.6],["Workspace English",81,96,75.8,90.3],["Workspace Hindi",65,96,57.8,76.2],["Instruction English",52,64,70.0,88.9],["Instruction Hindi",47,64,61.5,82.7],["Instruction Hinglish",47,64,61.5,82.7]];
+const fc=document.getElementById('factorci');
+for(const [l,k,n,lo,hi] of F){const p=100*k/n,t=`${l}: ${k}/${n} = ${p.toFixed(1)}% (95% CI ${lo}–${hi})`,col=l.includes('Hindi')&&l.startsWith('Work')?'var(--s-hi)':'var(--s-new)';
+  fc.insertAdjacentHTML('beforeend',`<div class="lab">${l}</div><div class="citrack"><div class="w" style="left:${lo}%;width:${hi-lo}%;background:${col}" data-tip="${t}"></div><div class="d" style="left:${p}%;background:${col}" data-tip="${t}"></div></div><div class="val">${k}/${n} · ${p.toFixed(0)}%</div>`)}
+const pair=(el,rows,max)=>{const e=document.getElementById(el);for(const [l,a,b] of rows)e.insertAdjacentHTML('beforeend',`<div class="lab">${l}</div><div class="track"><div class="b" style="width:${a/max*100}%;background:var(--s-new)" data-tip="${l}, English workspace: ${a} of ${max}"></div><div class="b" style="width:${b/max*100}%;background:var(--s-hi)" data-tip="${l}, Hindi workspace: ${b} of ${max}"></div></div><div class="val">${a} · ${b}</div>`)};
+pair('mwbars',[["GLM",42,32],["Nemotron",39,33]],48);
+const T=[["01","UPI settlement","finance",4,5,5,4,"budget, amount parsing"],["02","GST payables","finance",6,5,6,5,"budget"],["03","School bus roster","schools",6,4,6,4,"budget"],["04","Exam seating","schools",4,3,2,5,"capacity chain"],["05","Paddy payout","agriculture",4,4,6,2,"recovery arithmetic, budget"],["06","Seed allocation","agriculture",6,4,4,6,"lot allocation"],["07","Hindi UI strings","localization",5,3,2,6,"revision rule, NFC length"],["08","Search normalization","localization",5,5,6,4,"spelling, format"],["09","Ward water supply","municipal",6,4,4,6,"time windows"],["10","Grievance dedup","municipal",4,6,4,6,"missed duplicates"],["11","Parcel dispatch","logistics",6,5,6,5,"budget"],["12","Delivery audit","logistics",6,3,5,4,"unit conversion"],["13","Appointment rebooking","clinic",3,2,4,1,"slot choice, budget"],["14","Lab flags","clinic",4,4,6,2,"child ranges, budget"],["15","Catalogue merge","archives",6,4,4,6,"ID prefix, header"],["16","Digitization audit","archives",6,4,4,6,"Devanagari digits"]];
+pair('taskws',T.map(t=>[t[0]+' '+t[1],t[3],t[4]]),6);
+const tt=document.getElementById('tasktbl');
+for(const t of T)tt.insertAdjacentHTML('beforeend',`<tr><td>${t[0]} ${t[1]}</td><td>${t[2]}</td><td class="n">${t[5]}</td><td class="n">${t[6]}</td><td class="n">${t[5]+t[6]}</td><td>${t[7]}</td></tr>`);
+const tip=document.getElementById('tip');
+document.addEventListener('pointerover',e=>{const x=e.target.closest('[data-tip]');if(!x){tip.hidden=true;return}tip.textContent=x.dataset.tip;tip.hidden=false});
+document.addEventListener('pointermove',e=>{if(!tip.hidden){tip.style.left=Math.min(e.clientX+12,innerWidth-270)+'px';tip.style.top=(e.clientY+14)+'px'}});
+</script>

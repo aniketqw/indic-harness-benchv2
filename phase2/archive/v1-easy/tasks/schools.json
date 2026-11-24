@@ -1,0 +1,257 @@
+[
+  {
+    "id": "04-bus-roster",
+    "title": "Bus route correction",
+    "goals": {
+      "en": "Produce the updated pickup roster for every student.",
+      "hi": "सभी विद्यार्थियों के चढ़ने के स्टॉप की संशोधित सूची बनाएँ।",
+      "hinglish": "Har student ka updated pickup stop roster banao."
+    },
+    "headers": {
+      "en": [
+        "student",
+        "route",
+        "stop"
+      ],
+      "hi": [
+        "विद्यार्थी",
+        "रूट",
+        "स्टॉप"
+      ]
+    },
+    "records": [
+      [
+        "K01",
+        "R2",
+        "A"
+      ],
+      [
+        "K02",
+        "R2",
+        "B"
+      ],
+      [
+        "K03",
+        "R2",
+        "C"
+      ],
+      [
+        "K04",
+        "R3",
+        "A"
+      ],
+      [
+        "K05",
+        "R3",
+        "B"
+      ],
+      [
+        "K06",
+        "R2",
+        "B"
+      ]
+    ],
+    "notice": {
+      "en": "Initial circular: on R2 move stop A to D and stop B to E. Correction: the R2 move from A is instead to F. The change from B only applies to student K06; other riders at B stay at B. Leave all R3 riders and all other entries as listed.",
+      "hi": "पहले परिपत्र में रूट R2 के स्टॉप A की जगह D और B की जगह E लिखा था। संशोधन: R2 में A की जगह F होगा। B से E जाने का बदलाव केवल विद्यार्थी K06 के लिए है। B के बाकी विद्यार्थी वहीं रहेंगे। R3 और बाकी प्रविष्टियाँ पहले जैसी रखें।"
+    },
+    "output": [
+      "student",
+      "route",
+      "stop"
+    ],
+    "answer": [
+      [
+        "K01",
+        "R2",
+        "F"
+      ],
+      [
+        "K02",
+        "R2",
+        "B"
+      ],
+      [
+        "K03",
+        "R2",
+        "C"
+      ],
+      [
+        "K04",
+        "R3",
+        "A"
+      ],
+      [
+        "K05",
+        "R3",
+        "B"
+      ],
+      [
+        "K06",
+        "R2",
+        "E"
+      ]
+    ]
+  },
+  {
+    "id": "05-exam-rooms",
+    "title": "Exam-room reassignment",
+    "goals": {
+      "en": "Assign a room to each exam group and retain the group IDs.",
+      "hi": "हर परीक्षा समूह को कमरा आवंटित करें। समूह की आईडी बनाए रखें।",
+      "hinglish": "Har exam group ko room assign karo. Group IDs same rakho."
+    },
+    "headers": {
+      "en": [
+        "group",
+        "slot",
+        "students",
+        "step_free"
+      ],
+      "hi": [
+        "समूह",
+        "पाली",
+        "विद्यार्थियों_की_संख्या",
+        "सीढ़ी_रहित_पहुँच"
+      ]
+    },
+    "records": [
+      [
+        "G1",
+        "AM",
+        "21",
+        "Y"
+      ],
+      [
+        "G2",
+        "AM",
+        "25",
+        "N"
+      ],
+      [
+        "G3",
+        "PM",
+        "18",
+        "N"
+      ],
+      [
+        "G4",
+        "PM",
+        "20",
+        "Y"
+      ]
+    ],
+    "notice": {
+      "en": "Rooms: R1 has 24 seats and step-free access, R2 has 30 seats and stairs, R3 has 20 seats and step-free access. R3 is closed in the morning only. Within each slot assign groups in ID order to the smallest available suitable room. No sharing in the same slot.",
+      "hi": "कमरा R1 में 24 सीटें हैं और बिना सीढ़ी के पहुँच है। R2 में 30 सीटें हैं और सीढ़ियाँ चढ़नी पड़ती हैं। R3 में 20 सीटें हैं और बिना सीढ़ी के पहुँच है। R3 सिर्फ सुबह बंद है। हर पाली में समूहों को उनकी आईडी के क्रम में सबसे छोटा उपलब्ध उपयुक्त कमरा दें। एक पाली में एक कमरे में एक ही समूह होगा।"
+    },
+    "output": [
+      "group",
+      "room"
+    ],
+    "answer": [
+      [
+        "G1",
+        "R1"
+      ],
+      [
+        "G2",
+        "R2"
+      ],
+      [
+        "G3",
+        "R3"
+      ],
+      [
+        "G4",
+        "R1"
+      ]
+    ]
+  },
+  {
+    "id": "06-rain-calendar",
+    "hi_records": [
+      ["E1","2026-11-18","YARD","खुले में"],
+      ["E2","2026-11-18","LAB","कमरे में"],
+      ["E3","2026-11-18","FIELD","खुले में"],
+      ["E4","2026-11-19","FIELD","खुले में"]
+    ],
+    "title": "Rain-closure calendar update",
+    "goals": {
+      "en": "Update the school event calendar based on the final rain notice. Include every event.",
+      "hi": "बारिश की अंतिम सूचना के अनुसार स्कूल का कार्यक्रम कैलेंडर अपडेट करें। सभी कार्यक्रम शामिल करें।",
+      "hinglish": "Baarish ka final notice padhkar school calendar update karo. Har event include karo."
+    },
+    "headers": {
+      "en": [
+        "event",
+        "date",
+        "venue",
+        "kind"
+      ],
+      "hi": [
+        "कार्यक्रम",
+        "तारीख",
+        "स्थान",
+        "प्रकार"
+      ]
+    },
+    "records": [
+      [
+        "E1",
+        "2026-11-18",
+        "YARD",
+        "OUTDOOR"
+      ],
+      [
+        "E2",
+        "2026-11-18",
+        "LAB",
+        "INDOOR"
+      ],
+      [
+        "E3",
+        "2026-11-18",
+        "FIELD",
+        "OUTDOOR"
+      ],
+      [
+        "E4",
+        "2026-11-19",
+        "FIELD",
+        "OUTDOOR"
+      ]
+    ],
+    "notice": {
+      "en": "A circulating message said all events on 18 November were cancelled. The signed notice supersedes it: only outdoor events on the 18th move to the 20th. Events originally in FIELD go to HALL; those in YARD keep their venue. Keep other entries as scheduled.",
+      "hi": "एक संदेश में कहा गया था कि 18 नवंबर के सभी कार्यक्रम रद्द हैं। उसकी जगह हस्ताक्षरित सूचना लागू होगी। 18 नवंबर के केवल खुले में होने वाले कार्यक्रम 20 नवंबर को होंगे। FIELD वाले कार्यक्रम HALL में होंगे और YARD वाले वहीं होंगे। बाकी कार्यक्रम तय समय और स्थान पर होंगे।"
+    },
+    "output": [
+      "event",
+      "date",
+      "venue"
+    ],
+    "answer": [
+      [
+        "E1",
+        "2026-11-20",
+        "YARD"
+      ],
+      [
+        "E2",
+        "2026-11-18",
+        "LAB"
+      ],
+      [
+        "E3",
+        "2026-11-20",
+        "HALL"
+      ],
+      [
+        "E4",
+        "2026-11-19",
+        "FIELD"
+      ]
+    ]
+  }
+]

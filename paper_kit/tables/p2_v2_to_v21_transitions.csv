@@ -1,0 +1,4 @@
+task_group,conditions,both_correct,neither,v2_only,v21_only
+tasks 06+14 (defects fixed),24,2,6,0,16
+tasks 07+08 (identical),24,15,2,4,3
+other 12 tasks,144,79,14,20,31

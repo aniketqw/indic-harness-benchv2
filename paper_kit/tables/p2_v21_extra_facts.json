@@ -1,0 +1,13 @@
+{
+ "nemotron_with_file": 83,
+ "nemotron_correct_given_file": 72,
+ "glm_with_file": 96,
+ "glm_correct_given_file": 74,
+ "tasks_en_ws_better": 11,
+ "tasks_hi_ws_better": 2,
+ "tasks_tied": 3,
+ "total_input_tokens": 18921420,
+ "total_output_tokens": 4679923,
+ "total_requests": 1269,
+ "total_agent_hours": 13.43
+}

@@ -1,0 +1,331 @@
+[
+  {
+    "id": "16-depot-cutoff",
+    "title": "Depot cutoff replanning",
+    "goals": {
+      "en": "Update the dispatch-day assignment for every parcel.",
+      "hi": "हर पार्सल का भेजने का दिन अपडेट करें।",
+      "hinglish": "Har parcel ka dispatch day update karo."
+    },
+    "headers": {
+      "en": [
+        "parcel",
+        "depot",
+        "ready_time",
+        "service"
+      ],
+      "hi": [
+        "पार्सल",
+        "डिपो",
+        "तैयार_होने_का_समय",
+        "सेवा"
+      ]
+    },
+    "records": [
+      [
+        "P1",
+        "D1",
+        "14:30",
+        "REG"
+      ],
+      [
+        "P2",
+        "D1",
+        "14:31",
+        "REG"
+      ],
+      [
+        "P3",
+        "D1",
+        "15:15",
+        "EXP"
+      ],
+      [
+        "P4",
+        "D1",
+        "15:16",
+        "EXP"
+      ],
+      [
+        "P5",
+        "D2",
+        "15:45",
+        "REG"
+      ],
+      [
+        "P6",
+        "D2",
+        "16:01",
+        "EXP"
+      ]
+    ],
+    "notice": {
+      "en": "New same-day cutoff at D1: 14:30 for REG and 15:15 for EXP, inclusive. D2 retains its 16:00 cutoff for both. Use TODAY if the parcel meets its cutoff and NEXT otherwise.",
+      "hi": "D1 से उसी दिन भेजने की नई अंतिम सीमा REG के लिए 14:30 और EXP के लिए 15:15 है। ठीक उस समय तैयार पार्सल भी शामिल हैं। D2 में दोनों सेवाओं के लिए 16:00 की सीमा बनी रहेगी। समय सीमा पूरी होने पर TODAY, अन्यथा NEXT लिखें।"
+    },
+    "output": [
+      "parcel",
+      "dispatch_day"
+    ],
+    "answer": [
+      [
+        "P1",
+        "TODAY"
+      ],
+      [
+        "P2",
+        "NEXT"
+      ],
+      [
+        "P3",
+        "TODAY"
+      ],
+      [
+        "P4",
+        "NEXT"
+      ],
+      [
+        "P5",
+        "TODAY"
+      ],
+      [
+        "P6",
+        "NEXT"
+      ]
+    ]
+  },
+  {
+    "id": "17-delivery-audit",
+    "hi_records": [
+      ["प्रेषण","D1","","10",""],
+      ["प्रेषण","D2","","8",""],
+      ["प्रेषण","D3","","9",""],
+      ["प्रेषण","D4","","4",""],
+      ["रसीद","R1","D1","6","हाँ"],
+      ["रसीद","R2","D1","2","हाँ"],
+      ["रसीद","R3","D2","8","नहीं"],
+      ["रसीद","R4","D3","9","हाँ"],
+      ["रसीद","R5","D4","0","हाँ"]
+    ],
+    "title": "Delivery shortage audit",
+    "goals": {
+      "en": "Prepare an audit row for each dispatch line.",
+      "hi": "भेजी गई हर खेप के लिए जाँच की एक पंक्ति बनाएँ।",
+      "hinglish": "Har dispatch line ke liye ek audit row banao."
+    },
+    "headers": {
+      "en": [
+        "type",
+        "id",
+        "dispatch",
+        "qty",
+        "signed"
+      ],
+      "hi": [
+        "प्रकार",
+        "आईडी",
+        "प्रेषण",
+        "मात्रा",
+        "हस्ताक्षरित"
+      ]
+    },
+    "records": [
+      [
+        "SEND",
+        "D1",
+        "",
+        "10",
+        ""
+      ],
+      [
+        "SEND",
+        "D2",
+        "",
+        "8",
+        ""
+      ],
+      [
+        "SEND",
+        "D3",
+        "",
+        "9",
+        ""
+      ],
+      [
+        "SEND",
+        "D4",
+        "",
+        "4",
+        ""
+      ],
+      [
+        "RCPT",
+        "R1",
+        "D1",
+        "6",
+        "Y"
+      ],
+      [
+        "RCPT",
+        "R2",
+        "D1",
+        "2",
+        "Y"
+      ],
+      [
+        "RCPT",
+        "R3",
+        "D2",
+        "8",
+        "N"
+      ],
+      [
+        "RCPT",
+        "R4",
+        "D3",
+        "9",
+        "Y"
+      ],
+      [
+        "RCPT",
+        "R5",
+        "D4",
+        "0",
+        "Y"
+      ]
+    ],
+    "notice": {
+      "en": "Count only signed receipts. Where none exist, label NO_PROOF and leave shortage blank. A signed zero receipt IS proof. If the signed total is lower than the dispatch quantity label SHORT and show the difference; otherwise label MATCH and write zero.",
+      "hi": "केवल हस्ताक्षरित रसीदें गिनें। ऐसी कोई रसीद न हो तो NO_PROOF लिखें और कमी खाली छोड़ें। शून्य मात्रा वाली हस्ताक्षरित रसीद भी प्रमाण है। हस्ताक्षरित कुल मात्रा भेजी गई मात्रा से कम हो तो SHORT और अंतर लिखें। बाकी में MATCH और शून्य लिखें।"
+    },
+    "output": [
+      "dispatch",
+      "status",
+      "shortage"
+    ],
+    "answer": [
+      [
+        "D1",
+        "SHORT",
+        "2"
+      ],
+      [
+        "D2",
+        "NO_PROOF",
+        ""
+      ],
+      [
+        "D3",
+        "MATCH",
+        "0"
+      ],
+      [
+        "D4",
+        "SHORT",
+        "4"
+      ]
+    ]
+  },
+  {
+    "id": "18-bus-diversion",
+    "title": "Bus diversion timetable update",
+    "goals": {
+      "en": "Publish the revised timetable with one row for every scheduled stop.",
+      "hi": "हर तय स्टॉप के लिए एक पंक्ति रखते हुए संशोधित समय-सारणी बनाएँ।",
+      "hinglish": "Har scheduled stop ki ek row rakhkar revised timetable publish karo."
+    },
+    "headers": {
+      "en": [
+        "stop_id",
+        "trip",
+        "stop",
+        "time"
+      ],
+      "hi": [
+        "स्टॉप_आईडी",
+        "फेरा",
+        "स्टॉप",
+        "समय"
+      ]
+    },
+    "records": [
+      [
+        "A1",
+        "X",
+        "DEPOT",
+        "08:00"
+      ],
+      [
+        "A2",
+        "X",
+        "BRIDGE",
+        "08:10"
+      ],
+      [
+        "A3",
+        "X",
+        "MARKET",
+        "08:18"
+      ],
+      [
+        "A4",
+        "X",
+        "PARK",
+        "08:25"
+      ],
+      [
+        "B1",
+        "Y",
+        "BRIDGE",
+        "09:10"
+      ],
+      [
+        "B2",
+        "Y",
+        "PARK",
+        "09:22"
+      ]
+    ],
+    "notice": {
+      "en": "Only trip X is diverted. Replace BRIDGE with LIBRARY and add four minutes at that stop and at every subsequent stop on trip X. Keep all trip Y times and stops.",
+      "hi": "केवल फेरा X का मार्ग बदला है। BRIDGE की जगह LIBRARY रखें। इस स्टॉप और फेरा X के बाद के हर स्टॉप के समय में चार मिनट जोड़ें। फेरा Y के सभी स्टॉप और समय वैसे ही रखें।"
+    },
+    "output": [
+      "stop_id",
+      "stop",
+      "time"
+    ],
+    "answer": [
+      [
+        "A1",
+        "DEPOT",
+        "08:00"
+      ],
+      [
+        "A2",
+        "LIBRARY",
+        "08:14"
+      ],
+      [
+        "A3",
+        "MARKET",
+        "08:22"
+      ],
+      [
+        "A4",
+        "PARK",
+        "08:29"
+      ],
+      [
+        "B1",
+        "BRIDGE",
+        "09:10"
+      ],
+      [
+        "B2",
+        "PARK",
+        "09:22"
+      ]
+    ]
+  }
+]

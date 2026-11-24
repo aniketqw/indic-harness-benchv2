@@ -1,0 +1,319 @@
+[
+  {
+    "id": "01-upi-close",
+    "hi_records": [
+      ["बिक्री","S1","","750"],
+      ["बिक्री","S2","","490"],
+      ["बिक्री","S3","","620"],
+      ["भुगतान","P1","S1","500"],
+      ["भुगतान","P2","S1","250"],
+      ["भुगतान","P3","S2","490"],
+      ["भुगतान","P4","S3","620"],
+      ["वापसी","R1","P3","100"],
+      ["भुगतान","P2","S1","250"]
+    ],
+    "title": "UPI settlement reconciliation",
+    "goals": {
+      "en": "Close the day's sales. Report one reconciled row per sale.",
+      "hi": "दिन की बिक्री का मिलान करें। हर बिक्री के लिए एक पंक्ति दें।",
+      "hinglish": "Din ki sales reconcile karo. Har sale ke liye ek row do."
+    },
+    "headers": {
+      "en": [
+        "type",
+        "id",
+        "reference",
+        "rupees"
+      ],
+      "hi": [
+        "प्रकार",
+        "आईडी",
+        "संदर्भ",
+        "रुपये"
+      ]
+    },
+    "records": [
+      [
+        "SALE",
+        "S1",
+        "",
+        "750"
+      ],
+      [
+        "SALE",
+        "S2",
+        "",
+        "490"
+      ],
+      [
+        "SALE",
+        "S3",
+        "",
+        "620"
+      ],
+      [
+        "PAY",
+        "P1",
+        "S1",
+        "500"
+      ],
+      [
+        "PAY",
+        "P2",
+        "S1",
+        "250"
+      ],
+      [
+        "PAY",
+        "P3",
+        "S2",
+        "490"
+      ],
+      [
+        "PAY",
+        "P4",
+        "S3",
+        "620"
+      ],
+      [
+        "REV",
+        "R1",
+        "P3",
+        "100"
+      ],
+      [
+        "PAY",
+        "P2",
+        "S1",
+        "250"
+      ]
+    ],
+    "notice": {
+      "en": "The export includes a repeated transmission of payment P2, not a second payment. Reversals refer to payment IDs and reduce the received amount of the associated sale. Compute net_received, then due = sale amount minus net_received.",
+      "hi": "भुगतान P2 की प्रविष्टि दोबारा भेजी गई थी। यह अलग भुगतान नहीं है। वापसी की प्रविष्टि में भुगतान की आईडी दी गई है। वापस की गई राशि उस बिक्री की कुल प्राप्ति से घटाएँ। net_received में शुद्ध प्राप्ति और due में बिक्री की राशि में से शुद्ध प्राप्ति घटाकर लिखें।"
+    },
+    "output": [
+      "sale_id",
+      "net_received",
+      "due"
+    ],
+    "answer": [
+      [
+        "S1",
+        "750",
+        "0"
+      ],
+      [
+        "S2",
+        "390",
+        "100"
+      ],
+      [
+        "S3",
+        "620",
+        "0"
+      ]
+    ]
+  },
+  {
+    "id": "02-invoice-hold",
+    "title": "Duplicate invoice detection",
+    "goals": {
+      "en": "Build an accounts-payable register with the disposition of every invoice.",
+      "hi": "हर चालान के भुगतान का निर्णय दर्ज करते हुए भुगतान रजिस्टर बनाएँ।",
+      "hinglish": "Har invoice ka payment decision likhkar accounts-payable register banao."
+    },
+    "headers": {
+      "en": [
+        "invoice",
+        "supplier",
+        "delivery",
+        "issued",
+        "amount"
+      ],
+      "hi": [
+        "चालान",
+        "आपूर्तिकर्ता",
+        "डिलीवरी",
+        "जारी_तारीख",
+        "राशि"
+      ]
+    },
+    "records": [
+      [
+        "I01",
+        "V1",
+        "D7",
+        "2026-11-11",
+        "1200"
+      ],
+      [
+        "I19",
+        "V1",
+        "D7",
+        "2026-11-13",
+        "1180"
+      ],
+      [
+        "I12",
+        "V2",
+        "D7",
+        "2026-11-13",
+        "1200"
+      ],
+      [
+        "I08",
+        "V1",
+        "D9",
+        "2026-11-12",
+        "1200"
+      ],
+      [
+        "I10",
+        "V3",
+        "D5",
+        "2026-11-12",
+        "850"
+      ]
+    ],
+    "notice": {
+      "en": "Finance changed its duplicate rule. Group by supplier and delivery together. Where a group has more than one invoice, only its latest issue date can be paid. Use HOLD and payable 0 for replaced invoices, PAY and the invoice amount for the rest.",
+      "hi": "वित्त विभाग ने दोहरे चालान की पहचान का नियम बदला है। आपूर्तिकर्ता और डिलीवरी, दोनों समान हों तो चालानों को एक समूह मानें। एक से अधिक चालान होने पर केवल सबसे नई जारी तारीख वाला चालान भुगतान के योग्य है। बदले गए चालानों में HOLD और payable में 0 लिखें। बाकी में PAY और चालान की राशि लिखें।"
+    },
+    "output": [
+      "invoice",
+      "decision",
+      "payable"
+    ],
+    "answer": [
+      [
+        "I01",
+        "HOLD",
+        "0"
+      ],
+      [
+        "I19",
+        "PAY",
+        "1180"
+      ],
+      [
+        "I12",
+        "PAY",
+        "1200"
+      ],
+      [
+        "I08",
+        "PAY",
+        "1200"
+      ],
+      [
+        "I10",
+        "PAY",
+        "850"
+      ]
+    ]
+  },
+  {
+    "id": "03-supplier-credit",
+    "title": "Supplier credit-note matching",
+    "goals": {
+      "en": "Close the supplier balances after applying valid credit notes. Include every delivery.",
+      "hi": "मान्य क्रेडिट नोट लगाकर आपूर्तिकर्ता का बकाया निकालें। हर डिलीवरी शामिल करें।",
+      "hinglish": "Valid credit notes apply karke supplier ka balance nikalo. Har delivery include karo."
+    },
+    "headers": {
+      "en": [
+        "type",
+        "id",
+        "supplier",
+        "lot",
+        "quantity",
+        "unit_price"
+      ],
+      "hi": [
+        "प्रकार",
+        "आईडी",
+        "आपूर्तिकर्ता",
+        "बैच",
+        "मात्रा",
+        "प्रति_इकाई_दर"
+      ]
+    },
+    "records": [
+      [
+        "DEL",
+        "D1",
+        "V1",
+        "L4",
+        "12",
+        "90"
+      ],
+      [
+        "DEL",
+        "D2",
+        "V1",
+        "L8",
+        "10",
+        "100"
+      ],
+      [
+        "DEL",
+        "D3",
+        "V2",
+        "L4",
+        "10",
+        "75"
+      ],
+      [
+        "CR",
+        "C1",
+        "V1",
+        "L4",
+        "3",
+        ""
+      ],
+      [
+        "CR",
+        "C2",
+        "V1",
+        "L8",
+        "2",
+        ""
+      ],
+      [
+        "CR",
+        "C3",
+        "V2",
+        "L4",
+        "1",
+        ""
+      ]
+    ],
+    "notice": {
+      "en": "C2 was voided after inspection. Match all other credits by supplier and lot together and value credits at the matching delivery's unit price. Output the credit in rupees and the remaining amount due.",
+      "hi": "जाँच के बाद क्रेडिट नोट C2 रद्द कर दिया गया। बाकी क्रेडिट नोटों का मिलान आपूर्तिकर्ता और बैच, दोनों के आधार पर करें। वापसी का मूल्य उसी डिलीवरी की प्रति इकाई दर से निकालें। क्रेडिट राशि और बचा बकाया रुपये में लिखें।"
+    },
+    "output": [
+      "delivery",
+      "credit",
+      "balance"
+    ],
+    "answer": [
+      [
+        "D1",
+        "270",
+        "810"
+      ],
+      [
+        "D2",
+        "0",
+        "1000"
+      ],
+      [
+        "D3",
+        "75",
+        "675"
+      ]
+    ]
+  }
+]

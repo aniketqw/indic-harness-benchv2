@@ -1,0 +1,230 @@
+## 01-upi-settlement en.en.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 01-upi-settlement hi.en.nemotron status=budget_exhausted score=78.7037 reason=None header=['invoice', 'net_received', 'due', 'status']
+  INV-0101 due: exp='180' got='15756624'
+  INV-0105 due: exp='6015' got='601500'
+  INV-0116 net_received: exp='5340' got='534000'
+  INV-0116 status: exp='PAID' got='OVERPAID'
+  INV-0120 net_received: exp='6165' got='372366'
+  INV-0120 status: exp='PAID' got='OVERPAID'
+  INV-0121 net_received: exp='2215' got='221500'
+  INV-0121 due: exp='950' got='0'
+  ... 23 mismatched cells total
+## 01-upi-settlement hinglish.hi.glm status=completed score=99.0741 reason=None header=['invoice', 'net_received', 'due', 'status']
+  INV-0134 net_received: exp='10632' got='8304'
+## 02-gst-payables en.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 03-bus-roster hi.hi.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 03-bus-roster hinglish.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 04-exam-seating hi.en.glm status=completed score=93.3824 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G09 rooms: exp='R104+R103' got='HALL'
+  G10 rooms: exp='R101+R203' got=''
+  G10 status: exp='SEATED' got='UNSEATED'
+  G11 rooms: exp='HALL+R201' got='R201+R104+R103'
+  G13 rooms: exp='LAB1+R102' got='R102+R101'
+  G15 rooms: exp='HALL+R202' got='HALL+R104'
+  G16 rooms: exp='R104+R102' got='HALL'
+  G17 rooms: exp='' got='R102'
+  ... 9 mismatched cells total
+## 04-exam-seating hi.hi.glm status=completed score=98.5294 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G18 rooms: exp='R203' got=''
+  G18 status: exp='SEATED' got='UNSEATED'
+## 04-exam-seating hinglish.en.glm status=completed score=97.0588 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G18 rooms: exp='R203' got=''
+  G18 status: exp='SEATED' got='UNSEATED'
+  G24 rooms: exp='R203' got=''
+  G24 status: exp='SEATED' got='UNSEATED'
+## 04-exam-seating hinglish.hi.glm status=completed score=98.5294 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G31 rooms: exp='R203' got='R101'
+  G32 rooms: exp='R101' got='R203'
+## 04-exam-seating hinglish.hi.nemotron status=budget_exhausted score=94.1176 reason=None header=['group', 'date', 'session', 'rooms', 'status']
+  G06 rooms: exp='R102' got='R103'
+  G18 rooms: exp='R203' got=''
+  G18 status: exp='SEATED' got='UNSEATED'
+  G20 rooms: exp='R103+LAB1+R101' got='R103+LAB1+R101+R203'
+  G24 rooms: exp='R203' got=''
+  G24 status: exp='SEATED' got='UNSEATED'
+  G26 rooms: exp='R103+LAB1+R101' got='R103+LAB1+R101+R203'
+  G30 rooms: exp='R103' got='R102'
+## 05-grower-payout en.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 05-grower-payout hi.en.nemotron status=completed score=92.5 reason=None header=['farmer', 'accepted_kg', 'gross', 'recovered', 'net_payable', 'outstanding']
+  F002 recovered: exp='314500' got='453649'
+  F002 net_payable: exp='139149' got='0'
+  F002 outstanding: exp='0' got='7483851'
+  F004 recovered: exp='137500' got='530372'
+  F004 net_payable: exp='392872' got='0'
+  F004 outstanding: exp='0' got='102128'
+  F016 recovered: exp='290500' got='483667'
+  F016 net_payable: exp='193167' got='0'
+  ... 9 mismatched cells total
+## 05-grower-payout hi.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 05-grower-payout hinglish.en.nemotron status=completed score=69.1667 reason=None header=['farmer', 'accepted_kg', 'gross', 'recovered', 'net_payable', 'outstanding']
+  F001 gross: exp='71043' got='73932'
+  F001 net_payable: exp='71043' got='73932'
+  F002 gross: exp='453649' got='461394'
+  F002 recovered: exp='314500' got='461394'
+  F002 net_payable: exp='139149' got='0'
+  F002 outstanding: exp='0' got='7476106'
+  F003 gross: exp='478347' got='486619'
+  F003 net_payable: exp='114847' got='123119'
+  ... 37 mismatched cells total
+## 06-seed-allocation en.hi.glm status=completed score=87.037 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R011 allocated_kg: exp='4' got='5'
+  R011 lots: exp='L10' got='L08'
+  R023 allocated_kg: exp='10' got='4'
+  R023 lots: exp='L08' got='L10'
+  R023 pending_kg: exp='13' got='19'
+  R024 lots: exp='L02+L04' got='L06+L02'
+  R025 allocated_kg: exp='120' got='580'
+  R025 lots: exp='L04' got='L02+L04'
+  ... 28 mismatched cells total
+## 06-seed-allocation hi.hi.glm status=completed score=96.7593 reason=None header=['request', 'allocated_kg', 'lots', 'pending_kg']
+  R002 lots: exp='L23+L20' got='L23'
+  R024 allocated_kg: exp='880' got='420'
+  R024 lots: exp='L02+L04' got='L04'
+  R024 pending_kg: exp='0' got='455'
+  R025 allocated_kg: exp='120' got='580'
+  R025 lots: exp='L04' got='L02+L04'
+  R025 pending_kg: exp='455' got='0'
+## 07-ui-strings en.hi.glm status=completed score=96.6667 reason=None header=['key', 'revision', 'status']
+  web.balance status: exp='GLOSSARY' got='OK'
+  web.transit revision: exp='2' got='4'
+  app.tab_settings status: exp='GLOSSARY' got='TOO_LONG'
+  app.coupon revision: exp='1' got='2'
+## 07-ui-strings hi.hi.glm status=completed score=95.0 reason=None header=['key', 'revision', 'status']
+  web.balance status: exp='GLOSSARY' got='OK'
+  app.track status: exp='TOO_LONG' got='OK'
+  app.tab_settings status: exp='GLOSSARY' got='OK'
+  app.coupon revision: exp='1' got='2'
+  app.coupon status: exp='TOO_LONG' got='OK'
+  app.add_cart status: exp='TOO_LONG' got='OK'
+## 07-ui-strings hinglish.en.glm status=completed score=95.8333 reason=None header=['key', 'revision', 'status']
+  web.balance status: exp='GLOSSARY' got='OK'
+  app.track status: exp='TOO_LONG' got='OK'
+  app.tab_settings status: exp='GLOSSARY' got='OK'
+  app.coupon revision: exp='1' got='2'
+  app.add_cart status: exp='TOO_LONG' got='OK'
+## 07-ui-strings hinglish.hi.glm status=completed score=95.0 reason=None header=['key', 'revision', 'status']
+  web.track status: exp='OK' got='TOO_LONG'
+  web.tab_account revision: exp='1' got='4'
+  web.balance status: exp='GLOSSARY' got='OK'
+  web.history status: exp='UNTRANSLATED' got='GLOSSARY'
+  app.tab_settings status: exp='GLOSSARY' got='OK'
+  app.add_cart status: exp='TOO_LONG' got='OK'
+## 08-search-normalization hinglish.en.nemotron status=completed score=99.2754 reason=None header=['query', 'matches']
+  Q073 matches: exp='NONE' got='P23'
+## 08-search-normalization hinglish.hi.nemotron status=completed score=0.0 reason=duplicate_output_key header=['query', 'matches']
+  missing keys (138): [('Q001',), ('Q002',), ('Q003',), ('Q004',), ('Q005',), ('Q006',)]
+  extra keys (137): [('हल्\u200dदी',), ('हल्\u200cदी',), ('हल्दी',), ('जीरा',), ('ज़ीरा',), ('मूंग दाल',)]
+## 09-water-schedule hi.hi.glm status=completed score=97.5 reason=None header=['ward', 'date', 'start', 'end', 'minutes', 'tanker']
+  W08:2026-11-21 start: exp='05:45' got='08:30'
+  W08:2026-11-21 end: exp='08:00' got='09:30'
+  W08:2026-11-21 minutes: exp='135' got='60'
+  W08:2026-11-21 tanker: exp='NO' got='YES'
+  W12:2026-11-20 end: exp='17:15' got='17:45'
+  W12:2026-11-20 minutes: exp='150' got='180'
+## 09-water-schedule hinglish.hi.glm status=completed score=97.5 reason=None header=['ward', 'date', 'start', 'end', 'minutes', 'tanker']
+  W02:2026-11-20 end: exp='12:30' got='12:00'
+  W02:2026-11-20 minutes: exp='150' got='120'
+  W04:2026-11-20 end: exp='13:15' got='12:45'
+  W04:2026-11-20 minutes: exp='300' got='270'
+  W12:2026-11-20 end: exp='17:15' got='16:45'
+  W12:2026-11-20 minutes: exp='150' got='120'
+## 10-grievance-dedup hi.en.glm status=completed score=68.3673 reason=None header=['ticket', 'duplicates', 'department', 'due', 'breached']
+  extra keys (26): [('T0087',), ('T0078',), ('T0098',), ('T0040',), ('T0036',), ('T0102',)]
+  T0001 duplicates: exp='1' got='0'
+  T0002 duplicates: exp='1' got='0'
+  T0021 duplicates: exp='2' got='0'
+  T0025 duplicates: exp='1' got='0'
+  T0032 duplicates: exp='1' got='0'
+  T0043 duplicates: exp='1' got='0'
+  T0045 duplicates: exp='2' got='0'
+  T0049 duplicates: exp='1' got='0'
+  ... 20 mismatched cells total
+## 10-grievance-dedup hinglish.en.glm status=completed score=91.8831 reason=None header=['ticket', 'duplicates', 'department', 'due', 'breached']
+  extra keys (5): [('T0098',), ('T0076',), ('T0024',), ('T0030',), ('T0072',)]
+  T0032 duplicates: exp='1' got='0'
+  T0045 duplicates: exp='2' got='1'
+  T0049 duplicates: exp='1' got='0'
+  T0079 duplicates: exp='2' got='0'
+  T0101 duplicates: exp='2' got='1'
+## 11-parcel-dispatch hinglish.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 12-delivery-audit en.hi.glm status=completed score=98.2456 reason=None header=['line', 'received_units', 'difference', 'status']
+  M024 received_units: exp='90' got=''
+  M024 difference: exp='0' got=''
+  M024 status: exp='MATCH' got='NO_PROOF'
+## 12-delivery-audit hi.hi.nemotron status=completed score=97.076 reason=None header=['line', 'received_units', 'difference', 'status']
+  M018 received_units: exp='24' got='2'
+  M018 difference: exp='-120' got='-142'
+  M045 received_units: exp='96' got='76'
+  M045 difference: exp='6' got='-14'
+  M045 status: exp='EXCESS' got='SHORT'
+## 12-delivery-audit hinglish.hi.nemotron status=completed score=52.6316 reason=None header=['line', 'received_units', 'difference', 'status']
+  M001 received_units: exp='120' got=''
+  M001 difference: exp='10' got=''
+  M001 status: exp='EXCESS' got='NO_PROOF'
+  M004 received_units: exp='110' got=''
+  M004 difference: exp='-10' got=''
+  M004 status: exp='SHORT' got='NO_PROOF'
+  M008 received_units: exp='360' got='240'
+  M008 difference: exp='0' got='-120'
+  ... 81 mismatched cells total
+## 13-appointment-rebooking en.en.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 13-appointment-rebooking en.hi.glm status=completed score=48.7805 reason=None header=['appointment', 'slot', 'doctor', 'status']
+  AP011 slot: exp='SL008' got='SL040'
+  AP011 doctor: exp='DR6' got='DR5'
+  AP015 slot: exp='SL034' got=''
+  AP015 doctor: exp='DR3' got=''
+  AP015 status: exp='REBOOKED' got='WAITLIST'
+  AP021 slot: exp='SL023' got='SL009'
+  AP021 doctor: exp='DR4' got='DR3'
+  AP024 slot: exp='SL021' got='SL014'
+  ... 63 mismatched cells total
+## 13-appointment-rebooking hi.en.nemotron status=completed score=47.1545 reason=None header=['appointment', 'slot', 'doctor', 'status']
+  AP010 slot: exp='SL029' got='SL004'
+  AP010 doctor: exp='DR4' got='DR3'
+  AP015 slot: exp='SL034' got=''
+  AP015 doctor: exp='DR3' got=''
+  AP015 status: exp='REBOOKED' got='WAITLIST'
+  AP021 slot: exp='SL023' got='SL038'
+  AP021 doctor: exp='DR4' got='DR3'
+  AP023 slot: exp='SL010' got='SL022'
+  ... 65 mismatched cells total
+## 13-appointment-rebooking hinglish.en.glm status=completed score=86.9919 reason=None header=['appointment', 'slot', 'doctor', 'status']
+  AP029 slot: exp='SL028' got='SL045'
+  AP034 slot: exp='SL047' got='SL036'
+  AP034 doctor: exp='DR2' got='DR1'
+  AP037 slot: exp='SL026' got='SL038'
+  AP037 doctor: exp='DR4' got='DR3'
+  AP038 slot: exp='SL046' got='SL016'
+  AP046 slot: exp='' got='SL028'
+  AP046 doctor: exp='' got='DR1'
+  ... 16 mismatched cells total
+## 13-appointment-rebooking hinglish.hi.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 14-lab-flags en.en.nemotron status=completed score=97.7273 reason=None header=['patient', 'test', 'value', 'flag']
+  LP012:CREAT flag: exp='NORMAL' got='LOW'
+  LP015:CREAT flag: exp='HIGH' got='NORMAL'
+  LP021:CREAT flag: exp='NORMAL' got='LOW'
+## 14-lab-flags en.hi.nemotron status=completed score=0.0 reason=output_missing_or_oversized NO FILE
+## 14-lab-flags hi.en.nemotron status=budget_exhausted score=0.0 reason=output_missing_or_oversized NO FILE
+## 14-lab-flags hi.hi.nemotron status=completed score=96.2121 reason=None header=['patient', 'test', 'value', 'flag']
+  LP011:HB flag: exp='NORMAL' got='LOW'
+  LP012:CREAT flag: exp='NORMAL' got='LOW'
+  LP012:HB flag: exp='HIGH' got='NORMAL'
+  LP015:CREAT flag: exp='HIGH' got='NORMAL'
+  LP021:CREAT flag: exp='NORMAL' got='LOW'
+## 15-catalogue-merge hi.hi.glm status=completed score=83.7607 reason=None header=['canonical', 'merged', 'isbn13', 'edition']
+  ACC-125 merged: exp='ACC-1860+ACC-2036+ACC-3467' got='1860+2036+3467'
+  ACC-473 merged: exp='ACC-2120+ACC-2350+ACC-3495' got='2120+2350+3495'
+  ACC-525 merged: exp='ACC-725+ACC-2678' got='725+2678'
+  ACC-544 merged: exp='ACC-3112' got='3112'
+  ACC-626 merged: exp='ACC-1455+ACC-1709' got='1455+1709'
+  ACC-721 merged: exp='ACC-2250+ACC-3354' got='2250+3354'
+  ACC-782 merged: exp='ACC-3926' got='3926'
+  ACC-880 merged: exp='ACC-2473' got='2473'
+  ... 19 mismatched cells total
+## 15-catalogue-merge hinglish.hi.glm status=completed score=0.0 reason=incorrect_header header=['ACC-125', 'ACC-1860+ACC-2036+ACC-3467', '9788157956142', '1'] EXPECTED=['canonical', 'merged', 'isbn13', 'edition']
+  missing keys (1): [('ACC-125',)]
+## 16-digitization-audit en.hi.glm status=completed score=99.4667 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V3:34 status: exp='DUPLICATE' got='OK'
+  V3:34 scans: exp='V3_0034.tif+V3_0039b.tif' got='V3_0034.tif'
+## 16-digitization-audit hi.hi.glm status=completed score=99.7333 reason=None header=['volume', 'position', 'label', 'status', 'scans']
+  V1:1 status: exp='DUPLICATE' got='OK'

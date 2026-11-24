@@ -1,0 +1,284 @@
+<title>Indic Bench v2 Audit and v2.1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Devanagari:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<style>
+/* Layout: one reading column (~70ch) with full-width figures; summary first, evidence after. */
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#14171c; --ink-2:#4a5160; --ink-3:#6b7282; --rule:#dfe3ea;
+  --accent:#1f4f9e; --s-new:#2a78d6; --s-old:#9aa3b2; --s-hi:#eb6834;
+  --good:#1d7a3e; --warn:#a15c00; --bad:#b42318; --chip:#eef1f6;
+  --f-display:"Source Serif 4",Georgia,serif; --f-body:"IBM Plex Sans","IBM Plex Sans Devanagari",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111418; --panel:#181c22; --ink:#eceef2; --ink-2:#b5bccb; --ink-3:#8f97a8; --rule:#2b313b;
+  --accent:#8db4f0; --s-new:#3987e5; --s-old:#6b7484; --s-hi:#d95926; --good:#5cc27f; --warn:#e3a14a; --bad:#f07a6e; --chip:#222833; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111418; --panel:#181c22; --ink:#eceef2; --ink-2:#b5bccb; --ink-3:#8f97a8; --rule:#2b313b;
+  --accent:#8db4f0; --s-new:#3987e5; --s-old:#6b7484; --s-hi:#d95926; --good:#5cc27f; --warn:#e3a14a; --bad:#f07a6e; --chip:#222833; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body)}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font:700 clamp(30px,5vw,42px)/1.1 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 24px/1.25 var(--f-display);margin:0;text-wrap:balance}
+h3{font:600 16px/1.3 var(--f-body);margin:0}
+p{margin:0;max-width:70ch} section{display:flex;flex-direction:column;gap:14px}
+.lede{font-size:18px;color:var(--ink-2)}
+.meta{font:13px/1.5 var(--f-mono);color:var(--ink-3)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.tile b{font:600 28px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.tile span{font-size:13px;color:var(--ink-2)}
+ul,ol{margin:0;padding-left:22px;max-width:70ch;display:flex;flex-direction:column;gap:6px}
+.fig{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.fig figcaption{font-size:13px;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.bars{display:grid;grid-template-columns:minmax(120px,190px) 1fr 52px;gap:6px 10px;align-items:center;font-size:13px}
+.bars .lab{color:var(--ink-2);overflow-wrap:anywhere}
+.bars .val{font:12px var(--f-mono);color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+.track{position:relative;height:22px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.track .b{height:9px;border-radius:0 4px 4px 0;min-width:2px}
+.ci{display:grid;grid-template-columns:minmax(120px,190px) 1fr 92px;gap:8px 10px;align-items:center;font-size:13px}
+.ci .lab{color:var(--ink-2)} .ci .val{font:12px var(--f-mono);color:var(--ink-2);text-align:right}
+.citrack{position:relative;height:22px;background:linear-gradient(90deg,var(--rule) 1px,transparent 1px) 0 0/25% 100%}
+.citrack .w{position:absolute;top:10px;height:2px;border-radius:1px}
+.citrack .d{position:absolute;top:5px;width:12px;height:12px;border-radius:50%;transform:translateX(-6px);box-shadow:0 0 0 2px var(--panel)}
+.axis{display:grid;grid-template-columns:minmax(120px,190px) 1fr 92px;gap:10px;font:11px var(--f-mono);color:var(--ink-3)}
+.axis div:nth-child(2){display:flex;justify-content:space-between}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--ink-3);text-transform:uppercase;background:var(--chip)}
+tr:last-child td{border-bottom:0} td.n{text-align:right;font-family:var(--f-mono)}
+.chip{display:inline-block;font:500 11.5px/1.6 var(--f-mono);padding:0 7px;border-radius:10px;background:var(--chip);color:var(--ink-2);white-space:nowrap}
+.chip.good{color:var(--good)} .chip.bad{color:var(--bad)} .chip.warn{color:var(--warn)}
+.callout{border-left:3px solid var(--accent);padding:4px 0 4px 16px;display:flex;flex-direction:column;gap:8px}
+code{font:13px var(--f-mono);background:var(--chip);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.hi{font-family:"IBM Plex Sans Devanagari",var(--f-body)}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font:12px/1.4 var(--f-body);padding:6px 9px;border-radius:5px;max-width:260px;z-index:20}
+@media (max-width:560px){.bars,.ci,.axis{grid-template-columns:100px 1fr 46px}.ci .val{font-size:10.5px}}
+</style>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Indic Harness Bench · phase 2 · audit report · 18 Nov 2026</div>
+  <h1>Auditing v2 and running the corrected v2.1 suite</h1>
+  <p class="lede">The first full campaign (v2) was audited failure by failure. Two tasks had specification defects that marked correct answers wrong. We added a generic value glossary to the task notices without changing any data, rules or answers (v2.1), ran all 192 conditions again, and audited the new failures the same way. This report covers both campaigns.</p>
+  <div class="meta">GLM-5.3-Flash and Nemotron 3 Super · 16 tasks × 3 instruction languages × 2 workspace languages × 2 models · one run per condition</div>
+</header>
+
+<section>
+  <h2>Summary</h2>
+  <div class="tiles">
+    <div class="tile"><b>120 → 146</b><span>fully correct outputs out of 192 (v2 → v2.1)</span></div>
+    <div class="tile"><b>76.0%</b><span>v2.1 correct, 95% Wilson interval 69.5–81.5%</span></div>
+    <div class="tile"><b>81 vs 65</b><span>v2.1 correct with English vs Hindi workspace files (of 96 each)</span></div>
+    <div class="tile"><b>0</b><span>v2.1 failures traced to a task defect</span></div>
+  </div>
+  <ul>
+    <li><b>v2 had about 11 false failures.</b> Task 14 (lab flags) never said whether to output test codes or test names. Task 06 (seed allocation) used undocumented cultivar names for varieties. A further 5–7 runs were partly affected by smaller cases.</li>
+    <li><b>The fix is generic and leaves the answer key unchanged.</b> Every notice now ends with a glossary of the values the files write in more than one form, plus the exact codes required in the output. Each v2 notice is an exact prefix of its v2.1 notice.</li>
+    <li><b>The defective tasks recovered and the benchmark did not saturate.</b> Task 14 went from 0 to 8 correct and task 06 from 2 to 10. Overall v2.1 is 76%, with clearly hard tasks (appointment rebooking 5/12, exam seating 7/12).</li>
+    <li><b>The main new finding is a Hindi-workspace penalty that v2 hid.</b> In 96 matched pairs that differ only in the workspace language, 22 are correct only with English files and 6 only with Hindi files. In v2 this was 20 vs 20, because the defects mostly broke English-workspace runs.</li>
+    <li><b>Single conditions are noisy.</b> On the two tasks that are byte-identical across versions, 7 of 24 conditions changed result between runs. Use aggregates, not individual cells.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="tbl"><table>
+    <tr><th>When (IST)</th><th>Event</th></tr>
+    <tr><td>17 Nov</td><td>v2 campaign <code>results/final</code>: 192 conditions. It stopped twice on dropped provider streams (task 02) and was resumed by hand. 2 infrastructure failures, each retried once.</td></tr>
+    <tr><td>17 Nov</td><td>Audit of every non-perfect v2 output, including re-solving each task under literal readings of undocumented value forms.</td></tr>
+    <tr><td>17 Nov</td><td>v2.1 built: glossary appended, v2 files archived with SHA-256 sums, offline validation re-run. Runtime change: a dropped stream no longer stops the campaign; three provider failures in a row still do.</td></tr>
+    <tr><td>17 Nov 22:25</td><td>Short connection outage to the provider: 4 conditions on task 05 failed to connect, and the three-in-a-row rule stopped the run on purpose. Connectivity was confirmed and the run resumed.</td></tr>
+    <tr><td>18 Nov 02:20</td><td>v2.1 campaign <code>results/final-v21</code> finished: 183 graded, 9 infrastructure failures (all provider transport).</td></tr>
+    <tr><td>18 Nov 03:09</td><td>One recovery attempt for each of the 9: all ran to completion (7 fully correct, 2 out of output budget). Primary records kept.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>What the v2 audit found</h2>
+  <p>For every v2 output that was not perfect, we compared it cell by cell with the answer key. We also re-ran the reference solver under a literal reading of every value form the notice did not mention, and scored the output against those alternative keys. A failure counts as false when a faithful reading of the notice produces the model's answer.</p>
+  <div class="tbl"><table>
+    <tr><th>Task</th><th>Defect</th><th>Effect in v2</th></tr>
+    <tr><td>14 Lab flags</td><td>Results mix test codes and names (<code>HB</code>, <code>Hemoglobin</code>), and the notice never said which form the output must use.</td><td><span class="chip bad">false</span> All 6 GLM outputs score 100 once names map to codes; officially 0.</td></tr>
+    <tr><td>06 Seed allocation</td><td>Varieties appear as a code (<code>WHEAT</code>) and as a cultivar name (<code>Wheat HD-2967</code>). Hindi requests use both <span class="hi">लघु किसान</span> and <span class="hi">छोटा किसान</span>. The notice only promised case and spacing variation.</td><td><span class="chip bad">false</span> 4 English-workspace outputs match the literal reading at 100. Hindi-workspace runs partly affected.</td></tr>
+    <tr><td>12 Delivery audit</td><td><span class="hi">डिब्बे</span> and <span class="hi">डिब्बा</span> as unit forms.</td><td><span class="chip bad">false</span> 1 run.</td></tr>
+    <tr><td>13 Appointment rebooking</td><td><code>STD</code> and <code>standard</code>.</td><td><span class="chip warn">partly</span> some Nemotron runs.</td></tr>
+    <tr><td>04 Exam seating</td><td><code>AM</code> and <code>Morning</code>.</td><td><span class="chip warn">partly</span> minor.</td></tr>
+  </table></div>
+  <p>The audit also confirmed that most v2 failures were genuine model errors:</p>
+  <ul>
+    <li>16 missing output files, almost all Nemotron runs that used the whole output budget;</li>
+    <li>5 format errors, such as a wrong header or an extra column;</li>
+    <li>query text written in place of the query ID (task 08);</li>
+    <li>lower-case Roman numerals despite an explicit upper-case rule (task 16);</li>
+    <li>rule mistakes in otherwise valid files.</li>
+  </ul>
+  <p>A case-insensitive rescoring changed only the Roman-numeral run.</p>
+</section>
+
+<section>
+  <h2>The v2.1 change</h2>
+  <div class="callout">
+    <p>Nothing in the data, rules, prompts, answers or budgets changed. <code>authoring/core.py</code> appends one section to every notice, built from the generator's own value tables:</p>
+    <ul>
+      <li>a glossary listing every coded value that a workspace writes in more than one form;</li>
+      <li>an output-values line giving the exact codes required for any output column that holds coded values.</li>
+    </ul>
+    <p>Example from task 14: <code>results.csv, test: GLU = Glucose (fasting); HB = Hemoglobin; K = Potassium; CREAT = Creatinine</code>. Then <code>Output values: in out/result.csv, write test as one of these codes: GLU, HB, K, CREAT</code>.</p>
+  </div>
+  <p>The build checks that each v2 notice is an exact prefix of its v2.1 notice. Tasks 07 and 08 had no multi-form values and are byte-identical. The rule ablations are unchanged: ignoring any single rule still scores below 100 on every task. The v2 task files and generator are preserved in <code>phase2/archive/v2-final/</code>.</p>
+  <p><b>Disclosure.</b> This change was made after seeing v2 model outcomes. We limited it to a generic, mechanically generated clarification that adds no new rules or hints and applies the same way to every task. Both campaigns are reported: v2 as a preliminary run whose audit motivated v2.1, and v2.1 as the primary result.</p>
+</section>
+
+<section>
+  <h2>Results: v2 compared with v2.1</h2>
+  <figure class="fig" id="fig-task">
+    <div class="legend"><span><i style="background:var(--s-old)"></i>v2</span><span><i style="background:var(--s-new)"></i>v2.1</span></div>
+    <div class="bars" id="taskbars"></div>
+    <figcaption>Fully correct outputs per task, out of 12 conditions (3 instruction × 2 workspace × 2 models). Tasks 07 and 08 are identical in both versions.</figcaption>
+  </figure>
+  <figure class="fig">
+    <div class="legend"><span><i style="background:var(--s-old);border-radius:50%"></i>v2</span><span><i style="background:var(--s-new);border-radius:50%"></i>v2.1</span></div>
+    <div class="axis"><div></div><div><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div><div></div></div>
+    <div class="ci" id="cmpci"></div>
+    <figcaption>Share of fully correct outputs with 95% Wilson intervals. Workspace = language of the input files; instruction = language of the user prompt.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Outcome</th><th>Meaning</th><th class="n">v2</th><th class="n">v2.1</th></tr>
+    <tr><td><span class="chip good">full</span></td><td>All fields correct, within budget</td><td class="n">116</td><td class="n">142</td></tr>
+    <tr><td><span class="chip good">correct, over budget</span></td><td>File fully correct, but the run hit the output budget</td><td class="n">4</td><td class="n">4</td></tr>
+    <tr><td><span class="chip warn">partial</span></td><td>Valid file with some wrong fields</td><td class="n">46</td><td class="n">29</td></tr>
+    <tr><td><span class="chip warn">partial, over budget</span></td><td>Partial file at the output budget</td><td class="n">5</td><td class="n">2</td></tr>
+    <tr><td><span class="chip bad">no output, budget</span></td><td>No file; the whole 65,536-token output budget used</td><td class="n">13</td><td class="n">13</td></tr>
+    <tr><td><span class="chip bad">no output</span></td><td>No file, within budget</td><td class="n">3</td><td class="n">0</td></tr>
+    <tr><td><span class="chip bad">format error</span></td><td>Wrong header, row width or duplicate key</td><td class="n">5</td><td class="n">2</td></tr>
+  </table></div>
+  <p>The primary measure is <b>correct output</b>: the saved file is fully correct when the attempt ends. That is the first two rows (120 in v2, 146 in v2.1). The stricter <b>within budget</b> measure is the first row alone (116 and 142). Infrastructure failures are replaced by their single recovery attempt.</p>
+</section>
+
+<section>
+  <h2>Where the change came from</h2>
+  <div class="tbl"><table>
+    <tr><th>Matched conditions</th><th class="n">Both correct</th><th class="n">Neither</th><th class="n">v2 only</th><th class="n">v2.1 only</th></tr>
+    <tr><td>Tasks 06 and 14 (defects fixed), 24</td><td class="n">2</td><td class="n">6</td><td class="n">0</td><td class="n">16</td></tr>
+    <tr><td>Tasks 07 and 08 (identical), 24</td><td class="n">15</td><td class="n">2</td><td class="n">4</td><td class="n">3</td></tr>
+    <tr><td>Other 12 tasks (glossary added), 144</td><td class="n">79</td><td class="n">14</td><td class="n">20</td><td class="n">31</td></tr>
+  </table></div>
+  <ul>
+    <li><b>The defect fixes account for most of the gain.</b> On tasks 06 and 14, 16 conditions went from wrong to correct and none went the other way.</li>
+    <li><b>The identical tasks show the noise floor.</b> 7 of 24 conditions flipped (4 down, 3 up) with nothing changed. Sampling, tool-use paths and budget timing all vary between runs.</li>
+    <li><b>The other 12 tasks improved slightly</b> (31 up, 20 down). That is consistent with the smaller glossary fixes (tasks 04, 12, 13) plus run-to-run noise, and too small to attribute.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>The Hindi-workspace effect appears in v2.1</h2>
+  <div class="tbl"><table>
+    <tr><th>Paired comparison</th><th class="n">Pairs</th><th class="n">Both</th><th class="n">Neither</th><th class="n">Only first</th><th class="n">Only second</th></tr>
+    <tr><td>Workspace en vs hi, v2</td><td class="n">96</td><td class="n">40</td><td class="n">16</td><td class="n">20</td><td class="n">20</td></tr>
+    <tr><td>Workspace en vs hi, v2.1</td><td class="n">96</td><td class="n">59</td><td class="n">9</td><td class="n">22</td><td class="n">6</td></tr>
+    <tr><td>Instruction en vs hi, v2.1</td><td class="n">64</td><td class="n">44</td><td class="n">9</td><td class="n">8</td><td class="n">3</td></tr>
+    <tr><td>Instruction en vs Hinglish, v2.1</td><td class="n">64</td><td class="n">37</td><td class="n">2</td><td class="n">15</td><td class="n">10</td></tr>
+    <tr><td>Model GLM vs Nemotron, v2.1</td><td class="n">96</td><td class="n">52</td><td class="n">2</td><td class="n">22</td><td class="n">20</td></tr>
+  </table></div>
+  <ul>
+    <li><b>In v2 the gap was hidden.</b> The task 06 defect broke the English-workspace runs. In v2.1 the gap shows in 11 of 16 tasks; 2 tasks favour Hindi and 3 are tied.</li>
+    <li><b>The two models fail differently in Hindi workspaces.</b>
+      <ul>
+        <li>GLM writes a file but gets more fields wrong: 15 partial outputs with Hindi files vs 6 with English.</li>
+        <li>Nemotron runs out of output budget more often: 10 missing files with Hindi files vs 3 with English. It also produces 23% more output tokens on Hindi files (39.0k vs 31.8k mean) and takes 30% longer (median 411 s vs 317 s).</li>
+      </ul>
+    </li>
+    <li><b>Instruction language matters less than workspace language.</b> English, Hindi and Hinglish prompts give 52, 47 and 47 of 64 correct.</li>
+  </ul>
+  <p>These are exploratory counts from one run per condition, not significance tests.</p>
+</section>
+
+<section>
+  <h2>Was any v2.1 failure caused by a bad task?</h2>
+  <p>No. We repeated the audit on all 50 non-perfect v2.1 outputs. Every glossary form is now documented, so the literal-variant test no longer applies. Instead we diffed every output against the key cell by cell, listed the cells that failed the same way in more than one run, and checked each one against the notice and the input files.</p>
+  <div class="tbl"><table>
+    <tr><th>Repeated error</th><th>What the rule says</th><th>Verdict</th></tr>
+    <tr><td>14 CREAT and HB flags for LP012, LP015, LP021 (Nemotron)</td><td>Patients born 2012–2015 are children (rule 5: under 18 on the collection date). The runs applied adult ranges.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>04 G18 and G24 left unseated</td><td>Last step-free groups in a full session; an earlier allocation slip leaves no step-free room. 7 of 12 runs solved it.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>07 <code>app.coupon</code> revision 2</td><td>Equal revisions do not override (rule 1: only when higher). The key's revision 1 is correct.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>07 <code>app.add_cart</code>, <code>app.track</code> length</td><td>19 code points after NFC, where <span class="hi">ड़</span> stays decomposed; the button limit is 18.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>07 <code>app.tab_settings</code></td><td>The translation contains a zero-width joiner, so the required term <span class="hi">सेटिंग्स</span> is absent as written. This is an intended Unicode trap.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>07 <code>web.balance</code></td><td>The translation uses the inflected form <span class="hi">खाते</span> of the required term <span class="hi">खाता</span>. A strict reading flags it; a linguistic one might not.</td><td><span class="chip warn">wording ambiguity</span> All 4 runs that missed it also have other clear errors, so no outcome changes.</td></tr>
+    <tr><td>15 merged accessions without <code>ACC-</code></td><td>The data and the run's own canonical column use <code>ACC-1860</code>.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>08 Q073, <span class="hi">सरसो</span> matched to P23</td><td>It differs from <span class="hi">सरसों</span> after the specified normalisation, and spelling correction is forbidden.</td><td><span class="chip good">model error</span></td></tr>
+    <tr><td>16 V3:34 duplicate missed</td><td>Label <span class="hi">३०</span> equals 30 (rule 4), so two scans carry it.</td><td><span class="chip good">model error</span></td></tr>
+  </table></div>
+  <p>The other partial outputs have different errors in each run: arithmetic in payouts and allocations, missed duplicate grievances, and wrong slot choices in rebooking. All 13 missing files are Nemotron runs that used the full 65,536-token output budget. These include the 2 task 13 recovery attempts, which wrote nothing within budget.</p>
+</section>
+
+<section>
+  <h2>Infrastructure and recoveries</h2>
+  <ul>
+    <li><b>Infrastructure failures: 9 in v2.1</b> (2 in v2). All were provider transport failures; none came from the harness.
+      <ul>
+        <li>4 connection failures during the 22:25 outage, all on task 05.</li>
+        <li>5 dropped Nemotron streams, on tasks 02 (×2), 13 (×2) and 06.</li>
+      </ul>
+    </li>
+    <li><b>Each was retried exactly once, at the user's request, under the same protocol.</b> The primary record is kept, and the retry is logged in <code>infrastructure_retries.json</code> with its own journal.
+      <ul>
+        <li>7 retries scored 100.</li>
+        <li>The 2 task 13 Nemotron retries exhausted the output budget without writing a file.</li>
+      </ul>
+    </li>
+    <li><b>Every condition has a graded result.</b> None of the 192 v2.1 conditions is left as an infrastructure failure.</li>
+    <li><b>Cost: about $4.43 for v2.1</b> ($2.27 GLM, $2.16 Nemotron) at approximate list rates, close to v2's $4.41.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Inferences and thoughts</h2>
+  <ol>
+    <li><b>The audit was necessary.</b> Without it, v2 would have reported no workspace effect and a much weaker task 14. The defects were not random noise: they removed signal from specific cells of the design.</li>
+    <li><b>Hindi workspaces are the hard part, not Hindi prompts.</b> Reading Devanagari headers, Devanagari digits, Hindi month names and time words costs more than understanding the instruction. This matches the token data: Hindi files enlarge GLM's input by 32% and Nemotron's output by 23%.</li>
+    <li><b>The models are close overall but fail differently.</b> GLM almost always writes a file (no missing files in v2.1) and loses on details. When Nemotron writes a file it is more often right: 72 correct of 83 runs with a file. But 13 of its 96 runs ended without one. Budget behaviour matters as much as accuracy for Nemotron.</li>
+    <li><b>Per-condition results should not be read individually.</b> A 29% flip rate on identical tasks means a single cell can go either way. The workspace effect holds up because it is a 22 vs 6 imbalance across 96 pairs and appears in most tasks and both models.</li>
+    <li><b>If time allows before 22 Nov, a second v2.1 replication would help most.</b> It costs about 8 hours and $4.40, and would let the paper report run-to-run stability instead of a single sample.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Limitations to disclose</h2>
+  <ul>
+    <li>Synthetic data. Hindi and Hinglish text was written by an AI model with self-review only, not independent human review.</li>
+    <li>The v2.1 notice change came after seeing v2 outcomes (see the disclosure above). No tasks were added, removed or selected on scores.</li>
+    <li>One run per condition, 16 tasks, two models: exploratory, with no significance claims and no claims about Indian languages in general.</li>
+    <li>Approximate cost rates. Budgets: 32,768 tokens per response, 65,536 output and 600,000 input tokens, 40 requests and 1,200 s per attempt.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Reproduce</h2>
+  <ul>
+    <li>Tables: <code>py -B -X utf8 -m phase2.analysis.summarize final-v21 --compare final</code>, written to <code>results/final-v21/analysis/</code>.</li>
+    <li>Records: <code>results/final</code> and <code>results/final-v21</code> (journals, per-run artifacts, <code>infrastructure_retries.json</code>).</li>
+    <li>Design notes: <code>phase2/DESIGN-v2.md</code>, section "v2.1: value glossary". v2 sources: <code>phase2/archive/v2-final/</code>.</li>
+  </ul>
+</section>
+</div>
+<div id="tip" hidden></div>
+<script>
+const TASKS=[["01","UPI settlement",8,9],["02","GST payables",8,11],["03","School bus roster",8,10],["04","Exam seating",9,7],["05","Paddy payout",10,8],["06","Seed allocation",2,10],["07","Hindi UI strings",11,8],["08","Search normalization",8,10],["09","Ward water supply",9,10],["10","Grievance dedup",7,10],["11","Parcel dispatch",10,11],["12","Delivery audit",7,9],["13","Appointment rebooking",5,5],["14","Lab flags",0,8],["15","Catalogue merge",12,10],["16","Digitization audit",6,10]];
+const tb=document.getElementById('taskbars');
+for(const [id,name,a,b] of TASKS){
+  tb.insertAdjacentHTML('beforeend',`<div class="lab">${id} ${name}</div><div class="track"><div class="b" style="width:${a/12*100}%;background:var(--s-old)" data-tip="${id} ${name}, v2: ${a} of 12 correct"></div><div class="b" style="width:${b/12*100}%;background:var(--s-new)" data-tip="${id} ${name}, v2.1: ${b} of 12 correct"></div></div><div class="val">${a} → ${b}</div>`);
+}
+const CI=[["Overall",[120,192,55.5,69.0],[146,192,69.5,81.5]],["GLM",[63,96,55.7,74.4],[74,96,67.7,84.4]],["Nemotron",[57,96,49.4,68.7],[72,96,65.5,82.6]],["Workspace en",[60,96,52.5,71.5],[81,96,75.8,90.3]],["Workspace hi",[60,96,52.5,71.5],[65,96,57.8,76.2]],["Instruction en",[40,64,50.3,73.3],[52,64,70.0,88.9]],["Instruction hi",[40,64,50.3,73.3],[47,64,61.5,82.7]],["Instruction Hinglish",[40,64,50.3,73.3],[47,64,61.5,82.7]]];
+const ci=document.getElementById('cmpci');
+const mark=(v,col,top,lbl)=>{const [k,n,lo,hi]=v,p=100*k/n;return `<div class="w" style="left:${lo}%;width:${hi-lo}%;background:${col};top:${top+5}px" data-tip="${lbl}: ${k}/${n} = ${p.toFixed(1)}% (95% CI ${lo}–${hi})"></div><div class="d" style="left:${p}%;background:${col};top:${top}px;width:10px;height:10px;transform:translateX(-5px)" data-tip="${lbl}: ${k}/${n} = ${p.toFixed(1)}% (95% CI ${lo}–${hi})"></div>`};
+for(const [l,a,b] of CI){
+  ci.insertAdjacentHTML('beforeend',`<div class="lab">${l}</div><div class="citrack" style="height:28px">${mark(a,'var(--s-old)',2,l+', v2')}${mark(b,'var(--s-new)',15,l+', v2.1')}</div><div class="val">${(100*a[0]/a[1]).toFixed(0)}% → ${(100*b[0]/b[1]).toFixed(0)}%</div>`);
+}
+const tip=document.getElementById('tip');
+document.addEventListener('pointerover',e=>{const t=e.target.closest('[data-tip]');if(!t){tip.hidden=true;return}tip.textContent=t.dataset.tip;tip.hidden=false});
+document.addEventListener('pointermove',e=>{if(!tip.hidden){tip.style.left=Math.min(e.clientX+12,innerWidth-270)+'px';tip.style.top=(e.clientY+14)+'px'}});
+</script>
