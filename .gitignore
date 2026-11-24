@@ -42,3 +42,7 @@ reports/security_check.json
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# RL-harness run outputs and logs (local only)
+rlharness/runs/
+rlharness/*.log
