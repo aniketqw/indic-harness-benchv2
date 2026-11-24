@@ -50,3 +50,6 @@ base|062-k8s-config-audit|hinglish|1,062-k8s-config-audit,hinglish,0.14,35.2,,Fa
 base|027-contract-summary-risk|en|2,027-contract-summary-risk,en,0.0714,53.0,,False
 base|027-contract-summary-risk|hi|2,027-contract-summary-risk,hi,0.5,39.8,,False
 base|027-contract-summary-risk|hinglish|2,027-contract-summary-risk,hinglish,0.6429,62.1,,False
+base|036-citation-consistency-audit|hi|2,036-citation-consistency-audit,hi,0.78,202.6,,False
+base|036-citation-consistency-audit|en|2,036-citation-consistency-audit,en,0.0,361.2,,False
+base|063-alert-dedup-noise|en|2,063-alert-dedup-noise,en,1.0,54.0,,False

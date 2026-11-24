@@ -49,3 +49,6 @@
 {"key": "base|027-contract-summary-risk|en|2", "task": "027-contract-summary-risk", "lang": "en", "score": 0.0714, "elapsed": 53.0, "error": null, "integrity_violation": false}
 {"key": "base|027-contract-summary-risk|hi|2", "task": "027-contract-summary-risk", "lang": "hi", "score": 0.5, "elapsed": 39.8, "error": null, "integrity_violation": false}
 {"key": "base|027-contract-summary-risk|hinglish|2", "task": "027-contract-summary-risk", "lang": "hinglish", "score": 0.6429, "elapsed": 62.1, "error": null, "integrity_violation": false}
+{"key": "base|036-citation-consistency-audit|hi|2", "task": "036-citation-consistency-audit", "lang": "hi", "score": 0.78, "elapsed": 202.6, "error": null, "integrity_violation": false}
+{"key": "base|036-citation-consistency-audit|en|2", "task": "036-citation-consistency-audit", "lang": "en", "score": 0.0, "elapsed": 361.2, "error": null, "integrity_violation": false}
+{"key": "base|063-alert-dedup-noise|en|2", "task": "063-alert-dedup-noise", "lang": "en", "score": 1.0, "elapsed": 54.0, "error": null, "integrity_violation": false}

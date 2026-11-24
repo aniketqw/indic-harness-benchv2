@@ -1,0 +1,2 @@
+{"key": "nemotron|01-upi-settlement|en|en|r0", "model": "nemotron", "task": "01-upi-settlement", "plang": "en", "flang": "en", "score": 0.981481, "full": false, "reason": null, "input_intact": true, "extra_keys": 0, "elapsed": 255.1, "error": null}
+{"key": "glm|01-upi-settlement|en|en|r0", "model": "glm", "task": "01-upi-settlement", "plang": "en", "flang": "en", "score": 1.0, "full": true, "reason": null, "input_intact": true, "extra_keys": 0, "elapsed": 315.5, "error": null}
