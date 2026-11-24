@@ -9,7 +9,8 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 UPSTREAM = ("host.docker.internal", 11434)
-ALLOWED = {"gpt-oss:20b-cloud", "gpt-oss:20b", "nemotron-3-super:cloud", "nemotron-3-super"}
+ALLOWED = {"gpt-oss:20b-cloud", "gpt-oss:20b", "nemotron-3-super:cloud", "nemotron-3-super",
+           "glm-5.3-flash:cloud", "glm-5.3-flash"}
 
 
 class H(BaseHTTPRequestHandler):
